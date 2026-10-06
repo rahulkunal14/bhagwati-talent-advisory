@@ -1,70 +1,84 @@
-<svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Outer decorative dome structure -->
-  <path d="M140 20C140 20 160 30 170 45C180 60 180 80 170 95L170 110" stroke="#0B2545" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <path d="M140 20C140 20 120 30 110 45C100 60 100 80 110 95L110 110" stroke="#0B2545" stroke-width="3" fill="none" stroke-linecap="round"/>
+<svg width="400" height="350" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dome structure - top finial -->
+  <path d="M200 30L210 45L190 45Z" fill="#0B2545"/>
+  <ellipse cx="200" cy="50" rx="18" ry="14" fill="none" stroke="#0B2545" stroke-width="2.5"/>
   
-  <!-- Dome top -->
-  <ellipse cx="140" cy="35" rx="25" ry="20" fill="none" stroke="#0B2545" stroke-width="2.5"/>
-  <path d="M125 35C125 25 132 15 140 12C148 15 155 25 155 35" fill="#0B2545"/>
+  <!-- Outer dome rings -->
+  <path d="M175 55C175 55 165 65 165 80C165 95 180 105 200 105C220 105 235 95 235 80C235 65 225 55 225 55" fill="none" stroke="#0B2545" stroke-width="3" stroke-linecap="round"/>
   
-  <!-- Main arch frame -->
-  <path d="M110 110C100 120 95 135 95 155C95 190 115 220 140 225C165 220 185 190 185 155C185 135 180 120 170 110" fill="none" stroke="#0B2545" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner dome curve -->
+  <path d="M185 60C185 60 178 68 178 78C178 90 188 98 200 98C212 98 222 90 222 78C222 68 215 60 215 60" fill="none" stroke="#0B2545" stroke-width="2"/>
   
-  <!-- Inner arch -->
-  <path d="M120 115C115 125 112 140 112 155C112 185 128 210 140 213C152 210 168 185 168 155C168 140 165 125 160 115" fill="none" stroke="#0B2545" stroke-width="2"/>
+  <!-- Arch frame - outer -->
+  <path d="M160 100C145 115 135 135 135 160C135 210 165 255 200 265C235 255 265 210 265 160C265 135 255 115 240 100" fill="none" stroke="#0B2545" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
   
-  <!-- Decorative dots -->
-  <circle cx="105" cy="150" r="2" fill="#0B2545"/>
-  <circle cx="175" cy="150" r="2" fill="#0B2545"/>
-  <circle cx="110" cy="165" r="2" fill="#0B2545"/>
-  <circle cx="170" cy="165" r="2" fill="#0B2545"/>
+  <!-- Arch frame - inner decorative -->
+  <path d="M175 108C165 120 158 140 158 160C158 205 182 245 200 253C218 245 242 205 242 160C242 140 235 120 225 108" fill="none" stroke="#0B2545" stroke-width="2.5"/>
+  
+  <!-- Decorative arch details - left side -->
+  <line x1="172" y1="125" x2="172" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="168" cy="135" r="2.5" fill="#0B2545" opacity="0.5"/>
+  <circle cx="168" cy="155" r="2.5" fill="#0B2545" opacity="0.5"/>
+  
+  <!-- Decorative arch details - right side -->
+  <line x1="228" y1="125" x2="228" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.4"/>
+  <circle x="232" cy="135" r="2.5" fill="#0B2545" opacity="0.5"/>
+  <circle cx="232" cy="155" r="2.5" fill="#0B2545" opacity="0.5"/>
   
   <!-- Left book -->
-  <g transform="translate(70, 100)">
-    <rect x="0" y="0" width="40" height="60" rx="2" fill="#0B2545" opacity="0.1" stroke="#0B2545" stroke-width="2"/>
-    <line x1="8" y1="5" x2="8" y2="55" stroke="#0B2545" stroke-width="1.5" opacity="0.6"/>
-    <line x1="15" y1="5" x2="15" y2="55" stroke="#0B2545" stroke-width="1" opacity="0.4"/>
-    <line x1="22" y1="5" x2="22" y2="55" stroke="#0B2545" stroke-width="1" opacity="0.4"/>
-    <line x1="29" y1="5" x2="29" y2="55" stroke="#0B2545" stroke-width="1.5" opacity="0.6"/>
+  <g>
+    <rect x="115" y="105" width="45" height="75" rx="3" fill="none" stroke="#0B2545" stroke-width="2.5"/>
+    <line x1="127" y1="112" x2="127" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.7"/>
+    <line x1="138" y1="112" x2="138" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
+    <line x1="148" y1="112" x2="148" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
+    <path d="M115 105L120 100L165 100L160 105" fill="#0B2545" opacity="0.3"/>
   </g>
   
   <!-- Right book -->
-  <g transform="translate(170, 100)">
-    <rect x="0" y="0" width="40" height="60" rx="2" fill="#0B2545" opacity="0.1" stroke="#0B2545" stroke-width="2"/>
-    <line x1="8" y1="5" x2="8" y2="55" stroke="#0B2545" stroke-width="1.5" opacity="0.6"/>
-    <line x1="15" y1="5" x2="15" y2="55" stroke="#0B2545" stroke-width="1" opacity="0.4"/>
-    <line x1="22" y1="5" x2="22" y2="55" stroke="#0B2545" stroke-width="1" opacity="0.4"/>
-    <line x1="29" y1="5" x2="29" y2="55" stroke="#0B2545" stroke-width="1.5" opacity="0.6"/>
+  <g>
+    <rect x="240" y="105" width="45" height="75" rx="3" fill="none" stroke="#0B2545" stroke-width="2.5"/>
+    <line x1="252" y1="112" x2="252" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.7"/>
+    <line x1="263" y1="112" x2="263" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
+    <line x1="273" y1="112" x2="273" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
+    <path d="M240 105L245 100L290 100L285 105" fill="#0B2545" opacity="0.3"/>
   </g>
   
-  <!-- Diya (Oil lamp) bowl -->
-  <ellipse cx="140" cy="165" rx="18" ry="12" fill="#B45309" opacity="0.9"/>
-  <ellipse cx="140" cy="163" rx="16" ry="10" fill="#D4A373"/>
+  <!-- Arch support columns - left -->
+  <rect x="168" y="125" width="7" height="50" fill="#0B2545" opacity="0.7"/>
+  <circle cx="171.5" cy="120" r="3.5" fill="#0B2545"/>
   
-  <!-- Diya decorative pattern -->
-  <circle cx="130" cy="163" r="1.5" fill="#0B2545" opacity="0.3"/>
-  <circle cx="135" cy="164" r="1.5" fill="#0B2545" opacity="0.3"/>
-  <circle cx="140" cy="164.5" r="1.5" fill="#0B2545" opacity="0.3"/>
-  <circle cx="145" cy="164" r="1.5" fill="#0B2545" opacity="0.3"/>
-  <circle cx="150" cy="163" r="1.5" fill="#0B2545" opacity="0.3"/>
+  <!-- Arch support columns - right -->
+  <rect x="225" y="125" width="7" height="50" fill="#0B2545" opacity="0.7"/>
+  <circle cx="228.5" cy="120" r="3.5" fill="#0B2545"/>
   
-  <!-- Flame - outer -->
-  <path d="M140 140C135 135 133 125 135 115C137 120 138 125 138 130C138 125 140 115 140 110C140 115 142 125 142 130C142 125 143 120 145 115C147 125 145 135 140 140Z" fill="#FFB81C" opacity="0.8"/>
+  <!-- Diya (oil lamp) - outer bowl -->
+  <ellipse cx="200" cy="175" rx="28" ry="18" fill="#D4A574" stroke="#0B2545" stroke-width="2"/>
   
-  <!-- Flame - middle -->
-  <path d="M140 138C137 134 136 128 137 120C138 125 138.5 129 138.5 132C138.5 128 139.5 120 140 115C140.5 120 141.5 128 141.5 132C141.5 129 142 125 143 120C144 128 143 134 140 138Z" fill="#FFC837" opacity="0.95"/>
+  <!-- Diya - decorative rim pattern -->
+  <ellipse cx="200" cy="172" rx="26" ry="16" fill="none" stroke="#B45309" stroke-width="1.5" opacity="0.6"/>
   
-  <!-- Flame - inner glow -->
-  <path d="M140 136C138 133 137.5 129 138 123C139 128 139 131 139 133C139 130 139.5 123 140 120C140.5 123 141 130 141 133C141 131 141 128 142 123C142.5 129 142 133 140 136Z" fill="#FFD700"/>
+  <!-- Diya - decorative dots -->
+  <circle cx="180" cy="175" r="2" fill="#0B2545" opacity="0.4"/>
+  <circle cx="190" cy="177" r="2" fill="#0B2545" opacity="0.4"/>
+  <circle cx="200" cy="178" r="2" fill="#0B2545" opacity="0.4"/>
+  <circle cx="210" cy="177" r="2" fill="#0B2545" opacity="0.4"/>
+  <circle cx="220" cy="175" r="2" fill="#0B2545" opacity="0.4"/>
   
-  <!-- Arch columns - left -->
-  <rect x="105" y="115" width="6" height="35" fill="#0B2545" opacity="0.6"/>
-  <rect x="107" y="112" width="2" height="3" fill="#0B2545"/>
+  <!-- Flame - outer layer (large, golden yellow) -->
+  <path d="M200 145C192 138 188 125 190 108C193 120 195 128 195 138C195 130 198 115 200 105C202 115 205 130 205 138C205 128 207 120 210 108C212 125 208 138 200 145Z" fill="#FFB81C"/>
   
-  <!-- Arch columns - right -->
-  <rect x="169" y="115" width="6" height="35" fill="#0B2545" opacity="0.6"/>
-  <rect x="171" y="112" width="2" height="3" fill="#0B2545"/>
+  <!-- Flame - middle layer (brighter yellow) -->
+  <path d="M200 142C195 137 192 128 194 115C196 125 197 132 197 138C197 132 199 115 200 108C201 115 203 132 203 138C203 132 204 125 206 115C208 128 205 137 200 142Z" fill="#FFC837"/>
   
-  <!-- Bottom border -->
-  <path d="M95 155L140 225L185 155" fill="none" stroke="#0B2545" stroke-width="2" opacity="0.5"/>
+  <!-- Flame - inner layer (brightest - gold) -->
+  <path d="M200 140C197 136 195 130 196 120C198 127 198.5 133 198.5 137C198.5 133 199.5 120 200 114C200.5 120 201.5 133 201.5 137C201.5 133 202 127 204 120C205 130 203 136 200 140Z" fill="#FFD700"/>
+  
+  <!-- Flame tip glow -->
+  <ellipse cx="200" cy="108" rx="8" ry="6" fill="#FFE55C" opacity="0.7"/>
+  
+  <!-- Arch bottom point -->
+  <path d="M135 160L200 265L265 160" fill="none" stroke="#0B2545" stroke-width="2.5" opacity="0.4"/>
+  
+  <!-- Shield/base shape -->
+  <path d="M145 165L255 165L255 180C255 200 240 220 200 230C160 220 145 200 145 180Z" fill="none" stroke="#0B2545" stroke-width="2.5" opacity="0.5"/>
 </svg>
