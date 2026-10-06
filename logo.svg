@@ -1,84 +1,86 @@
-<svg width="400" height="350" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Dome structure - top finial -->
-  <path d="M200 30L210 45L190 45Z" fill="#0B2545"/>
-  <ellipse cx="200" cy="50" rx="18" ry="14" fill="none" stroke="#0B2545" stroke-width="2.5"/>
-  
-  <!-- Outer dome rings -->
-  <path d="M175 55C175 55 165 65 165 80C165 95 180 105 200 105C220 105 235 95 235 80C235 65 225 55 225 55" fill="none" stroke="#0B2545" stroke-width="3" stroke-linecap="round"/>
-  
-  <!-- Inner dome curve -->
-  <path d="M185 60C185 60 178 68 178 78C178 90 188 98 200 98C212 98 222 90 222 78C222 68 215 60 215 60" fill="none" stroke="#0B2545" stroke-width="2"/>
-  
-  <!-- Arch frame - outer -->
-  <path d="M160 100C145 115 135 135 135 160C135 210 165 255 200 265C235 255 265 210 265 160C265 135 255 115 240 100" fill="none" stroke="#0B2545" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/>
-  
-  <!-- Arch frame - inner decorative -->
-  <path d="M175 108C165 120 158 140 158 160C158 205 182 245 200 253C218 245 242 205 242 160C242 140 235 120 225 108" fill="none" stroke="#0B2545" stroke-width="2.5"/>
-  
-  <!-- Decorative arch details - left side -->
-  <line x1="172" y1="125" x2="172" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.4"/>
-  <circle cx="168" cy="135" r="2.5" fill="#0B2545" opacity="0.5"/>
-  <circle cx="168" cy="155" r="2.5" fill="#0B2545" opacity="0.5"/>
-  
-  <!-- Decorative arch details - right side -->
-  <line x1="228" y1="125" x2="228" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.4"/>
-  <circle x="232" cy="135" r="2.5" fill="#0B2545" opacity="0.5"/>
-  <circle cx="232" cy="155" r="2.5" fill="#0B2545" opacity="0.5"/>
-  
-  <!-- Left book -->
-  <g>
-    <rect x="115" y="105" width="45" height="75" rx="3" fill="none" stroke="#0B2545" stroke-width="2.5"/>
-    <line x1="127" y1="112" x2="127" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.7"/>
-    <line x1="138" y1="112" x2="138" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
-    <line x1="148" y1="112" x2="148" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
-    <path d="M115 105L120 100L165 100L160 105" fill="#0B2545" opacity="0.3"/>
+<svg width="1000" height="760" viewBox="0 0 1000 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gold1" x1="500" y1="180" x2="500" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9D87D"/>
+      <stop offset="0.5" stop-color="#E7B84C"/>
+      <stop offset="1" stop-color="#C98C1D"/>
+    </linearGradient>
+    <linearGradient id="gold2" x1="500" y1="250" x2="500" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE7A5"/>
+      <stop offset="0.4" stop-color="#F4D26F"/>
+      <stop offset="1" stop-color="#D39A28"/>
+    </linearGradient>
+  </defs>
+
+  <g stroke="#0B2545" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Top dome -->
+    <path d="M390 125C390 87 435 62 500 62C565 62 610 87 610 125V145C610 168 591 187 565 187H435C409 187 390 168 390 145V125Z" fill="none"/>
+    <path d="M432 98C452 80 475 72 500 72C525 72 548 80 568 98" fill="none"/>
+    <path d="M455 80C470 68 485 62 500 62C515 62 530 68 545 80" fill="none"/>
+    <path d="M470 40L500 18L530 40" fill="none"/>
+    <circle cx="500" cy="40" r="12" fill="#0B2545" stroke="none"/>
+
+    <!-- Outer arch -->
+    <path d="M240 160C225 195 210 245 210 310C210 445 302 560 500 560C698 560 790 445 790 310C790 245 775 195 760 160" fill="none"/>
+    <path d="M280 185C267 225 258 270 258 315C258 409 330 485 500 485C670 485 742 409 742 315C742 270 733 225 720 185" fill="none"/>
+
+    <!-- Book structure -->
+    <path d="M135 290L345 290L345 440L185 440L135 405V290Z" fill="none"/>
+    <path d="M865 290L655 290L655 440L815 440L865 405V290Z" fill="none"/>
+    <path d="M195 295L345 295L345 440L205 440L175 430L195 295Z" fill="none"/>
+    <path d="M805 295L655 295L655 440L795 440L825 430L805 295Z" fill="none"/>
+    <path d="M175 295L345 295"/>
+    <path d="M655 295L825 295"/>
+    <path d="M160 315H345"/>
+    <path d="M655 315H840"/>
+
+    <!-- Interior arch details -->
+    <path d="M345 250C340 247 330 255 330 265V430C330 445 342 455 360 455H500C518 455 530 445 530 430V265C530 255 520 247 515 250L500 265H370L345 250Z" fill="none"/>
+    <path d="M365 260H500"/>
+    <path d="M385 260V425"/>
+    <path d="M615 260V425"/>
+    <path d="M500 260H635"/>
+
+    <!-- Pillars -->
+    <path d="M345 240V440"/>
+    <path d="M655 240V440"/>
+    <circle cx="348" cy="252" r="8" fill="#0B2545" stroke="none"/>
+    <circle cx="652" cy="252" r="8" fill="#0B2545" stroke="none"/>
+    <circle cx="500" cy="185" r="10" fill="#0B2545" stroke="none"/>
+
+    <!-- Decorative dots -->
+    <g fill="#0B2545" stroke="none">
+      <circle cx="390" cy="270" r="4"/>
+      <circle cx="410" cy="285" r="4"/>
+      <circle cx="430" cy="300" r="4"/>
+      <circle cx="570" cy="270" r="4"/>
+      <circle cx="590" cy="285" r="4"/>
+      <circle cx="610" cy="300" r="4"/>
+    </g>
   </g>
-  
-  <!-- Right book -->
+
+  <!-- Diya lamp -->
   <g>
-    <rect x="240" y="105" width="45" height="75" rx="3" fill="none" stroke="#0B2545" stroke-width="2.5"/>
-    <line x1="252" y1="112" x2="252" y2="175" stroke="#0B2545" stroke-width="1.5" opacity="0.7"/>
-    <line x1="263" y1="112" x2="263" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
-    <line x1="273" y1="112" x2="273" y2="175" stroke="#0B2545" stroke-width="1" opacity="0.5"/>
-    <path d="M240 105L245 100L290 100L285 105" fill="#0B2545" opacity="0.3"/>
+    <ellipse cx="500" cy="455" rx="132" ry="52" fill="#E0B06C" stroke="#0B2545" stroke-width="7"/>
+    <ellipse cx="500" cy="442" rx="110" ry="38" fill="none" stroke="#C68D27" stroke-width="5" opacity="0.8"/>
+    <path d="M395 460C420 483 445 500 500 505C555 500 580 483 605 460" fill="none" stroke="#0B2545" stroke-width="7"/>
+
+    <g fill="url(#gold1)">
+      <path d="M500 350C488 345 478 331 481 314C485 326 489 334 494 342C490 332 491 317 500 300C509 317 510 332 506 342C511 334 515 326 519 314C522 331 512 345 500 350Z"/>
+      <path d="M500 342C488 334 479 319 483 298C488 312 493 356 500 371C507 356 512 312 517 298C521 319 512 334 500 342Z"/>
+      <path d="M500 332C492 321 489 310 492 290C495 304 496 315 497 321C497 315 499 304 500 288C501 304 503 315 503 321C504 315 505 304 508 290C511 310 508 321 500 332Z"/>
+    </g>
+    <ellipse cx="500" cy="325" rx="12" ry="8" fill="#F8E38A" opacity="0.75"/>
+    <g fill="#0B2545" opacity="0.4">
+      <circle cx="472" cy="452" r="6"/>
+      <circle cx="500" cy="456" r="6"/>
+      <circle cx="528" cy="452" r="6"/>
+      <circle cx="442" cy="448" r="5"/>
+      <circle cx="558" cy="448" r="5"/>
+    </g>
   </g>
-  
-  <!-- Arch support columns - left -->
-  <rect x="168" y="125" width="7" height="50" fill="#0B2545" opacity="0.7"/>
-  <circle cx="171.5" cy="120" r="3.5" fill="#0B2545"/>
-  
-  <!-- Arch support columns - right -->
-  <rect x="225" y="125" width="7" height="50" fill="#0B2545" opacity="0.7"/>
-  <circle cx="228.5" cy="120" r="3.5" fill="#0B2545"/>
-  
-  <!-- Diya (oil lamp) - outer bowl -->
-  <ellipse cx="200" cy="175" rx="28" ry="18" fill="#D4A574" stroke="#0B2545" stroke-width="2"/>
-  
-  <!-- Diya - decorative rim pattern -->
-  <ellipse cx="200" cy="172" rx="26" ry="16" fill="none" stroke="#B45309" stroke-width="1.5" opacity="0.6"/>
-  
-  <!-- Diya - decorative dots -->
-  <circle cx="180" cy="175" r="2" fill="#0B2545" opacity="0.4"/>
-  <circle cx="190" cy="177" r="2" fill="#0B2545" opacity="0.4"/>
-  <circle cx="200" cy="178" r="2" fill="#0B2545" opacity="0.4"/>
-  <circle cx="210" cy="177" r="2" fill="#0B2545" opacity="0.4"/>
-  <circle cx="220" cy="175" r="2" fill="#0B2545" opacity="0.4"/>
-  
-  <!-- Flame - outer layer (large, golden yellow) -->
-  <path d="M200 145C192 138 188 125 190 108C193 120 195 128 195 138C195 130 198 115 200 105C202 115 205 130 205 138C205 128 207 120 210 108C212 125 208 138 200 145Z" fill="#FFB81C"/>
-  
-  <!-- Flame - middle layer (brighter yellow) -->
-  <path d="M200 142C195 137 192 128 194 115C196 125 197 132 197 138C197 132 199 115 200 108C201 115 203 132 203 138C203 132 204 125 206 115C208 128 205 137 200 142Z" fill="#FFC837"/>
-  
-  <!-- Flame - inner layer (brightest - gold) -->
-  <path d="M200 140C197 136 195 130 196 120C198 127 198.5 133 198.5 137C198.5 133 199.5 120 200 114C200.5 120 201.5 133 201.5 137C201.5 133 202 127 204 120C205 130 203 136 200 140Z" fill="#FFD700"/>
-  
-  <!-- Flame tip glow -->
-  <ellipse cx="200" cy="108" rx="8" ry="6" fill="#FFE55C" opacity="0.7"/>
-  
-  <!-- Arch bottom point -->
-  <path d="M135 160L200 265L265 160" fill="none" stroke="#0B2545" stroke-width="2.5" opacity="0.4"/>
-  
-  <!-- Shield/base shape -->
-  <path d="M145 165L255 165L255 180C255 200 240 220 200 230C160 220 145 200 145 180Z" fill="none" stroke="#0B2545" stroke-width="2.5" opacity="0.5"/>
+
+  <!-- Text -->
+  <text x="500" y="660" text-anchor="middle" font-size="66" font-weight="700" letter-spacing="1.4" fill="#0B2545" font-family="Georgia, 'Times New Roman', serif">BHAGWATI</text>
+  <text x="500" y="725" text-anchor="middle" font-size="46" font-weight="700" letter-spacing="1.1" fill="#0B2545" font-family="Georgia, 'Times New Roman', serif">TALENT ADVISORY</text>
 </svg>
