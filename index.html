@@ -1,186 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Bhagwati Talent Advisory offers CBSE School HR and compliance support services for schools, institutions, and educational organizations."
-    />
-    <title>Bhagwati Talent Advisory</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container nav">
-        <div class="logo">
-          <span class="logo-mark">B</span>
-          <div>
-            <h1>Bhagwati</h1>
-            <small>Talent Advisory</small>
-          </div>
-        </div>
-        <nav class="main-nav">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#why-us">Why Us</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a class="btn btn-primary" href="#contact">Book Consultation</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bhagwati Talent Advisory™ | CBSE School HR & Compliance Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0b2545;
+      --accent: #b45309;
+      --accent-light: #fef3c7;
+      --bg-light: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-main);
+      background-color: #ffffff;
+      line-height: 1.6;
+    }
+
+    /* Brand Header with Logo */
+    header {
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 24px 20px;
+      text-align: center;
+      border-bottom: 4px solid var(--accent);
+    }
+    .brand-logo {
+      max-width: 130px;
+      height: auto;
+      background: #ffffff;
+      padding: 6px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      margin-bottom: 12px;
+    }
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    header p {
+      font-size: 13px;
+      color: #cbd5e1;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--bg-light);
+      padding: 45px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 23px;
+      color: var(--primary);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto 20px auto;
+      font-size: 14.5px;
+      color: #475569;
+    }
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s ease-in-out;
+    }
+    .btn-whatsapp {
+      background-color: #25d366;
+      color: #ffffff;
+    }
+    .btn-enquire {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      color: var(--primary);
+      font-size: 20px;
+      margin-bottom: 26px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    /* Services Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-top: 4px solid var(--primary);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* Inquiry Form Box */
+    .form-wrapper {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 30px 25px;
+      margin: 40px 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    }
+    .form-wrapper h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 19px;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .form-wrapper .sub {
+      text-align: center;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group.full {
+      grid-column: span 2;
+    }
+    @media (max-width: 600px) {
+      .form-group.full { grid-column: span 1; }
+    }
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .form-group input:focus, 
+    .form-group select:focus, 
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(11,37,69,0.1);
+    }
+    .submit-btn {
+      grid-column: span 2;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 13px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.2s ease;
+      margin-top: 6px;
+    }
+    @media (max-width: 600px) {
+      .submit-btn { grid-column: span 1; }
+    }
+    .submit-btn:hover {
+      background: #92400e;
+    }
+
+    /* Consultant Profile */
+    .profile-card {
+      background: var(--primary);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      margin-bottom: 35px;
+    }
+    .profile-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 21px;
+    }
+    .profile-card .designation {
+      font-size: 13.5px;
+      color: #94a3b8;
+      margin: 6px 0 14px 0;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 11.5px;
+      font-weight: 700;
+      margin: 3px;
+    }
+    .contact-details {
+      border-top: 1px solid #1e3a5f;
+      padding-top: 16px;
+      font-size: 13.5px;
+      color: #e2e8f0;
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Brand Header with Logo Image -->
+  <header>
+    <!-- Displays the logo.png uploaded to your repository -->
+    <img src="logo.png" alt="Bhagwati Talent Advisory Emblem" class="brand-logo" onerror="this.style.display='none'" />
+    <h1>Bhagwati Talent Advisory™</h1>
+    <p>Institutional HR • Faculty Acquisition • CBSE Regulatory Governance</p>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <h2>Specialized HR Solutions for CBSE Schools & Educational Trusts</h2>
+    <p>Empowering schools across Sherghati, Patna, and Bihar with qualified faculty recruitment, statutory child safety protocols (POCSO & POSH), teacher service agreements, and inspection-ready HR audits.</p>
+    <div class="hero-buttons">
+      <a class="btn btn-whatsapp" href="https://wa.me/917979770162?text=Hello%20Rahul%20Sir,%20we%20want%20to%20consult%20regarding%20HR%20and%20compliance%20for%20our%20school." target="_blank">Chat on WhatsApp</a>
+      <a class="btn btn-enquire" href="#inquiry">Submit School Inquiry</a>
+    </div>
+  </section>
+
+  <!-- Core Services -->
+  <div class="container">
+    <h2 class="section-title">Institutional Services</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Faculty & Leadership Hiring</h3>
+        <p>End-to-end recruitment, screening, and demo assessments for PGT, TGT, PRT, NTT, Special Educators, Counselors, and Principals matching CBSE and NCTE norms.</p>
       </div>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container hero-grid">
-          <div class="hero-text">
-            <span class="eyebrow">CBSE School HR & Compliance Services</span>
-            <h2>Building stronger school teams with trusted HR and compliance support.</h2>
-            <p>
-              Bhagwati Talent Advisory helps schools and educational institutions hire,
-              manage, and retain the right people while staying compliant with regulations
-              and operational standards.
-            </p>
-            <div class="cta-row">
-              <a class="btn btn-primary" href="#contact">Get Started</a>
-              <a class="btn btn-secondary" href="#services">Explore Services</a>
-            </div>
-            <ul class="stats">
-              <li><strong>100%</strong><span>Client Focus</span></li>
-              <li><strong>HR</strong><span>Support</span></li>
-              <li><strong>Compliance</strong><span>Driven</span></li>
-            </ul>
-          </div>
-
-          <div class="hero-card">
-            <div class="mini-card">
-              <span>Trusted Advisory</span>
-              <h3>School Workforce Solutions</h3>
-            </div>
-            <div class="check-list">
-              <div><span>✓</span> Recruitment & Talent Acquisition</div>
-              <div><span>✓</span> HR Policy & Process Support</div>
-              <div><span>✓</span> Compliance Monitoring</div>
-              <div><span>✓</span> Staff Documentation Assistance</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <span class="eyebrow">About Us</span>
-            <h2>Focused on school growth, staff excellence, and compliance confidence.</h2>
-          </div>
-          <div class="about-grid">
-            <div>
-              <p>
-                Bhagwati Talent Advisory works alongside educational institutions to simplify
-                recruitment, strengthen HR frameworks, and ensure smooth human resource operations.
-              </p>
-              <p>
-                We understand the unique needs of CBSE schools and help leaders hire the right talent,
-                reduce administrative pressure, and maintain strong compliance standards.
-              </p>
-            </div>
-            <div class="info-box">
-              <h3>Our Mission</h3>
-              <p>
-                To support schools with a practical, people-first approach that balances
-                operational efficiency and long-term institutional growth.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="services" class="section alt-bg">
-        <div class="container">
-          <div class="section-heading">
-            <span class="eyebrow">Our Services</span>
-            <h2>End-to-end support for school workforce and compliance needs.</h2>
-          </div>
-          <div class="service-grid">
-            <article class="service-card">
-              <div class="icon">01</div>
-              <h3>Talent Acquisition</h3>
-              <p>Helping schools identify and recruit quality educators and support staff efficiently.</p>
-            </article>
-            <article class="service-card">
-              <div class="icon">02</div>
-              <h3>HR Strategy</h3>
-              <p>Designing hiring, onboarding, and retention systems to build a stable school workforce.</p>
-            </article>
-            <article class="service-card">
-              <div class="icon">03</div>
-              <h3>Compliance Support</h3>
-              <p>Guidance on documentation, policy alignment, and regulatory compliance requirements.</p>
-            </article>
-            <article class="service-card">
-              <div class="icon">04</div>
-              <h3>School Operations</h3>
-              <p>Streamlining HR workflows so school leadership can focus on academic excellence.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="why-us" class="section">
-        <div class="container">
-          <div class="section-heading">
-            <span class="eyebrow">Why Choose Us</span>
-            <h2>Practical support built around trust, clarity, and school needs.</h2>
-          </div>
-          <div class="why-grid">
-            <div class="why-item">
-              <h3>School-Focused Approach</h3>
-              <p>We understand school environments, staffing cycles, and operational realities.</p>
-            </div>
-            <div class="why-item">
-              <h3>People-First Guidance</h3>
-              <p>We prioritize sustainable hiring and management practices that strengthen teams.</p>
-            </div>
-            <div class="why-item">
-              <h3>Reliable Compliance Assistance</h3>
-              <p>We help institutions stay organized, compliant, and prepared for evolving requirements.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="section contact-section">
-        <div class="container contact-box">
-          <div>
-            <span class="eyebrow">Contact</span>
-            <h2>Let’s build a stronger future for your school.</h2>
-            <p>
-              Whether you need hiring support, HR guidance, or compliance assistance, we are ready to help.
-            </p>
-          </div>
-          <form class="contact-form" action="#" method="post">
-            <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" required />
-            <input type="email" name="email" placeholder="Email Address" aria-label="Email Address" required />
-            <textarea name="message" rows="4" placeholder="Your Message" aria-label="Your Message" required></textarea>
-            <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container footer-row">
-        <p>© 2026 Bhagwati Talent Advisory</p>
-        <p>CBSE School HR & Compliance Services</p>
+      <div class="card">
+        <h3>POCSO & Child Safety Setup</h3>
+        <p>Constitution of Child Protection Committees, zero-tolerance declarations, police verification dossiers, and school safety compliance.</p>
       </div>
-    </footer>
+      <div class="card">
+        <h3>Statutory & Service Formats</h3>
+        <p>Execution of Teacher Service Agreements (CBSE Form 1 Stamp), private tuition prohibition undertakings, EPFO Form 11, and Gratuity nomination setups.</p>
+      </div>
+    </div>
 
-    <script src="script.js"></script>
-  </body>
+    <!-- Direct School Inquiry Form (Sends details to rahulkunal14@gmail.com) -->
+    <div class="form-wrapper" id="inquiry">
+      <h3>School Consultation & Inquiry Form</h3>
+      <p class="sub">Fill out the form below. Inquiries are forwarded directly to the Lead HR Consultant's desk.</p>
+
+      <form action="https://formsubmit.co/rahulkunal14@gmail.com" method="POST">
+        <!-- Configuration settings for FormSubmit -->
+        <input type="hidden" name="_subject" value="New CBSE School HR Inquiry - Bhagwati Talent Advisory" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="contact_name">Contact Person / Principal Name *</label>
+            <input type="text" id="contact_name" name="Contact_Person" placeholder="e.g. Dr. Rajesh Sharma" required />
+          </div>
+
+          <div class="form-group">
+            <label for="school_name">Name of School / Trust *</label>
+            <input type="text" id="school_name" name="School_Name" placeholder="e.g. Oxford Public School" required />
+          </div>
+
+          <div class="form-group">
+            <label for="mobile_number">Mobile / WhatsApp Number *</label>
+            <input type="tel" id="mobile_number" name="Mobile_Number" placeholder="+91 98765 43210" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email_id">Official Email Address *</label>
+            <input type="email" id="email_id" name="Email_Address" placeholder="school@gmail.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="location">School Location / City *</label>
+            <input type="text" id="location" name="City_Location" placeholder="e.g. Sherghati / Gaya / Patna" required />
+          </div>
+
+          <div class="form-group">
+            <label for="service_required">Primary Service Required *</label>
+            <select id="service_required" name="Service_Required" required>
+              <option value="">-- Select Requirement --</option>
+              <option value="Faculty Recruitment (PGT/TGT/PRT)">Faculty Recruitment (PGT / TGT / PRT)</option>
+              <option value="Principal / Leadership Hiring">Principal / Leadership Hiring</option>
+              <option value="CBSE Compliance & Document Audit">CBSE Compliance & Document Audit</option>
+              <option value="POCSO / POSH Policy Setup">POCSO / POSH Policy Setup</option>
+              <option value="Complete Annual HR Retainership">Complete Annual HR Retainership</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="message_details">Detailed Requirement / Message</label>
+            <textarea id="message_details" name="Message_Details" rows="4" placeholder="Briefly describe your vacancy needs, school affiliation status, or specific HR compliance requirements..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Inquiry to Rahul Sir</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Consultant Profile Box -->
+    <div class="profile-card">
+      <h3>Rahul Kunal</h3>
+      <div class="designation">Founder & Lead HR Consultant • MBA (HR) • 12+ Years Experience</div>
+      
+      <div>
+        <span class="badge">Naukri Maestro Recruiter</span>
+        <span class="badge">Best HR Award Winner (2019–2025)</span>
+        <span class="badge">CBSE Affiliation Specialist</span>
+      </div>
+
+      <div class="contact-details">
+        📍 <b>Principal Desk:</b> Sherghati, Bihar - 824211, India<br>
+        📱 <b>Mobile / WhatsApp:</b> +91 79797 70162 &nbsp;|&nbsp; 
+        ✉️️ <b>Email:</b> rahulkunal14@gmail.com
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Bhagwati Talent Advisory™. All rights reserved.</p>
+    <p>Operational Desk: Sherghati, Bihar, India | Hosted on GitHub Pages</p>
+  </footer>
+
+</body>
 </html>
