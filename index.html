@@ -102,7 +102,7 @@
     }
 
     .container {
-      max-width: 960px;
+      max-width: 1100px;
       margin: 40px auto;
       padding: 0 20px;
     }
@@ -261,6 +261,50 @@
       margin-top: 12px;
     }
 
+    .awards-section {
+      padding: 10px 0 40px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .award-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      overflow: hidden;
+    }
+    .award-card img {
+      width: 100%;
+      height: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 10px;
+      display: block;
+      background: #fff;
+    }
+    .award-card.missing {
+      background: linear-gradient(135deg, #f8fafc, #eef2ff);
+      color: var(--primary);
+      border: 1px dashed #cbd5e1;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+    }
+
     footer {
       background-color: #0f172a;
       color: #94a3b8;
@@ -376,6 +420,26 @@
       </div>
     </div>
   </div>
+
+  <section class="awards-section">
+    <div class="container">
+      <h2 class="section-title">Awards & Recognitions</h2>
+      <div class="awards-grid">
+        <div class="award-card">
+          <img src="award-1.png" alt="Naukri Maestro Recruiter Award" onerror="this.style.display='none'; this.parentElement.classList.add('missing'); this.parentElement.innerHTML='Award 1';" />
+        </div>
+        <div class="award-card">
+          <img src="award-2.png" alt="Award of Excellence 2023" onerror="this.style.display='none'; this.parentElement.classList.add('missing'); this.parentElement.innerHTML='Award 2';" />
+        </div>
+        <div class="award-card">
+          <img src="award-3.png" alt="Bajaj Capital Recognition Award" onerror="this.style.display='none'; this.parentElement.classList.add('missing'); this.parentElement.innerHTML='Award 3';" />
+        </div>
+        <div class="award-card">
+          <img src="award-4.png" alt="Amity University Job Fair Recognition" onerror="this.style.display='none'; this.parentElement.classList.add('missing'); this.parentElement.innerHTML='Award 4';" />
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <p>© 2026 Bhagwati Talent Advisory™. All rights reserved.</p>
