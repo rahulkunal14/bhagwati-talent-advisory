@@ -23,7 +23,6 @@
       line-height: 1.6;
     }
 
-    /* Brand Header with Logo */
     header {
       background-color: var(--primary);
       color: #ffffff;
@@ -55,7 +54,6 @@
       text-transform: uppercase;
     }
 
-    /* Hero Section */
     .hero {
       background: var(--bg-light);
       padding: 45px 20px;
@@ -103,7 +101,6 @@
       transform: translateY(-2px);
     }
 
-    /* Layout Container */
     .container {
       max-width: 960px;
       margin: 40px auto;
@@ -119,7 +116,6 @@
       letter-spacing: 0.6px;
     }
 
-    /* Services Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -145,7 +141,6 @@
       color: var(--text-muted);
     }
 
-    /* Inquiry Form Box */
     .form-wrapper {
       background: #ffffff;
       border: 2px solid #cbd5e1;
@@ -192,8 +187,8 @@
       color: #334155;
       margin-bottom: 6px;
     }
-    .form-group input, 
-    .form-group select, 
+    .form-group input,
+    .form-group select,
     .form-group textarea {
       padding: 10px 12px;
       border: 1px solid #cbd5e1;
@@ -201,8 +196,8 @@
       font-size: 14px;
       font-family: inherit;
     }
-    .form-group input:focus, 
-    .form-group select:focus, 
+    .form-group input:focus,
+    .form-group select:focus,
     .form-group textarea:focus {
       outline: none;
       border-color: var(--primary);
@@ -230,7 +225,6 @@
       background: #92400e;
     }
 
-    /* Consultant Profile */
     .profile-card {
       background: var(--primary);
       color: #ffffff;
@@ -267,7 +261,6 @@
       margin-top: 12px;
     }
 
-    /* Footer */
     footer {
       background-color: #0f172a;
       color: #94a3b8;
@@ -278,26 +271,21 @@
   </style>
 </head>
 <body>
-
-  <!-- Brand Header with Logo Image -->
   <header>
-    <!-- Displays the logo.png uploaded to your repository -->
-    <img src="logo.png" alt="Bhagwati Talent Advisory Emblem" class="brand-logo" onerror="this.style.display='none'" />
+    <img src="logo.svg" alt="Bhagwati Talent Advisory Emblem" class="brand-logo" />
     <h1>Bhagwati Talent Advisory™</h1>
     <p>Institutional HR • Faculty Acquisition • CBSE Regulatory Governance</p>
   </header>
 
-  <!-- Hero Banner -->
   <section class="hero">
     <h2>Specialized HR Solutions for CBSE Schools & Educational Trusts</h2>
     <p>Empowering schools across Sherghati, Patna, and Bihar with qualified faculty recruitment, statutory child safety protocols (POCSO & POSH), teacher service agreements, and inspection-ready HR audits.</p>
     <div class="hero-buttons">
-      <a class="btn btn-whatsapp" href="https://wa.me/917979770162?text=Hello%20Rahul%20Sir,%20we%20want%20to%20consult%20regarding%20HR%20and%20compliance%20for%20our%20school." target="_blank">Chat on WhatsApp</a>
+      <a class="btn btn-whatsapp" href="https://wa.me/917979770162?text=Hello%20Rahul%20Sir,%20we%20want%20to%20consult%20regarding%20HR%20and%20compliance%20for%20our%20school." target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
       <a class="btn btn-enquire" href="#inquiry">Submit School Inquiry</a>
     </div>
   </section>
 
-  <!-- Core Services -->
   <div class="container">
     <h2 class="section-title">Institutional Services</h2>
     <div class="grid">
@@ -315,13 +303,11 @@
       </div>
     </div>
 
-    <!-- Direct School Inquiry Form (Sends details to rahulkunal14@gmail.com) -->
     <div class="form-wrapper" id="inquiry">
       <h3>School Consultation & Inquiry Form</h3>
       <p class="sub">Fill out the form below. Inquiries are forwarded directly to the Lead HR Consultant's desk.</p>
 
       <form action="https://formsubmit.co/rahulkunal14@gmail.com" method="POST">
-        <!-- Configuration settings for FormSubmit -->
         <input type="hidden" name="_subject" value="New CBSE School HR Inquiry - Bhagwati Talent Advisory" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
@@ -374,11 +360,9 @@
       </form>
     </div>
 
-    <!-- Consultant Profile Box -->
     <div class="profile-card">
       <h3>Rahul Kunal</h3>
       <div class="designation">Founder & Lead HR Consultant • MBA (HR) • 12+ Years Experience</div>
-      
       <div>
         <span class="badge">Naukri Maestro Recruiter</span>
         <span class="badge">Best HR Award Winner (2019–2025)</span>
@@ -387,17 +371,15 @@
 
       <div class="contact-details">
         📍 <b>Principal Desk:</b> Sherghati, Bihar - 824211, India<br>
-        📱 <b>Mobile / WhatsApp:</b> +91 79797 70162 &nbsp;|&nbsp; 
-        ✉️️ <b>Email:</b> rahulkunal14@gmail.com
+        📱 <b>Mobile / WhatsApp:</b> +91 79797 70162 &nbsp;|&nbsp;
+        ✉️ <b>Email:</b> rahulkunal14@gmail.com
       </div>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <p>© 2026 Bhagwati Talent Advisory™. All rights reserved.</p>
     <p>Operational Desk: Sherghati, Bihar, India | Hosted on GitHub Pages</p>
   </footer>
-
 </body>
 </html>
