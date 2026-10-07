@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rahulkunal14.github.io/bhagwati-talent-advisory/sitemap.xml
