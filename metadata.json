@@ -1,0 +1,8 @@
+{
+  "name": "Bhagwati Talent Advisory",
+  "description": "Institutional HR solutions, faculty recruitment, and CBSE compliance advisory for schools and educational trusts.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
