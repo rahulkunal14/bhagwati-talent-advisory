@@ -78,7 +78,7 @@ function getAdminAuth() {
   } catch (e) {
     console.warn('Failed to read admin-auth.json:', e.message);
   }
-  const defaultPassword = process.env.ADMIN_PASSWORD || 'Bhagwati@2026';
+  const defaultPassword = process.env.ADMIN_PASSWORD || 'Bhagwati@901548';
   const salt = crypto.randomBytes(16).toString('hex');
   const hash = hashPassword(defaultPassword, salt);
   const data = {
@@ -164,6 +164,8 @@ function saveSiteConfig(newConfig) {
 // ==========================================
 // CBSE Official Notices Sync & Cache Engine
 // ==========================================
+let cbseNoticesVersion = Date.now();
+
 function getCbseNoticesCache() {
   try {
     if (fs.existsSync(cbseNoticesFilePath)) {
@@ -338,19 +340,23 @@ async function syncCbseNoticesFromOfficialSources() {
     notices
   };
 
+  if (newFoundCount > 0) {
+    cbseNoticesVersion = Date.now();
+  }
+
   saveCbseNoticesCache(updatedPayload);
   console.log(`[CBSE Sync] Synchronized ${notices.length} notices (${newFoundCount} new) from official CBSE portals`);
   return updatedPayload;
 }
 
-// Automated background sync scheduler: starts 2.5s after boot and every 30 minutes thereafter
+// Automated background sync scheduler: starts 2s after boot and every 2 minutes thereafter
 setTimeout(() => {
   syncCbseNoticesFromOfficialSources().catch(e => console.warn('[CBSE Initial Sync Error]:', e.message));
-}, 2500);
+}, 2000);
 
 setInterval(() => {
   syncCbseNoticesFromOfficialSources().catch(e => console.warn('[CBSE Scheduled Sync Error]:', e.message));
-}, 30 * 60 * 1000);
+}, 2 * 60 * 1000);
 
 // Submissions persistence helpers
 function loadSubmissions() {
@@ -853,12 +859,48 @@ app.post('/api/inquiries', async (req, res) => {
     res.status(200).json({
       success: true,
       message: 'Inquiry received successfully and dispatched to Rahul Kunal\'s advisory desk!',
+      inquiry: record,
       inquiryCount: inquiries.length
     });
   } catch (err) {
     console.error('Inquiry submission error:', err);
     res.status(500).json({ error: 'Failed to process inquiry submission' });
   }
+});
+
+// GET /api/inquiries - Live Inquiries Feed (Updates automatically on app page)
+app.get('/api/inquiries', (req, res) => {
+  const authHeader = req.headers.authorization || '';
+  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+  const isAdmin = isValidAdminSession(token);
+
+  const safeList = inquiries.slice(-50).reverse().map(item => {
+    if (isAdmin) return item;
+    const maskedMobile = item.mobile && item.mobile.length >= 10
+      ? item.mobile.substring(0, 4) + '****' + item.mobile.substring(item.mobile.length - 2)
+      : 'Verified Contact';
+    const maskedContact = item.contactPerson
+      ? item.contactPerson.split(' ')[0] + (item.contactPerson.split(' ')[1] ? ' ' + item.contactPerson.split(' ')[1][0] + '.' : '')
+      : 'School Representative';
+
+    return {
+      id: item.id,
+      schoolName: item.schoolName || 'Affiliated Institution',
+      contactPerson: maskedContact,
+      mobile: maskedMobile,
+      city: item.city || 'Bihar / Eastern India',
+      service: item.service || 'Institutional Advisory',
+      createdAt: item.createdAt,
+      status: 'Received & Active'
+    };
+  });
+
+  res.json({
+    success: true,
+    total: inquiries.length,
+    inquiries: safeList,
+    lastUpdated: inquiries.length > 0 ? inquiries[inquiries.length - 1].createdAt : new Date().toISOString()
+  });
 });
 
 // 4. API Endpoint: Educator Application (Inquiry Hub Tab 2)
@@ -1324,13 +1366,43 @@ app.delete('/api/media/:filename', (req, res) => {
 // ==========================================
 app.get('/api/cbse-notices', (req, res) => {
   const cache = getCbseNoticesCache();
+  // Trigger background sync if older than 2 minutes or explicitly requested
+  const cacheAge = Date.now() - new Date(cache.lastSync || 0).getTime();
+  if (cacheAge > 2 * 60 * 1000 || req.query.live === '1') {
+    syncCbseNoticesFromOfficialSources().catch(() => {});
+  }
   res.json({
     success: true,
+    version: cbseNoticesVersion,
     lastSync: cache.lastSync,
     status: cache.status,
     source: cache.source,
     total: cache.total || (cache.notices ? cache.notices.length : 0),
     notices: cache.notices || []
+  });
+});
+
+app.get('/api/cbse-notices/check-updates', async (req, res) => {
+  const clientVersion = req.query.version;
+  const clientLastSync = req.query.lastSync;
+  const cache = getCbseNoticesCache();
+
+  // If cache is older than 2 minutes, check in background
+  const cacheAge = Date.now() - new Date(cache.lastSync || 0).getTime();
+  if (cacheAge > 2 * 60 * 1000) {
+    syncCbseNoticesFromOfficialSources().catch(() => {});
+  }
+
+  const hasUpdates = (clientVersion && clientVersion !== String(cbseNoticesVersion)) ||
+    (clientLastSync && new Date(cache.lastSync).getTime() > new Date(clientLastSync).getTime());
+
+  res.json({
+    hasUpdates: !!hasUpdates,
+    version: cbseNoticesVersion,
+    lastSync: cache.lastSync,
+    total: cache.total || (cache.notices ? cache.notices.length : 0),
+    latestTitle: cache.notices && cache.notices[0] ? cache.notices[0].title : '',
+    latestUrl: cache.notices && cache.notices[0] ? cache.notices[0].url : ''
   });
 });
 

@@ -1,12 +1,12 @@
 {
-  "lastSync": "2026-10-08T15:21:43.778Z",
+  "lastSync": "2026-10-09T07:29:03.895Z",
   "status": "success",
   "source": "Central Board of Secondary Education (CBSE)",
   "endpoints": [
     "https://www.cbse.gov.in/cbsenew/cbse.html",
     "https://cbseacademic.nic.in/circulars.html"
   ],
-  "total": 50,
+  "total": 51,
   "newFoundCount": 0,
   "notices": [
     {
@@ -21,6 +21,19 @@
       "isOfficial": true,
       "isNew": true,
       "isPinned": true
+    },
+    {
+      "id": "cbse-xbelzs3",
+      "source": "CBSE Official Portal (cbse.gov.in)",
+      "refNo": "CBSE/EXAM/2026",
+      "title": "Date Sheet for Class XII : Special Examinations for West Asia - 2026 (631 KB)",
+      "date": "09/10/2026",
+      "category": "Examinations",
+      "summary": "Statutory circular issued by CBSE Head Office for institutional compliance: Date Sheet for Class XII : Special Examinations for West Asia - 2026 (631 KB)...",
+      "url": "https://www.cbse.gov.in/cbsenew/documents/Date_Sheet_Special_Examinations_09102026.pdf",
+      "isOfficial": true,
+      "isNew": true,
+      "isPinned": false
     },
     {
       "id": "cbse-et4algd",

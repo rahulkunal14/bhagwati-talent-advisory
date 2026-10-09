@@ -51,6 +51,9 @@
       <button type="button" class="admin-bar-btn" id="adminOpenDashboardBtn" title="Open full administration control center">
         🛠️ Admin Dashboard
       </button>
+      <button type="button" class="admin-bar-btn" id="adminChangePasswordBtn" title="Change Administrator Login Password">
+        🔑 Change Password
+      </button>
       <button type="button" class="admin-bar-btn admin-bar-btn-primary" id="adminSaveAllBtn" title="Save and publish all edits live to Firestore & server">
         💾 Save &amp; Publish Live
       </button>
@@ -220,17 +223,17 @@
   <section id="services" class="section-wrapper">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Institutional Solutions</span>
-        <h2>End-to-End Governance & Talent Advisory</h2>
-        <p>Comprehensive human capital management designed specifically for the rigorous statutory standards of CBSE and state education boards.</p>
+        <span class="section-tag" data-editable="servicesTag">Institutional Solutions</span>
+        <h2 data-editable="servicesTitle">End-to-End Governance & Talent Advisory</h2>
+        <p data-editable="servicesSubtitle">Comprehensive human capital management designed specifically for the rigorous statutory standards of CBSE and state education boards.</p>
       </div>
 
       <div class="services-grid">
         <article class="service-card">
           <div class="service-icon-box">👨‍🏫</div>
-          <h3>Faculty & Leadership Acquisition</h3>
-          <p>Structured recruitment pipelines with subject-matter demo assessments for PGT, TGT, PRT, NTT, Special Educators, Wellness Counselors, and Principals.</p>
-          <ul class="service-features">
+          <h3 data-editable="service1Title">Faculty & Leadership Acquisition</h3>
+          <p data-editable="service1Desc">Structured recruitment pipelines with subject-matter demo assessments for PGT, TGT, PRT, NTT, Special Educators, Wellness Counselors, and Principals.</p>
+          <ul class="service-features" data-editable="service1Features">
             <li>NCTE & CBSE qualification validation</li>
             <li>Rigorous 3-tier demo evaluation process</li>
             <li>Turnaround within 7-14 business days</li>
@@ -239,9 +242,9 @@
 
         <article class="service-card">
           <div class="service-icon-box">🛡️</div>
-          <h3>POCSO & Child Safety Setup</h3>
-          <p>Establishment of mandatory Child Protection Committees, zero-tolerance child abuse protocols, employee police verification dossiers, and staff sensitization workshops.</p>
-          <ul class="service-features">
+          <h3 data-editable="service2Title">POCSO & Child Safety Setup</h3>
+          <p data-editable="service2Desc">Establishment of mandatory Child Protection Committees, zero-tolerance child abuse protocols, employee police verification dossiers, and staff sensitization workshops.</p>
+          <ul class="service-features" data-editable="service2Features">
             <li>Constitution of external NGO member board</li>
             <li>Police verification & background check files</li>
             <li>Inspection-ready POCSO safety registry</li>
@@ -250,9 +253,9 @@
 
         <article class="service-card">
           <div class="service-icon-box">📜</div>
-          <h3>Statutory Employment Formats</h3>
-          <p>Execution of Teacher Service Agreements on CBSE Form 1 stamp papers, private tuition prohibition undertakings, EPF Form 11, and Gratuity nomination setups.</p>
-          <ul class="service-features">
+          <h3 data-editable="service3Title">Statutory Employment Formats</h3>
+          <p data-editable="service3Desc">Execution of Teacher Service Agreements on CBSE Form 1 stamp papers, private tuition prohibition undertakings, EPF Form 11, and Gratuity nomination setups.</p>
+          <ul class="service-features" data-editable="service3Features">
             <li>CBSE Affiliation Bye-Laws Section 5 format</li>
             <li>Service books & annual appraisal records</li>
             <li>EPFO, ESIC, and salary bank transfer audit</li>
@@ -261,9 +264,9 @@
 
         <article class="service-card">
           <div class="service-icon-box">🔍</div>
-          <h3>CBSE Affiliation & Renewal Audit</h3>
-          <p>Pre-inspection dry runs and SARAS documentation audits to ensure total alignment with OASIS disclosures and inspection committee criteria.</p>
-          <ul class="service-features">
+          <h3 data-editable="service4Title">CBSE Affiliation & Renewal Audit</h3>
+          <p data-editable="service4Desc">Pre-inspection dry runs and SARAS documentation audits to ensure total alignment with OASIS disclosures and inspection committee criteria.</p>
+          <ul class="service-features" data-editable="service4Features">
             <li>Staff ratio verification (1:1.5 per section)</li>
             <li>Mandatory public disclosure web audit</li>
             <li>Zero-defect compliance dossier preparation</li>
@@ -272,9 +275,9 @@
 
         <article class="service-card">
           <div class="service-icon-box">⚖️</div>
-          <h3>POSH Policy & Committee Setup</h3>
-          <p>Legal constitution of Internal Complaints Committee (ICC) under the POSH Act 2013, drafting institutional anti-harassment by-laws, and annual report filing.</p>
-          <ul class="service-features">
+          <h3 data-editable="service5Title">POSH Policy & Committee Setup</h3>
+          <p data-editable="service5Desc">Legal constitution of Internal Complaints Committee (ICC) under the POSH Act 2013, drafting institutional anti-harassment by-laws, and annual report filing.</p>
+          <ul class="service-features" data-editable="service5Features">
             <li>Presiding officer & committee appointment</li>
             <li>Staff awareness modules & sign-offs</li>
             <li>Statutory compliance filing support</li>
@@ -283,9 +286,9 @@
 
         <article class="service-card">
           <div class="service-icon-box">🤝</div>
-          <h3>Annual HR Retainership Desk</h3>
-          <p>Year-round outsourced HR desk for educational institutions, overseeing contract renewals, mid-session teacher replacement guarantees, and grievance redressal.</p>
-          <ul class="service-features">
+          <h3 data-editable="service6Title">Annual HR Retainership Desk</h3>
+          <p data-editable="service6Desc">Year-round outsourced HR desk for educational institutions, overseeing contract renewals, mid-session teacher replacement guarantees, and grievance redressal.</p>
+          <ul class="service-features" data-editable="service6Features">
             <li>Dedicated desk manager for your school</li>
             <li>Immediate emergency faculty substitution</li>
             <li>Bi-annual statutory document review</li>
@@ -299,18 +302,18 @@
   <section id="about" class="section-wrapper bg-alt">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">About Bhagwati Talent Advisory</span>
-        <h2>12+ Years of Institutional HR & CBSE Educational Excellence</h2>
-        <p>Pioneering transparent educator recruitment, statutory compliance, and trust-level governance for schools across Eastern India.</p>
+        <span class="section-tag" data-editable="aboutTag">About Bhagwati Talent Advisory</span>
+        <h2 data-editable="aboutTitle">12+ Years of Institutional HR & CBSE Educational Excellence</h2>
+        <p data-editable="aboutSubtitle">Pioneering transparent educator recruitment, statutory compliance, and trust-level governance for schools across Eastern India.</p>
       </div>
 
       <div class="about-grid">
         <div class="about-content">
           <h3>Empowering Institutions with Visionary Leadership & Compliance Rigor</h3>
-          <p>
+          <p data-editable="aboutDesc1">
             Founded by <strong>Rahul Kunal</strong> (MBA in HR, recognized Top Zonal HR Award Winner and certified Naukri Maestro Recruiter), <strong>Bhagwati Talent Advisory™</strong> was established to bridge the critical gap between CBSE statutory affiliation mandates and elite human capital acquisition in educational institutions.
           </p>
-          <p>
+          <p data-editable="aboutDesc2">
             Operating from Sherghati (Bihar) and serving leading schools across Bihar, Jharkhand, and neighboring states, we specialize in building inspection-ready institutions. From recruiting competent PGT, TGT, and PRT subject specialists to implementing mandatory POCSO Child Protection, POSH gender-safety frameworks, and CBSE OASIS staff disclosures, our advisory ensures schools remain accredited, compliant, and academically outstanding.
           </p>
 
@@ -965,6 +968,35 @@
           </form>
         </div>
       </div>
+
+      <!-- Live Real-Time Inquiries Received Activity Feed (Updates Live on Submission & Sync) -->
+      <div class="live-inquiries-stream-box" id="liveInquiriesStreamBox">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px;">
+          <div>
+            <h3 style="margin: 0; font-size: 16px; color: #0b2545; display: flex; align-items: center; gap: 8px;">
+              <span>⚡</span> Live Advisory Desk Activity (Received Inquiries)
+            </h3>
+            <p style="margin: 3px 0 0; font-size: 12.5px; color: #64748b;">
+              Institutional inquiries received from schools across Bihar and Eastern India, updated live in real time.
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="background: rgba(16, 185, 129, 0.12); border: 1px solid #10b981; color: #065f46; font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 6px;">
+              <span style="width: 7px; height: 7px; border-radius: 50%; background: #10b981;"></span> Live Auto-Updating
+            </span>
+            <span style="font-size: 12px; color: #475569; font-weight: 700; background: #f1f5f9; padding: 4px 10px; border-radius: 6px;">
+              Total Received: <b id="liveInquiriesCountBadge" style="color: #0b2545;">0</b>
+            </span>
+          </div>
+        </div>
+
+        <div id="liveInquiriesFeedList" class="live-inquiries-grid">
+          <!-- Dynamically populated and instantly updated live upon submission -->
+          <div style="grid-column: 1 / -1; text-align: center; color: #64748b; padding: 20px; font-size: 13px;">
+            Connecting to live inquiry stream...
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -972,17 +1004,17 @@
   <section id="cbse-work" class="section-wrapper bg-alt">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Statutory Governance & Affiliation Desk</span>
-        <h2>CBSE Related Work & Statutory Compliance Solutions</h2>
-        <p>A specialized institutional division dedicated solely to CBSE Affiliation Bye-Laws 2018, OASIS disclosures, SARAS portal workflows, and mandatory regulatory clearances.</p>
+        <span class="section-tag" data-editable="cbseTag">Statutory Framework</span>
+        <h2 data-editable="cbseTitle">Affiliation Governance & Inspection Readiness</h2>
+        <p data-editable="cbseSubtitle">Avoid inspection deficiencies, show-cause notices, or extension penalties with our systematic compliance checklist.</p>
       </div>
 
       <div class="cbse-work-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 32px;">
         <!-- Column 1: CBSE SARAS Affiliation & Upgradation -->
         <article class="service-card" style="border-top: 4px solid var(--primary); background: #ffffff;">
           <div class="service-icon-box" style="background: rgba(30, 58, 138, 0.1); color: var(--primary);">🏛️</div>
-          <h3>SARAS Affiliation & Upgradation Desk</h3>
-          <p>End-to-end guidance for Fresh Affiliation (up to Secondary/Senior Secondary), Switch-Over from State Boards, and Extension of Provisional Affiliation.</p>
+          <h3 data-editable="pillar1Title">SARAS 5.0 Portal Compliance</h3>
+          <p data-editable="pillar1Desc">Online application drafting, appendix cross-checking, and digital document uploads.</p>
           <ul class="service-features">
             <li>SARAS portal document preparation & fee verification</li>
             <li>Detailed Defect Letter & Deficiency compliance replies</li>
@@ -994,8 +1026,8 @@
         <!-- Column 2: OASIS Portal & Staffing Ratio Compliance -->
         <article class="service-card" style="border-top: 4px solid var(--accent); background: #ffffff;">
           <div class="service-icon-box" style="background: rgba(217, 119, 6, 0.1); color: var(--accent);">📊</div>
-          <h3>CBSE OASIS & Staffing Ratio Adherence</h3>
-          <p>Total statutory verification of teaching faculty against Section 5 of Affiliation Bye-Laws to ensure zero affiliation penalties or notice risks.</p>
+          <h3 data-editable="pillar2Title">1:1.5 Staffing Ratio Audits</h3>
+          <p data-editable="pillar2Desc">Section-wise teacher count validation, NTT/PRT/TGT/PGT ratio optimization for OASIS.</p>
           <ul class="service-features">
             <li>Strict 1:1.5 teacher-to-section ratio fulfillment audit</li>
             <li>NCTE qualification matching for PGT, TGT, PRT, NTT cadres</li>
@@ -1007,8 +1039,8 @@
         <!-- Column 3: Mandatory Legal Formats & Agreements -->
         <article class="service-card" style="border-top: 4px solid #059669; background: #ffffff;">
           <div class="service-icon-box" style="background: rgba(5, 150, 105, 0.1); color: #059669;">📝</div>
-          <h3>CBSE Form 1 Teacher Service Agreements</h3>
-          <p>Drafting and execution of legal service contracts on appropriate non-judicial stamp papers required under CBSE Affiliation Bye-Laws Appendix I.</p>
+          <h3 data-editable="pillar3Title">Statutory Form 1 Agreements</h3>
+          <p data-editable="pillar3Desc">Enforceable teacher contracts, probation terms, pay-scale parity as per state norms.</p>
           <ul class="service-features">
             <li>Bilingual Service Agreements with probation & confirmation clauses</li>
             <li>Mandatory Private Tuition Prohibition statutory undertakings</li>
@@ -1020,8 +1052,8 @@
         <!-- Column 4: Safety & Statutory Inspection Certificates -->
         <article class="service-card" style="border-top: 4px solid #dc2626; background: #ffffff;">
           <div class="service-icon-box" style="background: rgba(220, 38, 38, 0.1); color: #dc2626;">🛡️</div>
-          <h3>POCSO, POSH & Mandatory NOC Dossiers</h3>
-          <p>Institutional constitution of statutory committees and audit of mandatory fire, building, and health safety certificates for hassle-free inspection.</p>
+          <h3 data-editable="pillar4Title">Safety & Committee Dossiers</h3>
+          <p data-editable="pillar4Desc">Valid Fire NOC, Building Safety Certificate, POCSO & POSH statutory committee records.</p>
           <ul class="service-features">
             <li>POCSO Child Protection Committee with external NGO representative</li>
             <li>POSH Internal Complaints Committee (ICC) & employee training</li>
@@ -1053,9 +1085,9 @@
   <section id="awards" class="section-wrapper">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Industry Honors & Leadership Proof</span>
-        <h2>Honors, Certifications & Stage Recognitions</h2>
-        <p>12+ years of recognized HR leadership. Click on any certificate or trophy to inspect credentials.</p>
+        <span class="section-tag" data-editable="awardsSectionTag">Industry Honors & Leadership Proof</span>
+        <h2 data-editable="awardsSectionTitle">Honors, Certifications & Stage Recognitions</h2>
+        <p data-editable="awardsSectionSubtitle">12+ years of recognized HR leadership. Click on any certificate or trophy to inspect credentials.</p>
       </div>
 
       <!-- OFFICIAL STAGE PHOTOGRAPHS -->
@@ -1064,7 +1096,7 @@
           <span>📸</span> Official Stage Photographs
         </h3>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <div id="publicStagePhotosGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
           <!-- Stage Photo 1 -->
           <article class="award-card" data-img="1000595358.jpg" data-title="Achievers Forum 2025 'THRIVE' Stage Felicitation" data-desc="Official stage photograph of Rahul Kunal receiving the Top Zonal HR honors from senior leadership at the Achievers Forum convention.">
             <div class="award-card-img-wrap" style="aspect-ratio: 16/11;">
@@ -1105,81 +1137,81 @@
         <span>🏆</span> Verified Badges, Certificates & Trophies
       </h3>
 
-      <div class="awards-grid">
-        <!-- Award 1 -->
-        <article class="award-card" data-img="1000595332.jpg" data-title="Bajaj Capital Achiever's Forum 2025 - I AM AN Achiever" data-desc="Official Achiever's Forum 2025 gold credentials and medal ribbon awarded to Rahul Kunal with 5-Star distinction.">
+      <div class="awards-grid" id="publicAwardsGrid">
+        <!-- Certificate 1: Naukri Maestro Recruiter -->
+        <article class="award-card" data-img="1000595336.jpg" data-title="Certified Naukri Maestro Recruiter (2025)" data-desc="Official certification by Pawan Goyal, Chief Business Officer Naukri.com, certifying Rahul Kunal as Certified Maestro Recruiter (Id: NMRP-0325-116944, Dated 31-03-2025).">
           <div class="award-card-img-wrap">
-            <img src="1000595332.jpg" alt="Achiever's Forum 2025 Lanyard & Badge Rahul Kunal" />
+            <img src="1000595336.jpg" alt="Certified Naukri Maestro Recruiter Certificate Rahul Kunal" />
           </div>
           <div class="award-card-caption">
-            <h4>Achiever's Forum 2025</h4>
-            <span>Bajaj Capital Tiger Badge • 5-Star Honor</span>
+            <h4>Naukri Maestro Recruiter</h4>
+            <span>Certified 2025 • Id: NMRP-0325-116944</span>
           </div>
         </article>
 
-        <!-- Award 2 -->
-        <article class="award-card" data-img="1000595334.jpg" data-title="Certificate of Appreciation - Achiever Award (2024-25)" data-desc="Signed by Rachit Mongia (EVP & CBO) and Venkatesh Naidu (CEO BCIBL) honoring Rahul Kunal as Achiever.">
+        <!-- Certificate 2: Certificate of Appreciation -->
+        <article class="award-card" data-img="1000595334.jpg" data-title="Certificate of Appreciation - Achiever Award (2024-25)" data-desc="Signed by Rachit Mongia (EVP & CBO - FPC) and Venkatesh Naidu (CEO BCIBL), Bajaj Capital honoring Rahul Kunal as Achiever.">
           <div class="award-card-img-wrap">
             <img src="1000595334.jpg" alt="Certificate of Appreciation Achiever Award 2024-25 Rahul Kunal" />
           </div>
           <div class="award-card-caption">
             <h4>Certificate of Appreciation</h4>
-            <span>Achiever Award 2024-25 • Executive Signatures</span>
+            <span>Achiever Award 2024-25 • Bajaj Capital</span>
           </div>
         </article>
 
-        <!-- Award 3 -->
-        <article class="award-card" data-img="1000595335.jpg" data-title="5 Years of Valued Relationship Trophy" data-desc="Star Crystal Trophy awarded to Rahul Kunal by Mr. Rajiv Bajaj and Mr. Sanjiv Bajaj for distinguished collaboration.">
+        <!-- Trophy 3: FPC Appreciation Award - Top Zonal HR -->
+        <article class="award-card" data-img="1000595330.jpg" data-title="FPC Appreciation Award - Top Zonal HR (2024-25)" data-desc="Conferred upon Rahul Kunal as Top Zonal HR at the Bajaj Capital FPC Appreciation Awards 2024-25 for exceptional regional leadership.">
           <div class="award-card-img-wrap">
-            <img src="1000595335.jpg" alt="5 Years Valued Relationship Star Crystal Trophy Rahul Kunal" />
+            <img src="1000595330.jpg" alt="FPC Appreciation Award Top Zonal HR 2024-25 Rahul Kunal" />
+          </div>
+          <div class="award-card-caption">
+            <h4>FPC Appreciation Award</h4>
+            <span>Top Zonal HR Trophy (2024-25) • Bajaj Capital</span>
+          </div>
+        </article>
+
+        <!-- Trophy 4: 5 Years of Valued Relationship -->
+        <article class="award-card" data-img="1000595331.jpg" data-title="5 Years of Valued Relationship Trophy" data-desc="Prestigious Star Crystal Trophy awarded to Rahul Kunal in recognition of 5 Years of Valued Relationship and organizational partnership.">
+          <div class="award-card-img-wrap">
+            <img src="1000595331.jpg" alt="5 Years Valued Relationship Trophy Rahul Kunal" />
           </div>
           <div class="award-card-caption">
             <h4>5 Years Valued Relationship</h4>
-            <span>Star Crystal Trophy • Signed by Promoters</span>
+            <span>Distinguished Partnership Trophy • Bajaj Capital</span>
           </div>
         </article>
 
-        <!-- Award 4 -->
-        <article class="award-card" data-img="1000595333.jpg" data-title="Award of Excellence - 2023 Trophy" data-desc="Sculpted golden crystal tower trophy awarded to Rahul Kunal at The Power of 100 AmritKaal Conclave.">
+        <!-- Trophy 5: Award of Excellence -->
+        <article class="award-card" data-img="1000595332.jpg" data-title="Award of Excellence - Rahul Kunal" data-desc="Award of Excellence crystal tower trophy awarded to Rahul Kunal for exemplary organizational HR leadership.">
           <div class="award-card-img-wrap">
-            <img src="1000595333.jpg" alt="Award of Excellence 2023 Sculpted Tower Trophy Rahul Kunal" />
+            <img src="1000595332.jpg" alt="Award of Excellence Rahul Kunal" />
           </div>
           <div class="award-card-caption">
-            <h4>Award of Excellence (2023)</h4>
-            <span>The Power of 100 • Sculpted Golden Pinnacle</span>
+            <h4>Award of Excellence</h4>
+            <span>Excellence Trophy • Conferred to Rahul Kunal</span>
           </div>
         </article>
 
-        <!-- Award 5 -->
-        <article class="award-card" data-img="1000595330.jpg" data-title="Certified Naukri Maestro Recruiter (2025)" data-desc="Official certification by Pawan Goyal, Chief Business Officer Naukri.com, certifying elite talent acquisition expertise (Id: NMRP-0325-116944).">
+        <!-- Credential 6: Achiever's Forum 2025 -->
+        <article class="award-card" data-img="1000595333.jpg" data-title="Achiever's Forum 2025 Credentials & Medal Ribbon" data-desc="Official Achiever's Forum credential badge and gold medal ribbon awarded to Rahul Kunal at the National convention.">
           <div class="award-card-img-wrap">
-            <img src="1000595330.jpg" alt="Naukri Maestro Recruiter Certification Rahul Kunal" />
+            <img src="1000595333.jpg" alt="Achiever's Forum Credentials and Medal Ribbon Rahul Kunal" />
           </div>
           <div class="award-card-caption">
-            <h4>Naukri Maestro Recruiter</h4>
-            <span>Certified 2025 • Naukri.com Leadership</span>
+            <h4>Achiever's Forum 2025</h4>
+            <span>National Achievers Forum • Rahul Kunal</span>
           </div>
         </article>
 
-        <!-- Award 6 -->
-        <article class="award-card" data-img="1000595331.jpg" data-title="FPC Appreciation Award - Top Zonal HR (2024-25)" data-desc="Ornate circular filigree gold plate awarded to Rahul Kunal as Top Zonal HR for outstanding organizational performance.">
+        <!-- Trophy 7: Amity University Patna Plaque -->
+        <article class="award-card" data-img="1000595335.jpg" data-title="Amity University Patna - Job Fair Plaque" data-desc="Presented to Rahul Kunal by Amity University Patna during the Amity Open Job Fair (August 2019) recognizing distinguished talent leadership.">
           <div class="award-card-img-wrap">
-            <img src="1000595331.jpg" alt="FPC Appreciation Award Gold Plate Top Zonal HR 2024-25 Rahul Kunal" />
-          </div>
-          <div class="award-card-caption">
-            <h4>Top Zonal HR Gold Plate</h4>
-            <span>FPC Appreciation Award (2024-25)</span>
-          </div>
-        </article>
-
-        <!-- Award 7 -->
-        <article class="award-card" data-img="1000595336.jpg" data-title="Amity University Patna - Job Fair Plaque" data-desc="Presented by Amity University Patna during the Amity Open Job Fair 2019 acknowledging distinguished talent leadership.">
-          <div class="award-card-img-wrap">
-            <img src="1000595336.jpg" alt="Amity University Patna Open Job Fair Gold Shield Plaque" />
+            <img src="1000595335.jpg" alt="Amity University Patna Open Job Fair Plaque Rahul Kunal" />
           </div>
           <div class="award-card-caption">
             <h4>Amity University Patna Plaque</h4>
-            <span>Open Job Fair 2019 • Campus Citation</span>
+            <span>Open Job Fair (August 2019) • Campus Citation</span>
           </div>
         </article>
       </div>
@@ -1192,11 +1224,11 @@
       <div class="profile-card">
         <div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 14px;">
           <img src="1000595358.jpg" alt="Rahul Kunal - Lead HR Consultant & Founder" style="width: 104px; height: 104px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: 0 4px 20px rgba(0,0,0,0.35); margin-bottom: 12px;" />
-          <h3 style="margin-bottom: 4px;">Rahul Kunal</h3>
-          <div class="designation">Founder & Lead HR Consultant • MBA (HR) • 12+ Years Advisory</div>
+          <h3 style="margin-bottom: 4px;" data-editable="founderName">Rahul Kunal</h3>
+          <div class="designation" data-editable="founderDesignation">Founder & Lead HR Consultant • MBA (HR) • 12+ Years Advisory</div>
         </div>
         
-        <div>
+        <div id="publicFounderBadges" data-editable="founderBadges">
           <span class="badge">Naukri Maestro Recruiter</span>
           <span class="badge">Top Zonal HR Award Winner</span>
           <span class="badge">CBSE Affiliation Specialist</span>
@@ -1204,14 +1236,14 @@
           <span class="badge">12+ Years Industry Leadership</span>
         </div>
 
-        <p style="max-width: 720px; margin: 16px auto 0; font-size: 14px; color: #e2e8f0; line-height: 1.7;">
+        <p style="max-width: 720px; margin: 16px auto 0; font-size: 14px; color: #e2e8f0; line-height: 1.7;" data-editable="founderBio">
           With over a decade of dedicated talent acquisition and institutional regulatory consulting, Rahul Kunal oversees institutional HR structures, faculty appointments, and regulatory governance for private schools, trusts, and colleges across Bihar and Eastern India.
         </p>
 
         <div class="contact-details-box">
-          <div>📍 <b>Principal Desk:</b> Sherghati, Bihar - 824211, India</div>
-          <div>📱 <b>Direct WhatsApp / Mobile:</b> <a href="tel:+917979770162">+91 79797 70162</a></div>
-          <div>✉️ <b>Email:</b> <a href="mailto:rahulkunal14@gmail.com">rahulkunal14@gmail.com</a></div>
+          <div>📍 <b>Principal Desk:</b> <span data-editable="founderAddress">Sherghati, Bihar - 824211, India</span></div>
+          <div>📱 <b>Direct WhatsApp / Mobile:</b> <a href="tel:+917979770162" data-editable="founderPhone">+91 79797 70162</a></div>
+          <div>✉️ <b>Email:</b> <a href="mailto:rahulkunal14@gmail.com" data-editable="founderEmail">rahulkunal14@gmail.com</a></div>
         </div>
       </div>
     </div>
@@ -1221,18 +1253,18 @@
   <section id="knowledge" class="section-wrapper">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Regulatory Insights</span>
-        <h2>CBSE Governance Knowledge Hub</h2>
-        <p>Key legal frameworks every school administrator and trust chairperson must maintain.</p>
+        <span class="section-tag" data-editable="faqTag">Regulatory Insights</span>
+        <h2 data-editable="faqSectionTitle">CBSE Governance Knowledge Hub</h2>
+        <p data-editable="faqSectionSubtitle">Key legal frameworks every school administrator and trust chairperson must maintain.</p>
       </div>
 
       <div class="faq-grid">
         <div class="faq-item active">
           <button class="faq-question">
-            <span>What are the strict CBSE requirements for the POCSO Child Protection Committee?</span>
+            <span data-editable="faq1Q">What are the strict CBSE requirements for the POCSO Child Protection Committee?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" data-editable="faq1A">
             Under CBSE Affiliation Bye-Laws 2018 (Section 14) and the POCSO Act 2012, every affiliated institution MUST constitute a dedicated Child Protection Committee comprising:
             <ul style="margin: 8px 0 8px 20px;">
               <li>Principal / Head of Institution (Chairman)</li>
@@ -1246,30 +1278,30 @@
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>Why is the CBSE Form 1 Service Agreement mandatory on Stamp Paper?</span>
+            <span data-editable="faq2Q">Why is the CBSE Form 1 Service Agreement mandatory on Stamp Paper?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" data-editable="faq2A">
             CBSE Affiliation Bye-Laws Chapter 5 (Rule 5.3) dictates that no teacher can be employed without executing a formal Service Agreement in the exact format prescribed as 'Form 1'. This document guarantees security of tenure, clearly details EPF/Gratuity entitlements, confirms working hours, and protects the school from abrupt mid-term resignations while shielding management during surprise affiliation inspections.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>What is the mandatory Teacher-Section Ratio and Special Educator rule?</span>
+            <span data-editable="faq3Q">What is the mandatory Teacher-Section Ratio and Special Educator rule?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" data-editable="faq3A">
             CBSE mandates a strict minimum ratio of <strong>1.5 teachers per section</strong> excluding the Principal, Physical Education Teacher, and Co-Scholastic instructors. Furthermore, under the Rights of Persons with Disabilities (RPwD) Act and CBSE circulars, <strong>every affiliated school must appoint at least one qualified Special Educator</strong> recognized by the Rehabilitation Council of India (RCI) and a certified Wellness Counselor.
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question">
-            <span>How does Bhagwati Talent Advisory conduct teacher demo evaluations?</span>
+            <span data-editable="faq4Q">How does Bhagwati Talent Advisory conduct teacher demo evaluations?</span>
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" data-editable="faq4A">
             Our talent screening is a 3-tier filtration process:
             <ol style="margin: 8px 0 8px 20px;">
               <li><strong>Normative Verification:</strong> Validating degrees (B.Ed, Master's, CTET) against NCTE and CBSE norms.</li>
@@ -1440,7 +1472,10 @@
       <!-- Modal Header -->
       <div class="notice-modal-header">
         <div class="notice-header-left">
-          <h3><span>📢</span> Institutional Notices &amp; Official CBSE Circulars</h3>
+          <h3 style="margin-bottom: 4px;"><span>📢</span> Institutional Notices &amp; Official CBSE Circulars</h3>
+          <span style="background: rgba(16, 185, 129, 0.25); border: 1.5px solid #34d399; color: #4ade80; font-size: 12.5px; font-weight: 800; letter-spacing: 0.3px; padding: 4px 12px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 7px; box-shadow: 0 0 10px rgba(74, 222, 128, 0.3);">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80; display: inline-block;"></span> CBSE Update Live
+          </span>
         </div>
         <div class="notice-header-actions">
           <button type="button" class="notice-modal-close" id="closeNoticeModalBtn" title="Close Notices Window">&times;</button>
@@ -1604,14 +1639,16 @@
       <a href="#cbse-work" class="floating-desk-item">
         <span>🏛️</span> CBSE Affiliation &amp; SARAS Work
       </a>
-      <a href="#audit-tool" class="floating-desk-item">
-        <span>📋</span> CBSE Compliance Self-Audit
+      <a href="#audit-tool" class="floating-desk-item" style="display: flex; align-items: center; justify-content: space-between;">
+        <span>📋 CBSE Compliance Self-Audit</span>
+        <span id="floatingAuditCount" style="font-size: 11px; font-weight: 700; background: #e0e7ff; color: #1e3a8a; padding: 2px 8px; border-radius: 999px;">24</span>
       </a>
       <a href="#calculator" class="floating-desk-item">
         <span>🧮</span> Staffing Calculator
       </a>
-      <a href="#inquiry" class="floating-desk-item">
-        <span>✉️</span> Submit School Inquiry
+      <a href="#inquiry" class="floating-desk-item" style="display: flex; align-items: center; justify-content: space-between;">
+        <span>✉️ Submit School Inquiry</span>
+        <span id="floatingInquiryCount" style="font-size: 11px; font-weight: 700; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 999px;">18</span>
       </a>
     </div>
 
@@ -1688,40 +1725,33 @@
 
         <!-- STEP 2: TWO-STEP VERIFICATION CODE -->
         <div id="adminLoginStep2" style="display: none;">
-          <div style="text-align: center; margin-bottom: 16px;">
-            <div style="font-size: 38px; margin-bottom: 6px;">📬</div>
-            <h4 style="margin: 0; color: #0b2545; font-size: 18px; font-weight: 800;">Two-Step Verification</h4>
-            <p style="margin: 6px 0 0; color: #64748b; font-size: 13px;">
-              A 6-digit security verification code has been dispatched to your email address.<br>
-              <span style="color: #64748b; font-size: 12px;">Please check your inbox or spam folder.</span>
+          <div style="text-align: center; margin-bottom: 14px;">
+            <div style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; border: 1.5px solid #a7f3d0; color: #065f46; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; margin-bottom: 8px;">
+              <span>✉️</span> <span>Code dispatched to rahulkunal14@gmail.com</span>
+            </div>
+            <h4 style="margin: 0; color: #0b2545; font-size: 17px; font-weight: 800;">Enter 6-Digit Verification Code</h4>
+            <p style="margin: 4px 0 0; color: #64748b; font-size: 12.5px;">
+              Please check your Gmail inbox and enter the 6 digits below.
             </p>
           </div>
 
-          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 12.5px; color: #166534; display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 18px;">✉️</span>
-            <span>Check your email inbox for the verification code. Enter the 6 digits below to complete sign-in.</span>
-          </div>
-
           <form id="adminStep2OtpForm">
-            <div style="margin-bottom: 16px;">
-              <label for="admin2FACodeInput" style="display: block; font-size: 12.5px; font-weight: 700; color: #334155; margin-bottom: 6px; text-align: center;">
-                Enter 6-Digit Verification Code
-              </label>
-              <input type="text" id="admin2FACodeInput" maxlength="6" pattern="[0-9]*" inputmode="numeric" placeholder="------" required autocomplete="one-time-code" style="width: 100%; text-align: center; font-size: 28px; font-weight: 800; letter-spacing: 12px; padding: 12px; border: 2px solid #0b2545; border-radius: 10px; background: #f8fafc; color: #0b2545; box-sizing: border-box; font-family: monospace;" />
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 12px; color: #64748b;">
-                <span id="twoFactorCountdownText">⏱️ Expires in: <b id="twoFactorCountdownTimer" style="color: #0b2545;">10:00</b></span>
-                <button type="button" id="btnResendOtp" style="background: none; border: none; color: #2563eb; font-weight: 600; cursor: pointer; padding: 0; font-size: 12px;">🔄 Resend Code</button>
+            <div style="margin-bottom: 14px;">
+              <input type="text" id="admin2FACodeInput" maxlength="6" pattern="[0-9]*" inputmode="numeric" placeholder="------" required autocomplete="one-time-code" style="width: 100%; text-align: center; font-size: 28px; font-weight: 800; letter-spacing: 12px; padding: 10px 12px; border: 2.5px solid #0b2545; border-radius: 10px; background: #f8fafc; color: #0b2545; box-sizing: border-box; font-family: monospace; outline: none;" />
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 12px; color: #64748b;">
+                <span id="twoFactorCountdownText">⏱️ Expires in: <b id="twoFactorCountdownTimer" style="color: #0b2545; font-weight: 700;">10:00</b></span>
+                <button type="button" id="btnResendOtp" style="background: none; border: none; color: #2563eb; font-weight: 700; cursor: pointer; padding: 2px 4px; font-size: 12px;">🔄 Resend Code</button>
               </div>
             </div>
 
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-              <button type="button" id="btnBackToStep1" class="btn btn-secondary" style="flex: 1; padding: 12px; font-size: 13px; font-weight: 600; justify-content: center;">
-                ← Back
-              </button>
-              <button type="submit" id="btnAdminStep2Submit" class="btn btn-primary" style="flex: 2; padding: 12px; font-size: 14px; font-weight: 700; justify-content: center; background: #10b981; border-color: #059669;">
-                Verify Code &amp; Log In 🚀
-              </button>
-            </div>
+            <!-- Prominent Submit Button -->
+            <button type="submit" id="btnAdminStep2Submit" class="btn btn-primary" style="width: 100%; padding: 13px 18px; font-size: 15px; font-weight: 800; justify-content: center; background: #10b981; border: 2px solid #059669; border-radius: 8px; color: #ffffff; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4); margin-bottom: 8px;">
+              <span>Verify Code &amp; Log In</span> <span>🚀</span>
+            </button>
+
+            <button type="button" id="btnBackToStep1" class="btn btn-secondary" style="width: 100%; padding: 8px; font-size: 12.5px; font-weight: 600; justify-content: center; background: transparent; border: none; color: #64748b; cursor: pointer;">
+              ← Back to Password Entry
+            </button>
           </form>
         </div>
 
@@ -1749,6 +1779,50 @@
     </div>
   </div>
 
+  <!-- Award & Honor Edit Modal -->
+  <div class="admin-quick-modal-backdrop" id="adminAwardEditModal" style="display: none; z-index: 10005;">
+    <div class="admin-quick-modal-content" style="max-width: 580px;">
+      <div class="admin-quick-modal-header">
+        <h3>✏️ Edit Award &amp; Tag Line Name</h3>
+        <button type="button" class="btn-close-modal" id="closeAwardEditModal">&times;</button>
+      </div>
+      <div class="admin-quick-modal-body">
+        <form id="adminAwardEditForm">
+          <input type="hidden" id="editAwardId" />
+          <div class="admin-form-group">
+            <label>Award / Certificate Title</label>
+            <input type="text" id="editAwardTitle" required />
+          </div>
+          <div class="admin-form-group">
+            <label>Tag Line Name (Subtitle Badge)</label>
+            <input type="text" id="editAwardTagline" required />
+            <div class="admin-help-text">Displays directly below the award title.</div>
+          </div>
+          <div class="admin-form-group">
+            <label>Award Category</label>
+            <select id="editAwardCategory">
+              <option value="certificate">📜 Verified Certificate</option>
+              <option value="trophy">🏆 Executive Trophy / Plate</option>
+              <option value="credential">🎖️ Award Badge / Medal Ribbon</option>
+              <option value="plaque">🛡️ University Plaque / Citation</option>
+              <option value="stage">📸 Official Stage Photograph</option>
+            </select>
+          </div>
+          <div class="admin-form-group">
+            <label>Authority Signatures / Description</label>
+            <textarea id="editAwardDesc" rows="3"></textarea>
+          </div>
+          <div class="admin-quick-modal-actions" style="margin-top: 18px;">
+            <button type="button" class="btn btn-secondary" id="cancelAwardEditBtn" style="padding: 8px 16px; font-size: 13px;">Cancel</button>
+            <button type="submit" class="btn btn-primary" style="padding: 8px 20px; font-size: 13px; background: #10b981; border-color: #059669;">
+              💾 Update Award on Page
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Full Admin Dashboard Modal -->
   <div class="admin-dashboard-modal" id="adminDashboardModal" style="display: none;">
     <div class="admin-dashboard-box">
@@ -1758,8 +1832,14 @@
       </div>
 
       <div class="admin-dash-tabs">
-        <button type="button" class="admin-dash-tab active" data-tab="tab-content">
-          🌐 Site Content &amp; Hours
+        <button type="button" class="admin-dash-tab active" data-tab="tab-sections">
+          📝 Complete Site Editor
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-awards">
+          🏆 Awards &amp; Honors Attachment
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-content">
+          🌐 Quick Content &amp; Sync
         </button>
         <button type="button" class="admin-dash-tab" data-tab="tab-inquiries">
           📬 Inquiries <span class="admin-tab-count" id="dashInquiriesCount">0</span>
@@ -1777,13 +1857,606 @@
           🖼️ Media &amp; Gallery
         </button>
         <button type="button" class="admin-dash-tab" data-tab="tab-security">
-          🔒 Security &amp; 2FA
+          🔑 Change Password &amp; 2FA
         </button>
       </div>
 
       <div class="admin-dash-content">
+        <!-- Panel 0: Complete Site Section Editor (Full editing access of each section) -->
+        <div class="admin-panel active" id="tab-sections">
+          <!-- Sub Navigation to switch between app sections -->
+          <div class="admin-section-nav" id="adminSectionSubNav">
+            <button type="button" class="admin-section-nav-btn active" data-section="pane-hero">🎯 Hero &amp; Brand</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-notices">📢 Notices &amp; Ticker</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-services">💼 Services (6 Cards)</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-about">📖 About &amp; Advisory</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-cbse">🏛️ CBSE &amp; SARAS Work</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-awards-header">🏆 Awards Headers</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-founder">👤 Founder Profile</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-faqs">📚 FAQs &amp; Knowledge</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-contact">📍 Contact Desk &amp; Hours</button>
+            <button type="button" class="admin-section-nav-btn" data-section="pane-desks">💬 Desks &amp; Forms</button>
+          </div>
+
+          <form id="adminFullSectionsForm">
+            <!-- Sub-Pane 1: Hero & Brand -->
+            <div class="admin-section-pane active" id="pane-hero">
+              <div class="admin-section-header">
+                <h3>🎯 Hero Section &amp; Core Branding</h3>
+                <p>Customize primary headline, subtitle, hero pill badge, and trust statistics displayed at the top of the app.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group full">
+                  <label>★ Hero Pill Badge Text</label>
+                  <input type="text" id="secHeroPill" value="★ Recognized Top Zonal HR Leader • 12+ Years Advisory" />
+                  <div class="admin-help-text">Gold badge shown prominently at top of hero.</div>
+                </div>
+                <div class="admin-form-group full">
+                  <label>🏷️ Main Hero Headline (H2)</label>
+                  <input type="text" id="secHeroTitle" value="Specialized Institutional HR Solutions &amp; Regulatory Compliance for CBSE Schools" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>📝 Hero Subtitle &amp; Description</label>
+                  <textarea id="secHeroSubtitle" rows="3"></textarea>
+                </div>
+                <div class="admin-form-group">
+                  <label>📊 Stat 1 Number</label>
+                  <input type="text" id="secStatYears" value="12+" />
+                </div>
+                <div class="admin-form-group">
+                  <label>📊 Stat 1 Label</label>
+                  <input type="text" id="secStatYearsLabel" value="Years of HR Excellence" />
+                </div>
+                <div class="admin-form-group">
+                  <label>🏆 Stat 2 Title</label>
+                  <input type="text" id="secStatAward" value="Top Zonal" />
+                </div>
+                <div class="admin-form-group">
+                  <label>🏆 Stat 2 Label</label>
+                  <input type="text" id="secStatAwardLabel" value="Award-Winning HR Leader" />
+                </div>
+                <div class="admin-form-group">
+                  <label>🎖️ Stat 3 Title</label>
+                  <input type="text" id="secStatRecruiter" value="Naukri" />
+                </div>
+                <div class="admin-form-group">
+                  <label>🎖️ Stat 3 Label</label>
+                  <input type="text" id="secStatRecruiterLabel" value="Certified Maestro Recruiter" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane 2: Notices & Ticker -->
+            <div class="admin-section-pane" id="pane-notices">
+              <div class="admin-section-header">
+                <h3>📢 Notice Board &amp; Scrolling News Ticker</h3>
+                <p>Edit marquee announcements and the breaking circular banner in the notices modal.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group full">
+                  <label>📢 Scrolling Notice Board Ticker Announcements</label>
+                  <textarea id="secNoticeTicker" rows="4" placeholder="Enter alerts separated by '|'"></textarea>
+                  <div class="admin-help-text">Separated by '|'. Cycles continuously in header ticker.</div>
+                </div>
+                <div class="admin-form-group full">
+                  <label>⚡ Breaking Notice Headline (in Modal)</label>
+                  <input type="text" id="secBreakingNotice" value="Observance of Swachhata Hi Seva &amp; SARAS 5.0 Affiliation updates published on CBSE Portal." />
+                </div>
+                <div class="admin-form-group full">
+                  <label>🔗 Breaking Notice Document URL</label>
+                  <input type="url" id="secBreakingNoticeLink" value="https://cbseacademic.nic.in/circulars.html" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane 3: Services (6 Cards) -->
+            <div class="admin-section-pane" id="pane-services">
+              <div class="admin-section-header">
+                <h3>💼 Institutional Solutions (Services Section)</h3>
+                <p>Manage the core institutional HR services cards, titles, and feature bullet points.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>Section Tag</label>
+                  <input type="text" id="secServicesTag" value="Institutional Solutions" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Section Main Title</label>
+                  <input type="text" id="secServicesTitle" value="End-to-End Governance &amp; Talent Advisory" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>Section Subtitle</label>
+                  <textarea id="secServicesSubtitle" rows="2"></textarea>
+                </div>
+
+                <!-- Service 1 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">👨‍🏫 Card 1: Faculty &amp; Leadership Acquisition</h4>
+                  <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                      <label>Title</label>
+                      <input type="text" id="secService1Title" value="Faculty &amp; Leadership Acquisition" />
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Description</label>
+                      <textarea id="secService1Desc" rows="2"></textarea>
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Feature Points (One per line)</label>
+                      <textarea id="secService1Features" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">🛡️ Card 2: POCSO &amp; Child Safety Setup</h4>
+                  <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                      <label>Title</label>
+                      <input type="text" id="secService2Title" value="POCSO &amp; Child Safety Setup" />
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Description</label>
+                      <textarea id="secService2Desc" rows="2"></textarea>
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Feature Points (One per line)</label>
+                      <textarea id="secService2Features" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">📜 Card 3: Statutory Employment Formats</h4>
+                  <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                      <label>Title</label>
+                      <input type="text" id="secService3Title" value="Statutory Employment Formats" />
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Description</label>
+                      <textarea id="secService3Desc" rows="2"></textarea>
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Feature Points (One per line)</label>
+                      <textarea id="secService3Features" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">🔍 Card 4: CBSE Affiliation &amp; Renewal Audit</h4>
+                  <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                      <label>Title</label>
+                      <input type="text" id="secService4Title" value="CBSE Affiliation &amp; Renewal Audit" />
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Description</label>
+                      <textarea id="secService4Desc" rows="2"></textarea>
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Feature Points (One per line)</label>
+                      <textarea id="secService4Features" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">⚖️ Card 5: POSH Policy &amp; Committee Setup</h4>
+                  <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                      <label>Title</label>
+                      <input type="text" id="secService5Title" value="POSH Policy &amp; Committee Setup" />
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Description</label>
+                      <textarea id="secService5Desc" rows="2"></textarea>
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Feature Points (One per line)</label>
+                      <textarea id="secService5Features" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">🤝 Card 6: Annual HR Retainership Desk</h4>
+                  <div class="admin-form-grid">
+                    <div class="admin-form-group full">
+                      <label>Title</label>
+                      <input type="text" id="secService6Title" value="Annual HR Retainership Desk" />
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Description</label>
+                      <textarea id="secService6Desc" rows="2"></textarea>
+                    </div>
+                    <div class="admin-form-group full">
+                      <label>Feature Points (One per line)</label>
+                      <textarea id="secService6Features" rows="3"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane: About Us & Advisory Framework -->
+            <div class="admin-section-pane" id="pane-about">
+              <div class="admin-section-header">
+                <h3>📖 About Us &amp; Advisory Framework</h3>
+                <p>Customize the institutional background narrative, mission statements, and advisory overview.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>Section Tag</label>
+                  <input type="text" id="secAboutTag" value="About Bhagwati Talent Advisory" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Section Heading</label>
+                  <input type="text" id="secAboutTitle" value="12+ Years of Institutional HR &amp; CBSE Educational Excellence" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>Section Subtitle</label>
+                  <textarea id="secAboutSubtitle" rows="2"></textarea>
+                </div>
+                <div class="admin-form-group full">
+                  <label>About Paragraph 1 (Founder narrative &amp; background)</label>
+                  <textarea id="secAboutDesc1" rows="4"></textarea>
+                </div>
+                <div class="admin-form-group full">
+                  <label>About Paragraph 2 (Operations, Sherghati, &amp; coverage)</label>
+                  <textarea id="secAboutDesc2" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane 4: CBSE Affiliation & SARAS Work -->
+            <div class="admin-section-pane" id="pane-cbse">
+              <div class="admin-section-header">
+                <h3>🏛️ CBSE Affiliation &amp; SARAS Work Section</h3>
+                <p>Customize the 4 regulatory pillars and guidance text in the CBSE work section.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>Section Tag</label>
+                  <input type="text" id="secCbseTag" value="Statutory Framework" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Section Heading</label>
+                  <input type="text" id="secCbseTitle" value="Affiliation Governance &amp; Inspection Readiness" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>Section Subtitle</label>
+                  <textarea id="secCbseSubtitle" rows="2"></textarea>
+                </div>
+
+                <div class="admin-form-group">
+                  <label>Pillar 1 Title</label>
+                  <input type="text" id="secPillar1Title" value="SARAS 5.0 Portal Compliance" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Pillar 1 Description</label>
+                  <input type="text" id="secPillar1Desc" value="Online application drafting, appendix cross-checking, and digital document uploads." />
+                </div>
+
+                <div class="admin-form-group">
+                  <label>Pillar 2 Title</label>
+                  <input type="text" id="secPillar2Title" value="1:1.5 Staffing Ratio Audits" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Pillar 2 Description</label>
+                  <input type="text" id="secPillar2Desc" value="Section-wise teacher count validation, NTT/PRT/TGT/PGT ratio optimization for OASIS." />
+                </div>
+
+                <div class="admin-form-group">
+                  <label>Pillar 3 Title</label>
+                  <input type="text" id="secPillar3Title" value="Statutory Form 1 Agreements" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Pillar 3 Description</label>
+                  <input type="text" id="secPillar3Desc" value="Enforceable teacher contracts, probation terms, pay-scale parity as per state norms." />
+                </div>
+
+                <div class="admin-form-group">
+                  <label>Pillar 4 Title</label>
+                  <input type="text" id="secPillar4Title" value="Safety &amp; Committee Dossiers" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Pillar 4 Description</label>
+                  <input type="text" id="secPillar4Desc" value="Valid Fire NOC, Building Safety Certificate, POCSO &amp; POSH statutory committee records." />
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane: Awards Section Headers -->
+            <div class="admin-section-pane" id="pane-awards-header">
+              <div class="admin-section-header">
+                <h3>🏆 Awards Section Headings &amp; Intro</h3>
+                <p>Customize the public section tag, headline, and subtitle for the Awards, Honors &amp; Stage Recognitions section.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>Section Tag</label>
+                  <input type="text" id="secAwardsSectionTag" value="Industry Honors &amp; Leadership Proof" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Section Heading</label>
+                  <input type="text" id="secAwardsSectionTitle" value="Honors, Certifications &amp; Stage Recognitions" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>Section Subtitle</label>
+                  <textarea id="secAwardsSectionSubtitle" rows="2"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane 5: Founder Profile -->
+            <div class="admin-section-pane" id="pane-founder">
+              <div class="admin-section-header">
+                <h3>👤 Founder Desk Profile (Rahul Kunal)</h3>
+                <p>Update founder credentials, biography, professional badges, and direct contact details.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>Founder Full Name</label>
+                  <input type="text" id="secFounderName" value="Rahul Kunal" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Designation / Credentials Tagline</label>
+                  <input type="text" id="secFounderDesignation" value="Founder &amp; Lead HR Consultant • MBA (HR) • 12+ Years Advisory" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>Founder Biography Paragraph</label>
+                  <textarea id="secFounderBio" rows="4"></textarea>
+                </div>
+                <div class="admin-form-group full">
+                  <label>Credentials Badges (Comma-separated)</label>
+                  <input type="text" id="secFounderBadges" value="Naukri Maestro Recruiter, Top Zonal HR Award Winner, CBSE Affiliation Specialist, POCSO &amp; POSH Auditor, 12+ Years Industry Leadership" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Desk Location</label>
+                  <input type="text" id="secFounderAddress" value="Sherghati, Bihar - 824211, India" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Direct WhatsApp / Mobile</label>
+                  <input type="text" id="secFounderPhone" value="+91 79797 70162" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>Direct Email Address</label>
+                  <input type="email" id="secFounderEmail" value="rahulkunal14@gmail.com" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane 6: Knowledge Hub & FAQs -->
+            <div class="admin-section-pane" id="pane-faqs">
+              <div class="admin-section-header">
+                <h3>📚 CBSE Governance Knowledge Hub (FAQs)</h3>
+                <p>Modify questions and statutory answers in the interactive regulatory knowledge hub.</p>
+              </div>
+              <div class="admin-form-grid">
+                <!-- FAQ 1 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <label style="color: #1e3a8a; font-size: 14px;">❓ FAQ 1 Question</label>
+                  <input type="text" id="secFaq1Q" value="What is the teacher-to-section ratio mandated by CBSE for affiliation?" style="margin-bottom: 10px;" />
+                  <label>Answer Content</label>
+                  <textarea id="secFaq1A" rows="3"></textarea>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <label style="color: #1e3a8a; font-size: 14px;">❓ FAQ 2 Question</label>
+                  <input type="text" id="secFaq2Q" value="What documents are mandatory for SARAS 5.0 Affiliation Extension?" style="margin-bottom: 10px;" />
+                  <label>Answer Content</label>
+                  <textarea id="secFaq2A" rows="3"></textarea>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <label style="color: #1e3a8a; font-size: 14px;">❓ FAQ 3 Question</label>
+                  <input type="text" id="secFaq3Q" value="Is police verification mandatory for school teaching and non-teaching staff?" style="margin-bottom: 10px;" />
+                  <label>Answer Content</label>
+                  <textarea id="secFaq3A" rows="3"></textarea>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="admin-form-group full" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 14px;">
+                  <label style="color: #1e3a8a; font-size: 14px;">❓ FAQ 4 Question</label>
+                  <input type="text" id="secFaq4Q" value="What are the legal requirements for employee service books in private schools?" style="margin-bottom: 10px;" />
+                  <label>Answer Content</label>
+                  <textarea id="secFaq4A" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane 7: Contact Desk & Hours -->
+            <div class="admin-section-pane" id="pane-contact">
+              <div class="admin-section-header">
+                <h3>📍 Contact Desk &amp; Working Hours</h3>
+                <p>Manage office address, official consultation phone, inquiry emails, and operational hours.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group full">
+                  <label>📍 Principal Office Address</label>
+                  <input type="text" id="secAddress" value="Bhagwati Complex, Near Block More, Sherghati, Gaya, Bihar - 824211" />
+                </div>
+                <div class="admin-form-group">
+                  <label>📱 Official Phone / WhatsApp</label>
+                  <input type="text" id="secPhone" value="+91 79797 70162" />
+                </div>
+                <div class="admin-form-group">
+                  <label>✉️ Official Alert Email</label>
+                  <input type="email" id="secEmail" value="rahulkunal14@gmail.com" />
+                </div>
+                <div class="admin-form-group full">
+                  <label>⏰ Consultation Working Hours</label>
+                  <input type="text" id="secConsultationHours" value="10:00 AM - 5:00 PM (Mon - Sat)" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-Pane: Desks & Inquiry Headers -->
+            <div class="admin-section-pane" id="pane-desks">
+              <div class="admin-section-header">
+                <h3>💬 Desks &amp; Form Callout Headings</h3>
+                <p>Customize the headlines and subtitles displayed on the Consultation Desk, Career Portal, and Audit Tool.</p>
+              </div>
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>Inquiry Desk Title</label>
+                  <input type="text" id="secInquiryTitle" value="Pre-Inspection Consultation &amp; Advisory Desk" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Inquiry Desk Subtitle</label>
+                  <input type="text" id="secInquirySubtitle" value="Connect directly with Rahul Sir and our institutional advisory team for immediate faculty acquisition and SARAS compliance vetting." />
+                </div>
+                <div class="admin-form-group">
+                  <label>Career Portal Title</label>
+                  <input type="text" id="secResumeTitle" value="Educator &amp; Leadership Career Portal" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Career Portal Subtitle</label>
+                  <input type="text" id="secResumeSubtitle" value="Submit your credentials directly for verified teaching and administrative openings across top CBSE schools in Bihar &amp; Eastern India." />
+                </div>
+                <div class="admin-form-group">
+                  <label>Self-Audit Tool Title</label>
+                  <input type="text" id="secAuditTitle" value="SARAS 5.0 Affiliation Readiness Self-Audit" />
+                </div>
+                <div class="admin-form-group">
+                  <label>Self-Audit Tool Subtitle</label>
+                  <input type="text" id="secAuditSubtitle" value="Evaluate your school's compliance status across key CBSE Affiliation Bye-Laws parameters." />
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid #cbd5e1; padding-top: 18px;">
+              <button type="submit" class="btn btn-primary" style="padding: 13px 28px; font-size: 14.5px; font-weight: 700; background: #10b981; border-color: #059669; display: flex; align-items: center; gap: 8px;">
+                💾 Save All App Sections Live
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Panel: Awards & Honors Attachment Box -->
+        <div class="admin-panel" id="tab-awards">
+          <div class="admin-section-header">
+            <h3>🏆 Awards, Honors &amp; Certificates Manager</h3>
+            <p>Attach new awards and honors using the attachment box below. Attached items display instantly on the public website with verified titles and tag lines.</p>
+          </div>
+
+          <!-- Attachment Box -->
+          <div class="award-attachment-box" id="awardAttachmentBox">
+            <h4 style="margin: 0 0 6px 0; color: #1e3a8a; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+              <span id="awardAttachmentBoxHeaderIcon">📎</span> <span id="awardAttachmentBoxHeading">Attachment Box — Add New Award / Certificate / Trophy</span>
+            </h4>
+            <p style="margin: 0 0 16px 0; font-size: 13px; color: #475569;">
+              Drag and drop an image file (PNG, JPG, WEBP) or browse to attach. The item will be attached and rendered live in the app's Verified Credentials gallery.
+            </p>
+
+            <form id="attachAwardForm">
+              <!-- Drop Zone -->
+              <div class="award-drop-zone" id="awardDropZone">
+                <div style="font-size: 32px; margin-bottom: 6px;">📂</div>
+                <div style="font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 4px;">Click or Drag &amp; Drop Award Image Here</div>
+                <div style="font-size: 12px; color: #64748b;">Supports JPG, PNG, WEBP (Max 30MB)</div>
+                <input type="file" id="awardFileInput" accept="image/*" style="display: none;" />
+              </div>
+
+              <!-- Image Preview Box -->
+              <div class="award-preview-box" id="awardPreviewBox" style="display: none;">
+                <img id="awardPreviewImg" class="award-preview-img" src="" alt="Award Preview" />
+                <div style="flex: 1;">
+                  <div style="font-size: 13px; font-weight: 700; color: #0b2545;" id="awardPreviewFileName">selected-file.jpg</div>
+                  <div style="font-size: 11.5px; color: #10b981; font-weight: 600;" id="awardPreviewStatus">✓ Ready to attach</div>
+                  <button type="button" id="btnChangeAwardFile" class="btn btn-secondary" style="margin-top: 6px; padding: 4px 10px; font-size: 11px;">Change File</button>
+                </div>
+              </div>
+
+              <!-- Quick Existing Image Selector (Optional convenience) -->
+              <div style="margin-bottom: 14px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                <label style="font-size: 12px; font-weight: 600; color: #475569; margin: 0;">Or attach existing image asset:</label>
+                <select id="awardExistingImageSelect" style="padding: 6px 10px; font-size: 12px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; max-width: 320px;">
+                  <option value="">-- Choose Existing Image (Optional) --</option>
+                  <option value="1000595336.jpg">1000595336.jpg (Naukri Maestro Certificate)</option>
+                  <option value="1000595334.jpg">1000595334.jpg (Bajaj Capital Achiever Certificate)</option>
+                  <option value="1000595330.jpg">1000595330.jpg (Top Zonal HR Trophy)</option>
+                  <option value="1000595331.jpg">1000595331.jpg (5 Years Valued Relationship Trophy)</option>
+                  <option value="1000595332.jpg">1000595332.jpg (Award of Excellence Trophy)</option>
+                  <option value="1000595333.jpg">1000595333.jpg (Achiever's Forum 2025 Credential)</option>
+                  <option value="1000595335.jpg">1000595335.jpg (Amity University Patna Plaque)</option>
+                  <option value="1000595358.jpg">1000595358.jpg (Achievers Forum Stage Photo)</option>
+                  <option value="1000595359.jpg">1000595359.jpg (Winner LED Stage Photo)</option>
+                  <option value="1000595357.jpg">1000595357.jpg (Auditorium Stage Panorama)</option>
+                </select>
+              </div>
+
+              <!-- Award Metadata Grid -->
+              <div class="admin-form-grid">
+                <div class="admin-form-group">
+                  <label>🏷️ Award / Certificate Title *</label>
+                  <input type="text" id="awardTitleInput" placeholder="e.g. Certified Naukri Maestro Recruiter" required />
+                </div>
+
+                <div class="admin-form-group">
+                  <label>🏷️ Tag Line Name (Subtitle Badge) *</label>
+                  <input type="text" id="awardTaglineInput" placeholder="e.g. Certified 2025 • Id: NMRP-0325-116944" required />
+                  <div class="admin-help-text">Displayed right below title on the award card.</div>
+                </div>
+
+                <div class="admin-form-group">
+                  <label>📂 Award Category / Type *</label>
+                  <select id="awardCategoryInput" required>
+                    <option value="certificate">📜 Verified Certificate</option>
+                    <option value="trophy">🏆 Executive Trophy / Plate</option>
+                    <option value="credential">🎖️ Award Badge / Medal Ribbon</option>
+                    <option value="plaque">🛡️ University Plaque / Citation</option>
+                    <option value="stage">📸 Official Stage Photograph</option>
+                  </select>
+                </div>
+
+                <div class="admin-form-group">
+                  <label>📅 Year / Award Date</label>
+                  <input type="text" id="awardDateInput" placeholder="e.g. 2025 or Session 2024-25" />
+                </div>
+
+                <div class="admin-form-group full">
+                  <label>📝 Authority Signatures &amp; Citations Details</label>
+                  <textarea id="awardDescInput" rows="2" placeholder="e.g. Official certification signed by Pawan Goyal, Chief Business Officer Naukri.com, certifying elite talent acquisition expertise."></textarea>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 14px;">
+                <button type="button" id="btnCancelEditAward" class="btn btn-secondary" style="display: none; padding: 11px 18px; font-size: 13.5px;">
+                  Cancel Edit
+                </button>
+                <button type="submit" id="btnAttachAwardSubmit" class="btn btn-primary" style="padding: 11px 24px; font-size: 13.5px; font-weight: 700; background: #2563eb; border-color: #1d4ed8; display: flex; align-items: center; gap: 6px;">
+                  <span id="btnAttachAwardText">➕ Attach Award &amp; Display on App Page</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Active Attached Awards Grid -->
+          <div style="margin-top: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+              <h4 style="margin: 0; color: #0b2545; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                <span>✨</span> Verified Credentials Displayed on Live App (<span id="attachedAwardsCountBadge">0</span>)
+              </h4>
+              <div style="font-size: 12px; color: #64748b;">
+                Changes reflect live on the website immediately upon saving.
+              </div>
+            </div>
+
+            <div class="attached-awards-grid" id="attachedAwardsListContainer">
+              <!-- Dynamically populated from siteConfig.awards -->
+            </div>
+          </div>
+        </div>
+
         <!-- Panel 1: Site Content -->
-        <div class="admin-panel active" id="tab-content">
+        <div class="admin-panel" id="tab-content">
           <form id="adminSiteContentForm">
             <div class="admin-form-grid">
               <div class="admin-form-group full">

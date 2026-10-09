@@ -453,11 +453,23 @@ function initForms() {
         });
 
         if (res.ok) {
-          if (typeof updateLiveDeskDisplay === "function") {
-            updateLiveDeskDisplay(currentLiveInquiries + 1, currentLiveAudits);
-            setTimeout(fetchLiveDeskStats, 1200);
-          }
           const resData = await res.json().catch(() => ({}));
+          const createdInquiry = resData.inquiry || {
+            id: 'INQ-' + Date.now(),
+            schoolName: dataObj.School_Name || 'School Institution',
+            contactPerson: dataObj.Contact_Person || 'Representative',
+            mobile: dataObj.Mobile_Number || '',
+            email: dataObj.Email_Address || '',
+            city: dataObj.City_Location || 'Bihar',
+            service: dataObj.Service_Required || 'Consultation',
+            message: dataObj.Message_Details || '',
+            createdAt: new Date().toISOString()
+          };
+
+          if (typeof addInquiryToLiveFeed === "function") {
+            addInquiryToLiveFeed(createdInquiry);
+          }
+
           if (schoolFeedback) {
             schoolFeedback.className = "form-feedback success";
             schoolFeedback.textContent = resData.message || "Thank you! Your institutional inquiry has been recorded and delivered to the Executive Advisory Desk. You will receive a consultation call shortly.";
@@ -467,10 +479,22 @@ function initForms() {
           throw new Error("Server response not ok");
         }
       } catch (err) {
-        if (typeof updateLiveDeskDisplay === "function") {
-          updateLiveDeskDisplay(currentLiveInquiries + 1, currentLiveAudits);
-          setTimeout(fetchLiveDeskStats, 1200);
+        const fallbackInquiry = {
+          id: 'INQ-' + Date.now(),
+          schoolName: dataObj.School_Name || 'School Institution',
+          contactPerson: dataObj.Contact_Person || 'Representative',
+          mobile: dataObj.Mobile_Number || '',
+          email: dataObj.Email_Address || '',
+          city: dataObj.City_Location || 'Bihar',
+          service: dataObj.Service_Required || 'Consultation',
+          message: dataObj.Message_Details || '',
+          createdAt: new Date().toISOString()
+        };
+
+        if (typeof addInquiryToLiveFeed === "function") {
+          addInquiryToLiveFeed(fallbackInquiry);
         }
+
         if (schoolFeedback) {
           schoolFeedback.className = "form-feedback success";
           schoolFeedback.textContent = "Thank you! Inquiry submitted successfully and routed to the Executive Advisory Desk. Connecting directly with Lead HR Consultant.";
@@ -701,17 +725,40 @@ function initKnowledgeHub() {
 
 // 7. Awards & Credentials Lightbox Modal
 function initAwardsModal() {
-  const awardCards = document.querySelectorAll(".award-card");
   const modal = document.getElementById("awardModal");
   const modalImg = document.getElementById("modalImg");
   const modalTitle = document.getElementById("modalTitle");
   const modalDesc = document.getElementById("modalDesc");
   const modalCloseBtn = document.getElementById("modalCloseBtn");
 
-  if (!modal || !awardCards.length) return;
+  if (!modal) return;
 
-  awardCards.forEach(card => {
-    card.addEventListener("click", () => {
+  function closeModal() {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  if (modalCloseBtn && !modalCloseBtn._bound) {
+    modalCloseBtn._bound = true;
+    modalCloseBtn.addEventListener("click", closeModal);
+  }
+
+  if (!modal._bound) {
+    modal._bound = true;
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("active")) {
+        closeModal();
+      }
+    });
+
+    // Delegated click listener for any .award-card (supports dynamically attached awards)
+    document.addEventListener("click", (e) => {
+      const card = e.target.closest(".award-card");
+      if (!card) return;
       const imgSrc = card.getAttribute("data-img") || card.querySelector("img")?.src;
       const title = card.getAttribute("data-title") || card.querySelector("h4")?.textContent;
       const desc = card.getAttribute("data-desc") || card.querySelector("span")?.textContent;
@@ -723,26 +770,7 @@ function initAwardsModal() {
       modal.classList.add("active");
       document.body.style.overflow = "hidden";
     });
-  });
-
-  function closeModal() {
-    modal.classList.remove("active");
-    document.body.style.overflow = "";
   }
-
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener("click", closeModal);
-  }
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeModal();
-    }
-  });
 }
 
 // 8. Direct Stage Media Uploader (Photos & Videos)
@@ -1053,10 +1081,8 @@ function initNoticeBoard() {
   if (viewAllBtn && modal) {
     viewAllBtn.addEventListener("click", () => {
       modal.classList.add("active");
-      // If not yet fetched, pull latest CBSE circulars
-      if (cbseNotices.length === 0) {
-        fetchCbseNotices();
-      }
+      // Pull latest CBSE circulars automatically upon opening
+      fetchCbseNotices(false);
     });
   }
 
@@ -1275,6 +1301,11 @@ function initNoticeBoard() {
     if (adminTotalCount) adminTotalCount.textContent = `${countAll} Active Notices`;
   }
 
+  // Real-time CBSE version and sync state tracker
+  let currentCbseVersion = null;
+  let lastCbseSyncTime = null;
+  let previousCbseCount = 0;
+
   // Fetch Live CBSE Notices from Backend Aggregator
   async function fetchCbseNotices(forceRefresh = false) {
     if (isFetchingCbse) return;
@@ -1304,12 +1335,21 @@ function initNoticeBoard() {
 
       if (res.ok) {
         const data = await res.json();
+        if (data.version) currentCbseVersion = data.version;
+        if (data.lastSync) lastCbseSyncTime = data.lastSync;
+
         const incoming = Array.isArray(data.notices) ? data.notices : [];
 
         cbseNotices = incoming.map(n => ({
           ...n,
           normalizedCategory: normalizeCategory(n.category, n.title)
         }));
+
+        // Detect if new notices were published by CBSE since last check
+        if (previousCbseCount > 0 && cbseNotices.length > previousCbseCount && cbseNotices[0]) {
+          showToast(`⚡ New CBSE Circular Received: "${cbseNotices[0].title}". Notices list updated automatically!`, "info");
+        }
+        previousCbseCount = cbseNotices.length;
 
         // Format relative sync time
         const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -1463,15 +1503,38 @@ function initNoticeBoard() {
   }));
   renderNotices();
 
+  // Automatic background monitor that checks for any new circular from CBSE and updates immediately
+  async function checkCbseUpdates() {
+    try {
+      const url = `/api/cbse-notices/check-updates?version=${encodeURIComponent(currentCbseVersion || '')}&lastSync=${encodeURIComponent(lastCbseSyncTime || '')}`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.hasUpdates) {
+          console.log("[CBSE Auto-Monitor] New official update detected from CBSE! Fetching all notices automatically...");
+          await fetchCbseNotices(false);
+        }
+      }
+    } catch (e) {
+      console.warn("[CBSE Auto-Monitor] Note:", e.message);
+    }
+  }
+
   // Trigger initial background fetch
   setTimeout(() => {
     fetchCbseNotices(false);
-  }, 1000);
+  }, 600);
 
-  // Background Auto-Sync every 10 minutes
+  // Background Auto-Sync: Polls every 25 seconds for instant official CBSE circular updates
   setInterval(() => {
-    fetchCbseNotices(false);
-  }, 10 * 60 * 1000);
+    checkCbseUpdates();
+  }, 25 * 1000);
+
+  // Auto-fetch immediately when user returns to window or tab becomes visible
+  window.addEventListener("focus", () => checkCbseUpdates());
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") checkCbseUpdates();
+  });
 }
 
 // 10. Quick Advisory Desk & Back to Top Controller
@@ -1654,12 +1717,157 @@ async function fetchLiveDeskStats() {
   }
 }
 
+// ==========================================================================
+// LIVE INQUIRIES STREAM (AUTO-UPDATES LIVE ON SUBMISSION & REAL-TIME SYNC)
+// ==========================================================================
+let liveInquiriesList = [];
+
+function formatRelativeTime(dateStr) {
+  try {
+    const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+    if (diff < 60) return "Just now";
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+    return new Date(dateStr).toLocaleDateString("en-IN", { day: "numeric", month: "short" });
+  } catch (e) {
+    return "Recently";
+  }
+}
+
+function renderLiveInquiriesFeed() {
+  const container = document.getElementById("liveInquiriesFeedList");
+  const countBadge = document.getElementById("liveInquiriesCountBadge");
+  const sectionBadge = document.getElementById("inquirySectionLiveBadge");
+
+  if (countBadge) countBadge.textContent = liveInquiriesList.length;
+  if (sectionBadge && liveInquiriesList.length > 0) {
+    sectionBadge.textContent = liveInquiriesList.length;
+  }
+
+  if (!container) return;
+
+  if (liveInquiriesList.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; color: #64748b; padding: 24px; font-size: 13px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px;">
+        📬 No institutional inquiries recorded yet today. Use the form above to submit your school requirements!
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = liveInquiriesList.slice(0, 12).map(item => {
+    const timeFormatted = item.createdAt ? formatRelativeTime(item.createdAt) : "Recently";
+    const escapeStr = str => String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return `
+      <div class="live-inquiry-card ${item.isJustAdded ? 'just-added' : ''}">
+        <div class="live-inquiry-card-header">
+          <div class="live-inquiry-school">🏫 ${escapeStr(item.schoolName || 'Affiliated School')}</div>
+          <span class="live-inquiry-time">⏱️ ${escapeStr(timeFormatted)}</span>
+        </div>
+        <div class="live-inquiry-service">
+          🎯 ${escapeStr(item.service || 'Institutional Consultation')}
+        </div>
+        <div class="live-inquiry-meta">
+          <span>👤 ${escapeStr(item.contactPerson || 'Representative')}</span>
+          <span>📍 ${escapeStr(item.city || 'Bihar')}</span>
+          <span class="live-inquiry-badge-status">✓ Received</span>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+async function fetchLiveInquiries() {
+  try {
+    const res = await fetch("/api/inquiries");
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data.inquiries)) {
+        const prevLen = liveInquiriesList.length;
+        liveInquiriesList = data.inquiries;
+        renderLiveInquiriesFeed();
+
+        // Also update Admin Inquiries count if present
+        const dashInqCount = document.getElementById("dashInquiriesCount");
+        if (dashInqCount) dashInqCount.textContent = liveInquiriesList.length;
+
+        if (prevLen > 0 && liveInquiriesList.length > prevLen && liveInquiriesList[0]) {
+          showToast(`⚡ New Inquiry received from ${liveInquiriesList[0].schoolName}! App page updated live.`, "info");
+        }
+      }
+    }
+  } catch (e) {
+    console.warn("Could not fetch live inquiries:", e.message);
+  }
+}
+
+function addInquiryToLiveFeed(newInquiry) {
+  if (!newInquiry) return;
+  const item = {
+    ...newInquiry,
+    isJustAdded: true,
+    createdAt: newInquiry.createdAt || new Date().toISOString()
+  };
+  liveInquiriesList.unshift(item);
+  renderLiveInquiriesFeed();
+
+  // Update live badges and statistics
+  if (typeof updateLiveDeskDisplay === "function") {
+    updateLiveDeskDisplay(liveInquiriesList.length, currentLiveAudits);
+  }
+  const inqBadge = document.getElementById("inquirySectionLiveBadge");
+  if (inqBadge) inqBadge.textContent = liveInquiriesList.length;
+  const countBadge = document.getElementById("liveInquiriesCountBadge");
+  if (countBadge) countBadge.textContent = liveInquiriesList.length;
+  const dashCount = document.getElementById("dashInquiriesCount");
+  if (dashCount) dashCount.textContent = liveInquiriesList.length;
+
+  // If Admin table is open, prepend row live
+  const adminBody = document.getElementById("adminInquiriesTableBody");
+  if (adminBody) {
+    const escapeStr = str => String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const tr = document.createElement("tr");
+    tr.style.background = "#f0fdf4";
+    tr.innerHTML = `
+      <td><strong>${escapeStr(item.id || 'INQ')}</strong></td>
+      <td>${escapeStr(item.schoolName || 'School')}</td>
+      <td>${escapeStr(item.contactPerson || 'Representative')}</td>
+      <td><a href="tel:${escapeStr(item.mobile || '')}">${escapeStr(item.mobile || '')}</a></td>
+      <td>${escapeStr(item.email || '')}</td>
+      <td>${escapeStr(item.city || '')}</td>
+      <td><span class="badge" style="background: #eff6ff; color: #1e40af;">${escapeStr(item.service || '')}</span></td>
+      <td>${escapeStr(item.message || '')}</td>
+      <td><span class="badge badge-success">✓ Received Just Now</span></td>
+    `;
+    adminBody.prepend(tr);
+  }
+
+  // Also sync to Firestore collection if available
+  try {
+    if (window.firebaseDb && window.firestoreDoc && window.firestoreSetDoc) {
+      window.firestoreSetDoc(
+        window.firestoreDoc(window.firebaseDb, "inquiries", item.id || ('INQ-' + Date.now())),
+        item,
+        { merge: true }
+      ).catch(() => {});
+    }
+  } catch (e) {}
+}
+
 function initLiveDeskCounters() {
   // Initial fetch
   fetchLiveDeskStats();
+  fetchLiveInquiries();
 
-  // Background auto-refresh polling every 12 seconds
-  setInterval(fetchLiveDeskStats, 12000);
+  // Background auto-refresh polling every 10 seconds
+  setInterval(fetchLiveDeskStats, 10000);
+  setInterval(fetchLiveInquiries, 10000);
+
+  // Auto-refresh when tab gains focus
+  window.addEventListener("focus", () => {
+    fetchLiveDeskStats();
+    fetchLiveInquiries();
+  });
 }
 
 // ==========================================================================
@@ -1777,28 +1985,776 @@ function initAdminPortal() {
       const el = document.querySelector('[data-editable="statYears"]');
       if (el) el.textContent = cfg.statYears;
     }
+    if (cfg.statYearsLabel) {
+      document.querySelectorAll('[data-editable="statYearsLabel"]').forEach(el => el.textContent = cfg.statYearsLabel);
+    }
+    if (cfg.statAward) {
+      document.querySelectorAll('[data-editable="statAward"]').forEach(el => el.textContent = cfg.statAward);
+    }
+    if (cfg.statAwardLabel) {
+      document.querySelectorAll('[data-editable="statAwardLabel"]').forEach(el => el.textContent = cfg.statAwardLabel);
+    }
+    if (cfg.statRecruiter) {
+      document.querySelectorAll('[data-editable="statRecruiter"]').forEach(el => el.textContent = cfg.statRecruiter);
+    }
+    if (cfg.statRecruiterLabel) {
+      document.querySelectorAll('[data-editable="statRecruiterLabel"]').forEach(el => el.textContent = cfg.statRecruiterLabel);
+    }
 
-    // Populate dashboard form fields if present
-    const fNotice = document.getElementById("cfgNoticeTicker");
-    if (fNotice && cfg.noticeTicker) fNotice.value = cfg.noticeTicker;
-    const fHours = document.getElementById("cfgConsultationHours");
-    if (fHours && cfg.consultationHours) fHours.value = cfg.consultationHours;
-    const fPhone = document.getElementById("cfgPhone");
-    if (fPhone && cfg.phone) fPhone.value = cfg.phone;
-    const fEmail = document.getElementById("cfgEmail");
-    if (fEmail && cfg.email) fEmail.value = cfg.email;
-    const fAddr = document.getElementById("cfgAddress");
-    if (fAddr && cfg.address) fAddr.value = cfg.address;
-    const fHeroPill = document.getElementById("cfgHeroPill");
-    if (fHeroPill && cfg.heroPill) fHeroPill.value = cfg.heroPill;
-    const fHeroTitle = document.getElementById("cfgHeroTitle");
-    if (fHeroTitle && cfg.heroTitle) fHeroTitle.value = cfg.heroTitle;
-    const fHeroSub = document.getElementById("cfgHeroSubtitle");
-    if (fHeroSub && cfg.heroSubtitle) fHeroSub.value = cfg.heroSubtitle;
-    const fStatYears = document.getElementById("cfgStatYears");
-    if (fStatYears && cfg.statYears) fStatYears.value = cfg.statYears;
-    const fStatAudits = document.getElementById("cfgStatAudits");
-    if (fStatAudits && cfg.statAudits) fStatAudits.value = cfg.statAudits;
+    // 7. Services Section (6 Cards)
+    if (cfg.servicesTag) document.querySelectorAll('[data-editable="servicesTag"]').forEach(el => el.textContent = cfg.servicesTag);
+    if (cfg.servicesTitle) document.querySelectorAll('[data-editable="servicesTitle"]').forEach(el => el.textContent = cfg.servicesTitle);
+    if (cfg.servicesSubtitle) document.querySelectorAll('[data-editable="servicesSubtitle"]').forEach(el => el.textContent = cfg.servicesSubtitle);
+
+    for (let i = 1; i <= 6; i++) {
+      if (cfg[`service${i}Title`]) {
+        document.querySelectorAll(`[data-editable="service${i}Title"]`).forEach(el => el.textContent = cfg[`service${i}Title`]);
+      }
+      if (cfg[`service${i}Desc`]) {
+        document.querySelectorAll(`[data-editable="service${i}Desc"]`).forEach(el => el.textContent = cfg[`service${i}Desc`]);
+      }
+      if (cfg[`service${i}Features`]) {
+        document.querySelectorAll(`[data-editable="service${i}Features"]`).forEach(el => {
+          const lines = String(cfg[`service${i}Features`]).split("\n").map(l => l.trim()).filter(Boolean);
+          if (lines.length > 0) {
+            el.innerHTML = lines.map(line => `<li>${escapeHtml(line)}</li>`).join("");
+          }
+        });
+      }
+    }
+
+    // 8. About Section
+    if (cfg.aboutTag) document.querySelectorAll('[data-editable="aboutTag"]').forEach(el => el.textContent = cfg.aboutTag);
+    if (cfg.aboutTitle) document.querySelectorAll('[data-editable="aboutTitle"]').forEach(el => el.textContent = cfg.aboutTitle);
+    if (cfg.aboutSubtitle) document.querySelectorAll('[data-editable="aboutSubtitle"]').forEach(el => el.textContent = cfg.aboutSubtitle);
+    if (cfg.aboutDesc1) document.querySelectorAll('[data-editable="aboutDesc1"]').forEach(el => el.textContent = cfg.aboutDesc1);
+    if (cfg.aboutDesc2) document.querySelectorAll('[data-editable="aboutDesc2"]').forEach(el => el.textContent = cfg.aboutDesc2);
+
+    // 9. CBSE Affiliation & SARAS Pillars
+    if (cfg.cbseTag) document.querySelectorAll('[data-editable="cbseTag"]').forEach(el => el.textContent = cfg.cbseTag);
+    if (cfg.cbseTitle) document.querySelectorAll('[data-editable="cbseTitle"]').forEach(el => el.textContent = cfg.cbseTitle);
+    if (cfg.cbseSubtitle) document.querySelectorAll('[data-editable="cbseSubtitle"]').forEach(el => el.textContent = cfg.cbseSubtitle);
+    for (let i = 1; i <= 4; i++) {
+      if (cfg[`pillar${i}Title`]) document.querySelectorAll(`[data-editable="pillar${i}Title"]`).forEach(el => el.textContent = cfg[`pillar${i}Title`]);
+      if (cfg[`pillar${i}Desc`]) document.querySelectorAll(`[data-editable="pillar${i}Desc"]`).forEach(el => el.textContent = cfg[`pillar${i}Desc`]);
+    }
+
+    // 10. Awards & Credentials Section Headers
+    if (cfg.awardsSectionTag) document.querySelectorAll('[data-editable="awardsSectionTag"]').forEach(el => el.textContent = cfg.awardsSectionTag);
+    if (cfg.awardsSectionTitle) document.querySelectorAll('[data-editable="awardsSectionTitle"]').forEach(el => el.textContent = cfg.awardsSectionTitle);
+    if (cfg.awardsSectionSubtitle) document.querySelectorAll('[data-editable="awardsSectionSubtitle"]').forEach(el => el.textContent = cfg.awardsSectionSubtitle);
+
+    // 11. Founder Profile Desk
+    if (cfg.founderName) document.querySelectorAll('[data-editable="founderName"]').forEach(el => el.textContent = cfg.founderName);
+    if (cfg.founderDesignation) document.querySelectorAll('[data-editable="founderDesignation"]').forEach(el => el.textContent = cfg.founderDesignation);
+    if (cfg.founderBio) document.querySelectorAll('[data-editable="founderBio"]').forEach(el => el.textContent = cfg.founderBio);
+    if (cfg.founderAddress) document.querySelectorAll('[data-editable="founderAddress"]').forEach(el => el.textContent = cfg.founderAddress);
+    if (cfg.founderPhone) {
+      document.querySelectorAll('[data-editable="founderPhone"]').forEach(el => {
+        el.textContent = cfg.founderPhone;
+        if (el.tagName === "A") el.setAttribute("href", `tel:${cfg.founderPhone.replace(/[^0-9+]/g, '')}`);
+      });
+    }
+    if (cfg.founderEmail) {
+      document.querySelectorAll('[data-editable="founderEmail"]').forEach(el => {
+        el.textContent = cfg.founderEmail;
+        if (el.tagName === "A") el.setAttribute("href", `mailto:${cfg.founderEmail}`);
+      });
+    }
+    if (cfg.founderBadges) {
+      const badgesContainer = document.getElementById("publicFounderBadges");
+      if (badgesContainer) {
+        const badgeList = String(cfg.founderBadges).split(",").map(b => b.trim()).filter(Boolean);
+        if (badgeList.length > 0) {
+          badgesContainer.innerHTML = badgeList.map(b => `<span class="badge">${escapeHtml(b)}</span>`).join("\n");
+        }
+      }
+    }
+
+    // 12. FAQs
+    for (let i = 1; i <= 4; i++) {
+      if (cfg[`faq${i}Q`]) document.querySelectorAll(`[data-editable="faq${i}Q"]`).forEach(el => el.textContent = cfg[`faq${i}Q`]);
+      if (cfg[`faq${i}A`]) document.querySelectorAll(`[data-editable="faq${i}A"]`).forEach(el => el.innerHTML = cfg[`faq${i}A`]);
+    }
+
+    // 13. Render Public Awards Gallery and Admin Portal views
+    renderPublicAwards(siteConfig);
+    populateFullSectionsForm(siteConfig);
+    renderAttachedAwardsList(siteConfig);
+  }
+
+  // Safe HTML escaper
+  function escapeHtml(str) {
+    if (!str) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  // Render Public Awards Gallery and Stage Photos on public app page
+  function renderPublicAwards(cfg) {
+    const config = cfg || siteConfig;
+    const stageGrid = document.getElementById("publicStagePhotosGrid");
+    const awardsGrid = document.getElementById("publicAwardsGrid");
+
+    if (stageGrid && Array.isArray(config.stagePhotos) && config.stagePhotos.length > 0) {
+      stageGrid.innerHTML = config.stagePhotos.map(item => `
+        <article class="award-card" data-img="${item.img}" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc || item.tagline || '')}">
+          <div class="award-card-img-wrap" style="aspect-ratio: 16/11;">
+            <img src="${item.img}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          </div>
+          <div class="award-card-caption">
+            <h4>${escapeHtml(item.title)}</h4>
+            <span>${escapeHtml(item.tagline || '')}</span>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    if (awardsGrid && Array.isArray(config.awards) && config.awards.length > 0) {
+      awardsGrid.innerHTML = config.awards.map(item => `
+        <article class="award-card" data-img="${item.img}" data-title="${escapeHtml(item.title)}" data-desc="${escapeHtml(item.desc || item.tagline || '')}">
+          <div class="award-card-img-wrap">
+            <img src="${item.img}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          </div>
+          <div class="award-card-caption">
+            <h4>${escapeHtml(item.title)}</h4>
+            <span>${escapeHtml(item.tagline || '')}</span>
+          </div>
+        </article>
+      `).join("");
+    }
+  }
+
+  // Populate Complete Site Editor form inputs in Admin Portal
+  function populateFullSectionsForm(cfg) {
+    const config = cfg || siteConfig;
+    const setVal = (id, val) => {
+      const el = document.getElementById(id);
+      if (el && val !== undefined && val !== null) el.value = val;
+    };
+
+    // Hero & Brand
+    setVal("secHeroPill", config.heroPill);
+    setVal("secHeroTitle", config.heroTitle);
+    setVal("secHeroSubtitle", config.heroSubtitle);
+    setVal("secStatYears", config.statYears);
+    setVal("secStatYearsLabel", config.statYearsLabel);
+    setVal("secStatAward", config.statAward);
+    setVal("secStatAwardLabel", config.statAwardLabel);
+    setVal("secStatRecruiter", config.statRecruiter);
+    setVal("secStatRecruiterLabel", config.statRecruiterLabel);
+
+    // Notices
+    setVal("secNoticeTicker", config.noticeTicker);
+    setVal("secBreakingNotice", config.breakingNotice);
+    setVal("secBreakingNoticeLink", config.breakingNoticeLink);
+
+    // Services (6 Cards)
+    setVal("secServicesTag", config.servicesTag);
+    setVal("secServicesTitle", config.servicesTitle);
+    setVal("secServicesSubtitle", config.servicesSubtitle);
+    setVal("secService1Title", config.service1Title);
+    setVal("secService1Desc", config.service1Desc);
+    setVal("secService1Features", config.service1Features);
+    setVal("secService2Title", config.service2Title);
+    setVal("secService2Desc", config.service2Desc);
+    setVal("secService2Features", config.service2Features);
+    setVal("secService3Title", config.service3Title);
+    setVal("secService3Desc", config.service3Desc);
+    setVal("secService3Features", config.service3Features);
+    setVal("secService4Title", config.service4Title);
+    setVal("secService4Desc", config.service4Desc);
+    setVal("secService4Features", config.service4Features);
+    setVal("secService5Title", config.service5Title);
+    setVal("secService5Desc", config.service5Desc);
+    setVal("secService5Features", config.service5Features);
+    setVal("secService6Title", config.service6Title);
+    setVal("secService6Desc", config.service6Desc);
+    setVal("secService6Features", config.service6Features);
+
+    // About
+    setVal("secAboutTag", config.aboutTag);
+    setVal("secAboutTitle", config.aboutTitle);
+    setVal("secAboutSubtitle", config.aboutSubtitle);
+    setVal("secAboutDesc1", config.aboutDesc1);
+    setVal("secAboutDesc2", config.aboutDesc2);
+
+    // CBSE Pillars
+    setVal("secCbseTag", config.cbseTag);
+    setVal("secCbseTitle", config.cbseTitle);
+    setVal("secCbseSubtitle", config.cbseSubtitle);
+    setVal("secPillar1Title", config.pillar1Title);
+    setVal("secPillar1Desc", config.pillar1Desc);
+    setVal("secPillar2Title", config.pillar2Title);
+    setVal("secPillar2Desc", config.pillar2Desc);
+    setVal("secPillar3Title", config.pillar3Title);
+    setVal("secPillar3Desc", config.pillar3Desc);
+    setVal("secPillar4Title", config.pillar4Title);
+    setVal("secPillar4Desc", config.pillar4Desc);
+
+    // Awards Section Header
+    setVal("secAwardsSectionTag", config.awardsSectionTag);
+    setVal("secAwardsSectionTitle", config.awardsSectionTitle);
+    setVal("secAwardsSectionSubtitle", config.awardsSectionSubtitle);
+
+    // Founder
+    setVal("secFounderName", config.founderName);
+    setVal("secFounderDesignation", config.founderDesignation);
+    setVal("secFounderBio", config.founderBio);
+    setVal("secFounderBadges", config.founderBadges);
+    setVal("secFounderAddress", config.founderAddress);
+    setVal("secFounderPhone", config.founderPhone);
+    setVal("secFounderEmail", config.founderEmail);
+
+    // FAQs
+    setVal("secFaq1Q", config.faq1Q);
+    setVal("secFaq1A", config.faq1A);
+    setVal("secFaq2Q", config.faq2Q);
+    setVal("secFaq2A", config.faq2A);
+    setVal("secFaq3Q", config.faq3Q);
+    setVal("secFaq3A", config.faq3A);
+    setVal("secFaq4Q", config.faq4Q);
+    setVal("secFaq4A", config.faq4A);
+
+    // Contact
+    setVal("secAddress", config.address);
+    setVal("secPhone", config.phone);
+    setVal("secEmail", config.email);
+    setVal("secConsultationHours", config.consultationHours);
+
+    // Desks
+    setVal("secInquiryTitle", config.inquiryTitle);
+    setVal("secInquirySubtitle", config.inquirySubtitle);
+    setVal("secResumeTitle", config.resumeTitle);
+    setVal("secResumeSubtitle", config.resumeSubtitle);
+    setVal("secAuditTitle", config.auditTitle);
+    setVal("secAuditSubtitle", config.auditSubtitle);
+  }
+
+  // Render Attached Awards List inside the Admin Portal Awards Manager tab
+  function renderAttachedAwardsList(cfg) {
+    const config = cfg || siteConfig;
+    const container = document.getElementById("attachedAwardsListContainer");
+    const badge = document.getElementById("attachedAwardsCountBadge");
+    if (!container) return;
+
+    const allAwards = [
+      ...(config.awards || []).map(a => ({ ...a, _isStage: false })),
+      ...(config.stagePhotos || []).map(s => ({ ...s, _isStage: true, category: 'stage' }))
+    ];
+
+    if (badge) badge.textContent = allAwards.length;
+
+    if (allAwards.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; padding: 32px; text-align: center; background: #f8fafc; border-radius: 8px; border: 1px dashed #cbd5e1; color: #64748b;">
+          No awards currently attached. Use the Attachment Box above to attach certificates, trophies, or stage photos.
+        </div>
+      `;
+      return;
+    }
+
+    const categoryLabels = {
+      certificate: "📜 Verified Certificate",
+      trophy: "🏆 Executive Trophy",
+      credential: "🎖️ Medal / Ribbon",
+      plaque: "🛡️ Citation Plaque",
+      stage: "📸 Stage Photo"
+    };
+
+    container.innerHTML = allAwards.map(item => `
+      <div class="attached-award-card" data-award-id="${item.id}">
+        <div class="attached-award-thumb-wrap">
+          <img src="${item.img}" alt="${escapeHtml(item.title)}" loading="lazy" />
+          <span class="attached-award-category-pill">${categoryLabels[item.category] || "🏆 Award"}</span>
+        </div>
+        <div class="attached-award-info">
+          <h4>${escapeHtml(item.title)}</h4>
+          <span class="attached-award-tagline">${escapeHtml(item.tagline || "")}</span>
+          <p class="attached-award-desc">${escapeHtml(item.desc || "")}</p>
+          <div class="attached-award-actions">
+            <button type="button" class="btn-award-action btn-award-edit" data-edit-id="${item.id}">
+              ✏️ Edit
+            </button>
+            <button type="button" class="btn-award-action btn-award-delete" data-delete-id="${item.id}">
+              🗑️ Remove
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+
+    // Wire Edit buttons
+    container.querySelectorAll(".btn-award-edit").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-edit-id");
+        editAttachedAward(id);
+      });
+    });
+
+    // Wire Remove buttons
+    container.querySelectorAll(".btn-award-delete").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-delete-id");
+        deleteAttachedAward(id);
+      });
+    });
+  }
+
+  // Active Attachment Box state
+  let activeEditingAwardId = null;
+  let attachedFileDataBase64 = null;
+  let attachedFileObj = null;
+
+  function editAttachedAward(id) {
+    const award = (siteConfig.awards || []).find(a => a.id === id) ||
+                  (siteConfig.stagePhotos || []).find(s => s.id === id);
+    if (!award) return;
+
+    activeEditingAwardId = id;
+    const titleInput = document.getElementById("awardTitleInput");
+    const taglineInput = document.getElementById("awardTaglineInput");
+    const catInput = document.getElementById("awardCategoryInput");
+    const dateInput = document.getElementById("awardDateInput");
+    const descInput = document.getElementById("awardDescInput");
+    const heading = document.getElementById("awardAttachmentBoxHeading");
+    const icon = document.getElementById("awardAttachmentBoxHeaderIcon");
+    const submitBtnText = document.getElementById("btnAttachAwardText");
+    const cancelBtn = document.getElementById("btnCancelEditAward");
+    const previewBox = document.getElementById("awardPreviewBox");
+    const previewImg = document.getElementById("awardPreviewImg");
+    const previewName = document.getElementById("awardPreviewFileName");
+    const previewStatus = document.getElementById("awardPreviewStatus");
+
+    if (titleInput) titleInput.value = award.title || "";
+    if (taglineInput) taglineInput.value = award.tagline || "";
+    if (catInput) catInput.value = award.category || "certificate";
+    if (dateInput) dateInput.value = award.date || "";
+    if (descInput) descInput.value = award.desc || "";
+
+    if (heading) heading.textContent = `Edit Attached Award: ${award.title}`;
+    if (icon) icon.textContent = "✏️";
+    if (submitBtnText) submitBtnText.textContent = "💾 Update Award & Save Live";
+    if (cancelBtn) cancelBtn.style.display = "inline-flex";
+
+    if (previewBox && previewImg && previewName && award.img) {
+      previewImg.src = award.img;
+      previewName.textContent = award.img;
+      if (previewStatus) previewStatus.textContent = "✓ Current attached image";
+      previewBox.style.display = "flex";
+    }
+
+    const box = document.getElementById("awardAttachmentBox");
+    if (box) box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function cancelAwardEdit() {
+    activeEditingAwardId = null;
+    attachedFileDataBase64 = null;
+    attachedFileObj = null;
+
+    const form = document.getElementById("attachAwardForm");
+    if (form) form.reset();
+
+    const heading = document.getElementById("awardAttachmentBoxHeading");
+    const icon = document.getElementById("awardAttachmentBoxHeaderIcon");
+    const submitBtnText = document.getElementById("btnAttachAwardText");
+    const cancelBtn = document.getElementById("btnCancelEditAward");
+    const previewBox = document.getElementById("awardPreviewBox");
+
+    if (heading) heading.textContent = "Attachment Box — Add New Award / Certificate / Trophy";
+    if (icon) icon.textContent = "📎";
+    if (submitBtnText) submitBtnText.textContent = "➕ Attach Award & Display on App Page";
+    if (cancelBtn) cancelBtn.style.display = "none";
+    if (previewBox) previewBox.style.display = "none";
+  }
+
+  async function deleteAttachedAward(id) {
+    const isStage = (siteConfig.stagePhotos || []).some(s => s.id === id);
+    const targetItem = isStage
+      ? (siteConfig.stagePhotos || []).find(s => s.id === id)
+      : (siteConfig.awards || []).find(a => a.id === id);
+
+    const title = targetItem ? targetItem.title : "this award";
+    if (!confirm(`Are you sure you want to remove "${title}" from the verified credentials gallery?`)) {
+      return;
+    }
+
+    if (isStage) {
+      siteConfig.stagePhotos = (siteConfig.stagePhotos || []).filter(s => s.id !== id);
+    } else {
+      siteConfig.awards = (siteConfig.awards || []).filter(a => a.id !== id);
+    }
+
+    await saveConfiguration({
+      awards: siteConfig.awards,
+      stagePhotos: siteConfig.stagePhotos
+    });
+
+    renderAttachedAwardsList(siteConfig);
+    renderPublicAwards(siteConfig);
+    showToast(`"${title}" removed from display.`);
+  }
+
+  // Initialize the Award Attachment Box
+  function initAwardAttachmentManager() {
+    const dropZone = document.getElementById("awardDropZone");
+    const fileInput = document.getElementById("awardFileInput");
+    const form = document.getElementById("attachAwardForm");
+    const previewBox = document.getElementById("awardPreviewBox");
+    const previewImg = document.getElementById("awardPreviewImg");
+    const previewName = document.getElementById("awardPreviewFileName");
+    const previewStatus = document.getElementById("awardPreviewStatus");
+    const btnChange = document.getElementById("btnChangeAwardFile");
+    const btnCancel = document.getElementById("btnCancelEditAward");
+    const existingSelect = document.getElementById("awardExistingImageSelect");
+
+    if (!form) return;
+
+    function handleFile(file) {
+      if (!file || !file.type.startsWith("image/")) {
+        alert("Please select a valid image file (JPG, PNG, WEBP, GIF).");
+        return;
+      }
+      attachedFileObj = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        attachedFileDataBase64 = e.target.result;
+        if (previewImg) previewImg.src = attachedFileDataBase64;
+        if (previewName) previewName.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+        if (previewStatus) previewStatus.textContent = "✓ Image attached & ready";
+        if (previewBox) previewBox.style.display = "flex";
+
+        // Auto suggest title if empty
+        const titleInput = document.getElementById("awardTitleInput");
+        if (titleInput && !titleInput.value.trim()) {
+          const cleanName = file.name
+            .replace(/\.[^/.]+$/, "")
+            .replace(/[-_]/g, " ")
+            .replace(/\b\w/g, l => l.toUpperCase());
+          titleInput.value = cleanName;
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    if (dropZone && fileInput) {
+      dropZone.addEventListener("click", () => fileInput.click());
+
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = "#2563eb";
+        dropZone.style.background = "#eff6ff";
+      });
+
+      dropZone.addEventListener("dragleave", () => {
+        dropZone.style.borderColor = "#cbd5e1";
+        dropZone.style.background = "#f8fafc";
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.style.borderColor = "#cbd5e1";
+        dropZone.style.background = "#f8fafc";
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      fileInput.addEventListener("change", () => {
+        if (fileInput.files && fileInput.files[0]) {
+          handleFile(fileInput.files[0]);
+        }
+      });
+    }
+
+    if (btnChange && fileInput) {
+      btnChange.addEventListener("click", () => fileInput.click());
+    }
+
+    if (btnCancel) {
+      btnCancel.addEventListener("click", cancelAwardEdit);
+    }
+
+    if (existingSelect) {
+      existingSelect.addEventListener("change", () => {
+        const val = existingSelect.value;
+        if (val) {
+          attachedFileDataBase64 = null;
+          attachedFileObj = null;
+          if (previewImg) previewImg.src = val;
+          if (previewName) previewName.textContent = val;
+          if (previewStatus) previewStatus.textContent = "✓ Using existing asset";
+          if (previewBox) previewBox.style.display = "flex";
+        }
+      });
+    }
+
+    // Submit handler
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const title = (document.getElementById("awardTitleInput")?.value || "").trim();
+      const tagline = (document.getElementById("awardTaglineInput")?.value || "").trim();
+      const category = document.getElementById("awardCategoryInput")?.value || "certificate";
+      const date = (document.getElementById("awardDateInput")?.value || "").trim();
+      const desc = (document.getElementById("awardDescInput")?.value || "").trim();
+      const submitBtn = document.getElementById("btnAttachAwardSubmit");
+
+      if (!title || !tagline) {
+        alert("Please enter both the Award Title and Tag Line Name.");
+        return;
+      }
+
+      let imageUrl = null;
+      if (existingSelect && existingSelect.value) {
+        imageUrl = existingSelect.value;
+      }
+
+      // If user uploaded a new file
+      if (attachedFileDataBase64 && attachedFileObj) {
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Uploading Image... ⏳";
+        }
+
+        try {
+          const upRes = await fetch("/api/upload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              filename: attachedFileObj.name,
+              fileData: attachedFileDataBase64,
+              fileType: attachedFileObj.type
+            })
+          });
+          const upData = await upRes.json();
+          if (upRes.ok && upData.media) {
+            imageUrl = upData.media.url || attachedFileObj.name;
+          } else {
+            imageUrl = attachedFileDataBase64;
+          }
+        } catch (err) {
+          console.warn("Upload fallback to base64:", err);
+          imageUrl = attachedFileDataBase64;
+        } finally {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<span id="btnAttachAwardText">➕ Attach Award &amp; Display on App Page</span>`;
+          }
+        }
+      }
+
+      if (activeEditingAwardId) {
+        // Updating existing
+        let found = false;
+        if (siteConfig.awards) {
+          const idx = siteConfig.awards.findIndex(a => a.id === activeEditingAwardId);
+          if (idx !== -1) {
+            siteConfig.awards[idx].title = title;
+            siteConfig.awards[idx].tagline = tagline;
+            siteConfig.awards[idx].category = category;
+            siteConfig.awards[idx].date = date;
+            siteConfig.awards[idx].desc = desc;
+            if (imageUrl) siteConfig.awards[idx].img = imageUrl;
+            found = true;
+          }
+        }
+        if (!found && siteConfig.stagePhotos) {
+          const idx = siteConfig.stagePhotos.findIndex(s => s.id === activeEditingAwardId);
+          if (idx !== -1) {
+            siteConfig.stagePhotos[idx].title = title;
+            siteConfig.stagePhotos[idx].tagline = tagline;
+            siteConfig.stagePhotos[idx].desc = desc;
+            if (imageUrl) siteConfig.stagePhotos[idx].img = imageUrl;
+            found = true;
+          }
+        }
+
+        await saveConfiguration({
+          awards: siteConfig.awards,
+          stagePhotos: siteConfig.stagePhotos
+        });
+
+        cancelAwardEdit();
+        renderAttachedAwardsList(siteConfig);
+        renderPublicAwards(siteConfig);
+        showToast(`Award "${title}" updated live on app page!`);
+      } else {
+        // Attaching new
+        if (!imageUrl) {
+          if (previewImg && previewImg.src && !previewImg.src.endsWith("/")) {
+            imageUrl = previewImg.src;
+          } else {
+            imageUrl = "1000595336.jpg";
+          }
+        }
+
+        const isStage = category === "stage";
+        const newId = (isStage ? "stage-" : "award-") + Date.now();
+        const newAwardObj = {
+          id: newId,
+          img: imageUrl,
+          title: title,
+          tagline: tagline,
+          category: category,
+          date: date,
+          desc: desc
+        };
+
+        if (isStage) {
+          if (!Array.isArray(siteConfig.stagePhotos)) siteConfig.stagePhotos = [];
+          siteConfig.stagePhotos.push(newAwardObj);
+        } else {
+          if (!Array.isArray(siteConfig.awards)) siteConfig.awards = [];
+          siteConfig.awards.push(newAwardObj);
+        }
+
+        await saveConfiguration({
+          awards: siteConfig.awards,
+          stagePhotos: siteConfig.stagePhotos
+        });
+
+        cancelAwardEdit();
+        renderAttachedAwardsList(siteConfig);
+        renderPublicAwards(siteConfig);
+        showToast(`Award "${title}" attached and displayed live on app page!`);
+      }
+    });
+  }
+
+  // Initialize Complete Site Editor sub-navigation and form submission
+  function initAdminFullSectionsForm() {
+    // 1. Sub-nav switcher
+    const subNavBtns = document.querySelectorAll(".admin-section-nav-btn");
+    subNavBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        subNavBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const paneId = btn.getAttribute("data-section");
+        document.querySelectorAll(".admin-section-pane").forEach(p => p.classList.remove("active"));
+        const targetPane = document.getElementById(paneId);
+        if (targetPane) targetPane.classList.add("active");
+      });
+    });
+
+    // 2. Submit handler for Complete Site Editor
+    const form = document.getElementById("adminFullSectionsForm");
+    if (!form) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const getVal = (id, fallback) => {
+        const el = document.getElementById(id);
+        return el ? el.value.trim() : fallback;
+      };
+
+      const updated = {
+        // Hero & Brand
+        heroPill: getVal("secHeroPill", siteConfig.heroPill),
+        heroTitle: getVal("secHeroTitle", siteConfig.heroTitle),
+        heroSubtitle: getVal("secHeroSubtitle", siteConfig.heroSubtitle),
+        statYears: getVal("secStatYears", siteConfig.statYears),
+        statYearsLabel: getVal("secStatYearsLabel", siteConfig.statYearsLabel),
+        statAward: getVal("secStatAward", siteConfig.statAward),
+        statAwardLabel: getVal("secStatAwardLabel", siteConfig.statAwardLabel),
+        statRecruiter: getVal("secStatRecruiter", siteConfig.statRecruiter),
+        statRecruiterLabel: getVal("secStatRecruiterLabel", siteConfig.statRecruiterLabel),
+
+        // Notices
+        noticeTicker: getVal("secNoticeTicker", siteConfig.noticeTicker),
+        breakingNotice: getVal("secBreakingNotice", siteConfig.breakingNotice),
+        breakingNoticeLink: getVal("secBreakingNoticeLink", siteConfig.breakingNoticeLink),
+
+        // Services (6 Cards)
+        servicesTag: getVal("secServicesTag", siteConfig.servicesTag),
+        servicesTitle: getVal("secServicesTitle", siteConfig.servicesTitle),
+        servicesSubtitle: getVal("secServicesSubtitle", siteConfig.servicesSubtitle),
+        service1Title: getVal("secService1Title", siteConfig.service1Title),
+        service1Desc: getVal("secService1Desc", siteConfig.service1Desc),
+        service1Features: getVal("secService1Features", siteConfig.service1Features),
+        service2Title: getVal("secService2Title", siteConfig.service2Title),
+        service2Desc: getVal("secService2Desc", siteConfig.service2Desc),
+        service2Features: getVal("secService2Features", siteConfig.service2Features),
+        service3Title: getVal("secService3Title", siteConfig.service3Title),
+        service3Desc: getVal("secService3Desc", siteConfig.service3Desc),
+        service3Features: getVal("secService3Features", siteConfig.service3Features),
+        service4Title: getVal("secService4Title", siteConfig.service4Title),
+        service4Desc: getVal("secService4Desc", siteConfig.service4Desc),
+        service4Features: getVal("secService4Features", siteConfig.service4Features),
+        service5Title: getVal("secService5Title", siteConfig.service5Title),
+        service5Desc: getVal("secService5Desc", siteConfig.service5Desc),
+        service5Features: getVal("secService5Features", siteConfig.service5Features),
+        service6Title: getVal("secService6Title", siteConfig.service6Title),
+        service6Desc: getVal("secService6Desc", siteConfig.service6Desc),
+        service6Features: getVal("secService6Features", siteConfig.service6Features),
+
+        // About
+        aboutTag: getVal("secAboutTag", siteConfig.aboutTag),
+        aboutTitle: getVal("secAboutTitle", siteConfig.aboutTitle),
+        aboutSubtitle: getVal("secAboutSubtitle", siteConfig.aboutSubtitle),
+        aboutDesc1: getVal("secAboutDesc1", siteConfig.aboutDesc1),
+        aboutDesc2: getVal("secAboutDesc2", siteConfig.aboutDesc2),
+
+        // CBSE Pillars
+        cbseTag: getVal("secCbseTag", siteConfig.cbseTag),
+        cbseTitle: getVal("secCbseTitle", siteConfig.cbseTitle),
+        cbseSubtitle: getVal("secCbseSubtitle", siteConfig.cbseSubtitle),
+        pillar1Title: getVal("secPillar1Title", siteConfig.pillar1Title),
+        pillar1Desc: getVal("secPillar1Desc", siteConfig.pillar1Desc),
+        pillar2Title: getVal("secPillar2Title", siteConfig.pillar2Title),
+        pillar2Desc: getVal("secPillar2Desc", siteConfig.pillar2Desc),
+        pillar3Title: getVal("secPillar3Title", siteConfig.pillar3Title),
+        pillar3Desc: getVal("secPillar3Desc", siteConfig.pillar3Desc),
+        pillar4Title: getVal("secPillar4Title", siteConfig.pillar4Title),
+        pillar4Desc: getVal("secPillar4Desc", siteConfig.pillar4Desc),
+
+        // Awards Header
+        awardsSectionTag: getVal("secAwardsSectionTag", siteConfig.awardsSectionTag),
+        awardsSectionTitle: getVal("secAwardsSectionTitle", siteConfig.awardsSectionTitle),
+        awardsSectionSubtitle: getVal("secAwardsSectionSubtitle", siteConfig.awardsSectionSubtitle),
+
+        // Founder
+        founderName: getVal("secFounderName", siteConfig.founderName),
+        founderDesignation: getVal("secFounderDesignation", siteConfig.founderDesignation),
+        founderBio: getVal("secFounderBio", siteConfig.founderBio),
+        founderBadges: getVal("secFounderBadges", siteConfig.founderBadges),
+        founderAddress: getVal("secFounderAddress", siteConfig.founderAddress),
+        founderPhone: getVal("secFounderPhone", siteConfig.founderPhone),
+        founderEmail: getVal("secFounderEmail", siteConfig.founderEmail),
+
+        // FAQs
+        faq1Q: getVal("secFaq1Q", siteConfig.faq1Q),
+        faq1A: getVal("secFaq1A", siteConfig.faq1A),
+        faq2Q: getVal("secFaq2Q", siteConfig.faq2Q),
+        faq2A: getVal("secFaq2A", siteConfig.faq2A),
+        faq3Q: getVal("secFaq3Q", siteConfig.faq3Q),
+        faq3A: getVal("secFaq3A", siteConfig.faq3A),
+        faq4Q: getVal("secFaq4Q", siteConfig.faq4Q),
+        faq4A: getVal("secFaq4A", siteConfig.faq4A),
+
+        // Contact
+        address: getVal("secAddress", siteConfig.address),
+        phone: getVal("secPhone", siteConfig.phone),
+        email: getVal("secEmail", siteConfig.email),
+        consultationHours: getVal("secConsultationHours", siteConfig.consultationHours),
+
+        // Desks
+        inquiryTitle: getVal("secInquiryTitle", siteConfig.inquiryTitle),
+        inquirySubtitle: getVal("secInquirySubtitle", siteConfig.inquirySubtitle),
+        resumeTitle: getVal("secResumeTitle", siteConfig.resumeTitle),
+        resumeSubtitle: getVal("secResumeSubtitle", siteConfig.resumeSubtitle),
+        auditTitle: getVal("secAuditTitle", siteConfig.auditTitle),
+        auditSubtitle: getVal("secAuditSubtitle", siteConfig.auditSubtitle)
+      };
+
+      await saveConfiguration(updated);
+      showToast("All website sections updated and published live!");
+    });
   }
 
   // Fetch initial configuration from server and Firestore
@@ -1939,7 +2895,7 @@ function initAdminPortal() {
   }
 
   // Transition Login Wizard to Step 2 (Two-Step Verification Code)
-  function transitionToStep2(challengeId) {
+  function transitionToStep2(challengeId, hintCode) {
     current2FAChallengeId = challengeId;
     const step1 = document.getElementById("adminLoginStep1");
     const step2 = document.getElementById("adminLoginStep2");
@@ -1966,6 +2922,10 @@ function initAdminPortal() {
     if (codeInput) {
       codeInput.value = "";
       setTimeout(() => codeInput.focus(), 150);
+    }
+    if (feedback) {
+      feedback.style.display = "none";
+      feedback.textContent = "";
     }
   }
 
@@ -2293,7 +3253,7 @@ function initAdminPortal() {
         const data = await res.json();
 
         if (res.ok && data.success) {
-          showToast("Credentials confirmed! Verification code dispatched to your email.");
+          showToast("Credentials confirmed! Verification code dispatched to your Gmail.");
           transitionToStep2(data.challengeId);
         } else {
           if (feedback) {
@@ -2393,6 +3353,17 @@ function initAdminPortal() {
         }
       }
     });
+
+    // Auto-trigger submit when user finishes typing/pasting 6 digits
+    const codeInputEl = document.getElementById("admin2FACodeInput");
+    if (codeInputEl) {
+      codeInputEl.addEventListener("input", () => {
+        const val = codeInputEl.value.trim().replace(/\s+/g, "");
+        if (val.length === 6) {
+          step2Form.dispatchEvent(new Event("submit", { cancelable: true }));
+        }
+      });
+    }
   }
 
   // Back to Step 1 Button
@@ -2577,14 +3548,26 @@ function initAdminPortal() {
 
   // 7. Full Admin Dashboard Modal
   const openDashBtn = document.getElementById("adminOpenDashboardBtn");
+  const changePwdBtn = document.getElementById("adminChangePasswordBtn");
   const dashModal = document.getElementById("adminDashboardModal");
   const closeDashBtn = document.getElementById("closeAdminDashboardBtn");
 
   if (openDashBtn && dashModal) {
     openDashBtn.addEventListener("click", () => {
       dashModal.style.display = "flex";
+      populateFullSectionsForm(siteConfig);
+      renderAttachedAwardsList(siteConfig);
       loadDashboardSubmissions();
       loadDashboardMedia();
+    });
+  }
+
+  if (changePwdBtn && dashModal) {
+    changePwdBtn.addEventListener("click", () => {
+      dashModal.style.display = "flex";
+      // Switch directly to tab-security
+      const secTab = document.querySelector('.admin-dash-tab[data-tab="tab-security"]');
+      if (secTab) secTab.click();
     });
   }
   if (closeDashBtn && dashModal) {
@@ -2602,12 +3585,18 @@ function initAdminPortal() {
       const targetPanel = document.getElementById(tabId);
       if (targetPanel) targetPanel.classList.add("active");
 
+      if (tabId === "tab-sections") populateFullSectionsForm(siteConfig);
+      if (tabId === "tab-awards") renderAttachedAwardsList(siteConfig);
       if (tabId === "tab-media") loadDashboardMedia();
       if (["tab-inquiries", "tab-resumes", "tab-audits", "tab-educators"].includes(tabId)) {
         loadDashboardSubmissions();
       }
     });
   });
+
+  // Initialize Complete Section Editor and Award Attachment Box
+  initAdminFullSectionsForm();
+  initAwardAttachmentManager();
 
   // Site Content Form Submit in Dashboard
   const contentForm = document.getElementById("adminSiteContentForm");
