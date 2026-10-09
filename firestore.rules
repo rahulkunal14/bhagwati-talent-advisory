@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny all access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (request.auth.token != null && request.auth.token.email == 'rahulkunal14@gmail.com') ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Connection validation probe doc
+    match /test/{docId} {
+      allow read: if isValidId(docId);
+    }
+
+    // Site Config: Public read, Admin write
+    match /site_config/{configId} {
+      allow get, list: if true;
+      allow create, update, delete: if isValidId(configId) && isAdmin();
+    }
+
+    // Admins collection: admin access
+    match /admins/{adminId} {
+      allow get, list: if isAdmin();
+      allow create, update, delete: if isValidId(adminId) && isAdmin();
+    }
+
+    // Public inquiries: anyone can create, admin can read/manage
+    match /inquiries/{inquiryId} {
+      allow create: if isValidId(inquiryId) &&
+        incoming().name is string && incoming().name.size() <= 200 &&
+        incoming().email is string && incoming().email.size() <= 200;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // School Self Audits: anyone can create, admin can read/manage
+    match /audits/{auditId} {
+      allow create: if isValidId(auditId) &&
+        incoming().schoolName is string && incoming().schoolName.size() <= 200 &&
+        incoming().email is string && incoming().email.size() <= 200;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Educator Resumes: anyone can create, admin can read/manage
+    match /resumes/{resumeId} {
+      allow create: if isValidId(resumeId) &&
+        incoming().fullName is string && incoming().fullName.size() <= 200 &&
+        incoming().email is string && incoming().email.size() <= 200;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

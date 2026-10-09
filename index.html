@@ -35,6 +35,33 @@
 </head>
 <body>
 
+  <!-- Persistent Admin Top Bar (Visible when logged in as rahulkunal14@gmail.com) -->
+  <aside class="admin-top-bar" id="adminTopBar" style="display: none;" aria-label="Administrator Management Bar">
+    <div class="admin-bar-left">
+      <span class="admin-badge-crown">👑 ADMIN MODE</span>
+      <span class="admin-email-tag">Logged in: <b id="adminEmailDisplay">rahulkunal14@gmail.com</b></span>
+      <span style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #34d399; font-size: 11px; padding: 2px 8px; border-radius: 9999px; font-weight: 700; display: inline-flex; align-items: center; gap: 4px;">
+        🔒 2-Step Verified
+      </span>
+    </div>
+    <div class="admin-bar-center">
+      <button type="button" class="admin-bar-btn" id="adminToggleEditBtn" title="Toggle click-to-edit mode across the website">
+        <span id="adminEditIcon">✏️</span> <span id="adminEditText">In-Place Edit: OFF</span>
+      </button>
+      <button type="button" class="admin-bar-btn" id="adminOpenDashboardBtn" title="Open full administration control center">
+        🛠️ Admin Dashboard
+      </button>
+      <button type="button" class="admin-bar-btn admin-bar-btn-primary" id="adminSaveAllBtn" title="Save and publish all edits live to Firestore & server">
+        💾 Save &amp; Publish Live
+      </button>
+    </div>
+    <div class="admin-bar-right">
+      <button type="button" class="admin-logout-btn" id="adminLogoutBtn" title="Sign out of Admin Mode">
+        🚪 Logout
+      </button>
+    </div>
+  </aside>
+
   <!-- Top Notification Bar -->
   <aside class="top-notice-bar">
     <span>🏛️ <strong style="color: #f87171;">URGENT CBSE NOTICE:</strong> Re-Affiliation application last date is <strong>10 Oct 2026</strong>. SARAS inspection & staff audit desk active.</span>
@@ -64,6 +91,7 @@
         <li><a href="#calculator">Staffing Calc</a></li>
         <li><a href="#inquiry">Inquiry Hub</a></li>
         <li><a href="https://wa.me/917979770162?text=Hello%20Rahul%20Sir,%20we%20want%20to%20consult%20regarding%20HR%20and%20compliance%20for%20our%20school." class="nav-cta" target="_blank" rel="noopener noreferrer">💬 WhatsApp Desk</a></li>
+        <li><button type="button" class="nav-admin-btn" id="openAdminPortalBtn" title="Administrator Portal Login">👑 Admin Portal</button></li>
       </ul>
     </div>
   </header>
@@ -142,9 +170,9 @@
   <!-- Hero Section -->
   <section class="hero-section">
     <div class="container">
-      <div class="hero-pill">★ Recognized Top Zonal HR Leader • 12+ Years Advisory</div>
-      <h2>Specialized Institutional HR Solutions & Regulatory Compliance for CBSE Schools</h2>
-      <p class="hero-description">
+      <div class="hero-pill" data-editable="heroPill">★ Recognized Top Zonal HR Leader • 12+ Years Advisory</div>
+      <h2 data-editable="heroTitle">Specialized Institutional HR Solutions & Regulatory Compliance for CBSE Schools</h2>
+      <p class="hero-description" data-editable="heroSubtitle">
         Partnering with educational trusts, chairpersons, and school principals across Sherghati, Gaya, Patna, and Bihar. From certified faculty recruitment (PGT, TGT, PRT) to inspection-ready POCSO, POSH, and CBSE Form 1 statutory compliance.
       </p>
 
@@ -163,7 +191,7 @@
       <!-- Trust & Scale Stats Strip -->
       <div class="stats-strip">
         <div class="stat-item">
-          <span class="stat-num">12+</span>
+          <span class="stat-num" data-editable="statYears">12+</span>
           <span class="stat-label">Years of HR Excellence</span>
         </div>
         <div class="stat-item">
@@ -174,9 +202,15 @@
           <span class="stat-num">Naukri</span>
           <span class="stat-label">Certified Maestro Recruiter</span>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">100%</span>
-          <span class="stat-label">CBSE Inspection Clearance</span>
+        <div class="stat-item stat-item-live">
+          <div class="stat-live-badge"><span class="pulse-indicator-live"></span> Live Auto-Updated</div>
+          <span class="stat-num" id="statInquiriesCount">18</span>
+          <span class="stat-label">School Enquiries Received</span>
+        </div>
+        <div class="stat-item stat-item-live">
+          <div class="stat-live-badge"><span class="pulse-indicator-live"></span> Live Auto-Updated</div>
+          <span class="stat-num" id="statAuditsCount">24</span>
+          <span class="stat-label">CBSE Self-Audits Received</span>
         </div>
       </div>
     </div>
@@ -454,6 +488,10 @@
       <div class="section-header">
         <span class="section-tag">Interactive Diagnostic Tool</span>
         <h2>CBSE Compliance Readiness & Affiliation Self-Audit</h2>
+        <div class="live-desk-activity-pill">
+          <span class="pulse-indicator-live"></span>
+          <strong>Live Board Desk:</strong> <span id="auditSectionLiveBadge" class="live-pill-count">24</span> CBSE Self-Audit Forms Received &amp; Evaluated
+        </div>
         <p>Tick the statutory norms your school currently fulfills to calculate your inspection readiness score in real-time.</p>
       </div>
 
@@ -611,10 +649,61 @@
             <a href="#" id="shareAuditWhatsappBtn" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
               <span>💬</span> Send Audit Score to Rahul Sir
             </a>
-            <a href="#inquiry" class="btn btn-primary">
+            <a href="#auditEmailBox" class="btn btn-primary" id="openAuditEmailBtn">
+              <span>✉️</span> Deliver Audit Report to Email
+            </a>
+            <a href="#inquiry" class="btn btn-accent">
               <span>📑</span> Request Action Plan
             </a>
           </div>
+        </div>
+
+        <!-- Dedicated Self Audit Email Delivery Form Card -->
+        <div class="audit-email-box" id="auditEmailBox" style="margin-top: 24px; padding: 24px; background: #ffffff; border-radius: 12px; border: 1px solid #cbd5e1; box-shadow: 0 4px 16px rgba(0,0,0,0.06);">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <div>
+              <h4 style="margin: 0; font-size: 18px; color: var(--primary); display: flex; align-items: center; gap: 8px;">
+                <span>📧</span> Deliver Complete Self-Audit Report for Review
+              </h4>
+              <p style="margin: 4px 0 0; font-size: 13.5px; color: var(--text-muted);">
+                Submits this live verified checklist, score, and gap breakdown directly to Rahul Kunal's talent advisory desk. A formal compliance review will be initiated.
+              </p>
+            </div>
+            <div id="auditLiveBadge" class="score-badge danger" style="font-size: 13px; padding: 6px 14px; font-weight: 700;">
+              SCORE: <span id="auditLiveScore">0%</span>
+            </div>
+          </div>
+
+          <form id="auditEmailForm">
+            <div id="auditFormFeedback" class="form-feedback" style="display: none; margin-bottom: 14px;"></div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="audit_school_name">School / Trust Name *</label>
+                <input type="text" id="audit_school_name" name="schoolName" placeholder="e.g. St. Xavier's Academy, Gaya" required />
+              </div>
+              <div class="form-group">
+                <label for="audit_contact_person">Principal / Trustee / Secretary *</label>
+                <input type="text" id="audit_contact_person" name="contactPerson" placeholder="e.g. Dr. Ramesh Kumar" required />
+              </div>
+              <div class="form-group">
+                <label for="audit_phone">Mobile / WhatsApp Number *</label>
+                <input type="tel" id="audit_phone" name="phone" placeholder="+91 98765 43210" required />
+              </div>
+              <div class="form-group">
+                <label for="audit_email">Official Email Address *</label>
+                <input type="email" id="audit_email" name="email" placeholder="principal@school.edu.in" required />
+              </div>
+              <div class="form-group full">
+                <label for="audit_notes">Specific Compliance Concerns / Target Affiliation Date</label>
+                <textarea id="audit_notes" name="notes" rows="2" placeholder="e.g. Need assistance with CBSE Form 1 staff stamp agreements and POCSO committee files before upcoming inspection."></textarea>
+              </div>
+              <div class="form-actions" style="margin-top: 8px;">
+                <button type="submit" id="submitAuditBtn" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 15px; font-weight: 700; justify-content: center;">
+                  <span>📤</span> Deliver Self-Audit Details to Rahul Sir
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -717,6 +806,10 @@
       <div class="section-header">
         <span class="section-tag">Direct Institutional Desk</span>
         <h2>Consultation & Talent Portal</h2>
+        <div class="live-desk-activity-pill">
+          <span class="pulse-indicator-live"></span>
+          <strong>Live Engagement Desk:</strong> <span id="inquirySectionLiveBadge" class="live-pill-count">18</span> School Inquiries Received &amp; Processed
+        </div>
         <p>Inquiries are routed directly to the Lead HR Consultant's desk in Sherghati for rapid assessment.</p>
       </div>
 
@@ -963,36 +1056,6 @@
         <span class="section-tag">Industry Honors & Leadership Proof</span>
         <h2>Honors, Certifications & Stage Recognitions</h2>
         <p>12+ years of recognized HR leadership. Click on any certificate or trophy to inspect credentials.</p>
-      </div>
-
-      <!-- DIRECT MEDIA UPLOADER PANEL -->
-      <div class="media-manager-panel" id="mediaUploaderDropzone">
-        <div class="uploader-header">
-          <div class="uploader-title">
-            <h4><span>📸</span> Official Stage & Award Photographs Uploader</h4>
-            <p>Upload your original high-resolution ceremony and stage photographs directly to display in the live app gallery.</p>
-          </div>
-          <button type="button" class="btn btn-primary" id="browseMediaBtn" style="padding: 9px 18px; font-size: 13px;">
-            <span>📁</span> Select Stage Photos
-          </button>
-        </div>
-
-        <div class="upload-dropzone" id="dropzoneClickArea">
-          <div class="dropzone-icon">📤</div>
-          <div class="dropzone-prompt">Drag & drop your stage and award photos (Achiver image.jpg, WA0116.jpg) here</div>
-          <div class="dropzone-sub">Supports JPG, JPEG, PNG, WEBP • Instant high-resolution rendering</div>
-          <input type="file" id="mediaFileInput" class="file-input-hidden" multiple accept="image/*" />
-        </div>
-
-        <div class="upload-feedback" id="uploadFeedback"></div>
-
-        <!-- Dynamic Container for Newly Uploaded Media -->
-        <div id="userUploadedSection" style="display: none; margin-top: 24px;">
-          <h5 style="font-size: 14.5px; color: var(--primary); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-            <span>✨</span> Live Uploaded Stage Photographs:
-          </h5>
-          <div class="uploaded-gallery-grid" id="uploadedMediaGrid"></div>
-        </div>
       </div>
 
       <!-- OFFICIAL STAGE PHOTOGRAPHS -->
@@ -1316,14 +1379,17 @@
 
         <div class="footer-col">
           <h4>Contact & Consult</h4>
-          <p>📱 <b>Mobile / WhatsApp:</b> <a href="tel:+917979770162" style="color: #93c5fd;">+91 79797 70162</a></p>
-          <p>✉️ <b>Desk Email:</b> <a href="mailto:rahulkunal14@gmail.com" style="color: #93c5fd;">rahulkunal14@gmail.com</a></p>
-          <p>⏰ <b>Consultation Hours:</b> 9:00 AM - 7:30 PM (Mon - Sat)</p>
+          <p>📱 <b>Mobile / WhatsApp:</b> <a href="tel:+917979770162" style="color: #93c5fd;" data-editable="phone">+91 79797 70162</a></p>
+          <p>✉️ <b>Desk Email:</b> <a href="mailto:rahulkunal14@gmail.com" style="color: #93c5fd;" data-editable="email">rahulkunal14@gmail.com</a></p>
+          <p>⏰ <b>Consultation Hours:</b> <span data-editable="consultationHours">10:00 AM - 5:00 PM (Mon - Sat)</span></p>
           <div style="margin-top: 14px;">
             <a href="https://wa.me/917979770162" class="btn btn-whatsapp" style="padding: 8px 16px; font-size: 12.5px;" target="_blank" rel="noopener noreferrer">
               <span>💬</span> Instant WhatsApp
             </a>
           </div>
+          <p style="margin-top: 12px; font-size: 12.5px;">
+            <a href="#" id="footerAdminLink" style="color: #f59e0b; text-decoration: underline; font-weight: 600;">👑 Admin Portal</a>
+          </p>
         </div>
       </div>
 
@@ -1346,6 +1412,7 @@
     "description": "Institutional HR solutions, faculty recruitment, and CBSE compliance advisory for schools and educational trusts.",
     "telephone": "+91 79797 70162",
     "email": "rahulkunal14@gmail.com",
+    "openingHours": "Mo-Sa 10:00-17:00",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Sherghati",
@@ -1367,66 +1434,150 @@
   }
   </script>
 
-  <!-- Notice Board Full Directory Modal -->
+  <!-- Notice Board Full Directory Modal with Automatic CBSE News Updates -->
   <div class="notice-modal-backdrop" id="noticeModalBackdrop">
     <div class="notice-modal-content">
+      <!-- Modal Header -->
       <div class="notice-modal-header">
-        <h3><span>📢</span> Institutional Notices & Circulars Board</h3>
-        <button type="button" class="notice-modal-close" id="closeNoticeModalBtn">&times;</button>
+        <div class="notice-header-left">
+          <h3><span>📢</span> Institutional Notices &amp; Official CBSE Circulars</h3>
+        </div>
+        <div class="notice-header-actions">
+          <button type="button" class="notice-modal-close" id="closeNoticeModalBtn" title="Close Notices Window">&times;</button>
+        </div>
       </div>
-      <div class="notice-modal-body">
-        <!-- URGENT PRIORITY DEADLINE: 10 OCT 2026 -->
-        <div class="notice-card-item" style="border-left: 5px solid #dc2626; background: #fff1f2; box-shadow: 0 4px 12px rgba(220, 38, 38, 0.12);">
+
+      <!-- Quick Breaking Ticker in Modal -->
+      <div class="notice-modal-breaking" id="noticeBreakingBar">
+        <span class="breaking-label">⚡ LATEST CBSE NOTICE:</span>
+        <span class="breaking-headline" id="noticeBreakingText">Observance of Swachhata Hi Seva &amp; SARAS 5.0 Affiliation updates published on CBSE Portal.</span>
+        <a href="https://cbseacademic.nic.in/circulars.html" class="breaking-link" id="noticeBreakingLink" target="_blank" rel="noopener noreferrer">Official Portal ↗</a>
+      </div>
+
+      <!-- Search & Category Filter Toolbar -->
+      <div class="notice-filter-toolbar">
+        <div class="notice-search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="noticeSearchInput" placeholder="Search notices, circular numbers (e.g. SARAS, Acad-65, Exams, POCSO)..." autocomplete="off" />
+          <button type="button" id="noticeSearchClearBtn" class="search-clear-btn" style="display: none;" title="Clear Search">✕</button>
+        </div>
+
+        <div class="notice-tabs-row" id="noticeCategoryTabs">
+          <button type="button" class="notice-tab active" data-category="all">
+            🏛️ All Notices <span class="notice-tab-count" id="countTabAll">--</span>
+          </button>
+          <button type="button" class="notice-tab" data-category="cbse-official">
+            ⚡ Official CBSE Feed <span class="notice-tab-count" id="countTabCbse">--</span>
+          </button>
+          <button type="button" class="notice-tab" data-category="saras">
+            📋 Affiliation &amp; SARAS <span class="notice-tab-count" id="countTabSaras">--</span>
+          </button>
+          <button type="button" class="notice-tab" data-category="exams">
+            🎓 Examinations <span class="notice-tab-count" id="countTabExams">--</span>
+          </button>
+          <button type="button" class="notice-tab" data-category="advisory">
+            💼 Recruitment &amp; Advisory <span class="notice-tab-count" id="countTabAdvisory">--</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Notices List Container -->
+      <div class="notice-modal-body" id="noticesListContainer">
+        <!-- Default Curated / Initial State (updated via live fetch) -->
+        <div class="notice-card-item card-critical" data-category="saras">
           <div class="notice-card-meta">
-            <span class="notice-item-tag tag-urgent" style="background: #dc2626; color: #ffffff; animation: pulseDot 2s infinite;">🚨 CRITICAL DEADLINE</span>
+            <span class="notice-item-tag tag-urgent" style="animation: pulseDot 2s infinite;">🚨 CRITICAL STATUTORY DEADLINE</span>
+            <span class="notice-ref-badge">CBSE/AFF/SARAS/2026</span>
             <time style="color: #b91c1c; font-weight: 800;">Last Date: 10 October 2026</time>
           </div>
-          <div class="notice-card-title" style="color: #991b1b; font-size: 16px;">Mandatory CBSE Re-Affiliation & Extension Window</div>
-          <div class="notice-card-desc" style="color: #450a0a;">All CBSE affiliated institutions applying for Re-Affiliation, extension of provisional affiliation, or stream upgradation must complete online SARAS submission on or before <strong style="text-decoration: underline;">10 October 2026</strong>. Staffing records, 1:1.5 teacher-to-section ratio fulfillment, Form 1 agreements, and POCSO/POSH compliance files must be fully validated.</div>
-          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <a href="#audit-tool" class="btn btn-primary close-modal-action" style="padding: 7px 15px; font-size: 13px;">Check Inspection Readiness Now →</a>
-            <a href="#cbse-work" class="btn btn-secondary close-modal-action" style="padding: 7px 15px; font-size: 13px;">Review Re-Affiliation Desk →</a>
+          <div class="notice-card-title" style="color: #991b1b; font-size: 16px;">Mandatory CBSE Re-Affiliation, Extension &amp; SARAS Submission</div>
+          <div class="notice-card-desc">All CBSE affiliated institutions applying for Re-Affiliation, extension of provisional affiliation, or stream upgradation must complete online SARAS submission on or before <strong style="text-decoration: underline;">10 October 2026</strong>. Staffing records, 1:1.5 teacher-to-section ratio fulfillment, Form 1 agreements, and POCSO/POSH compliance files must be fully validated.</div>
+          <div class="notice-card-actions">
+            <a href="https://saras.cbse.gov.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 7px 15px; font-size: 12.5px;">📄 Official SARAS Portal ↗</a>
+            <a href="#audit-tool" class="btn btn-secondary close-modal-action" style="padding: 7px 15px; font-size: 12.5px;">Check Inspection Readiness Now →</a>
+            <a href="https://wa.me/917979770162?text=Hello%20Rahul%20Sir,%20we%20need%20urgent%20guidance%20for%20CBSE%20SARAS%20Re-Affiliation%20deadline." target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 7px 14px; font-size: 12.5px;">💬 WhatsApp Rahul Sir</a>
           </div>
         </div>
 
-        <div class="notice-card-item">
+        <div class="notice-card-item" data-category="exams">
+          <div class="notice-card-meta">
+            <span class="notice-item-tag tag-cbse">OFFICIAL CBSE</span>
+            <span class="notice-ref-badge">CBSE/EXAM/PRIVATE/2026</span>
+            <time>07 October 2026</time>
+          </div>
+          <div class="notice-card-title">Submission of Examination Forms by Private Candidates for Class X &amp; XII</div>
+          <div class="notice-card-desc">CBSE Examination Branch has officially opened the submission portal for Private Candidates appearing for Secondary (Class X) and Senior Secondary (Class XII) examinations. Check official candidate guidelines, subjects list, and portal verification links.</div>
+          <div class="notice-card-actions">
+            <a href="https://www.cbse.gov.in/cbsenew/documents/SUBMISSION_FORMS_PRIVATE_XII_2627_07102026.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 7px 15px; font-size: 12.5px;">📄 Class XII Circular PDF ↗</a>
+            <a href="https://www.cbse.gov.in/cbsenew/documents/SUBMISSION_FORMS_PRIVATE_X_2627_07102026.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 7px 15px; font-size: 12.5px;">📄 Class X Circular PDF ↗</a>
+          </div>
+        </div>
+
+        <div class="notice-card-item" data-category="advisory">
           <div class="notice-card-meta">
             <span class="notice-item-tag tag-urgent">URGENT HIRING</span>
+            <span class="notice-ref-badge">BHAGWATI/HR/2026</span>
             <time>Session 2025-26 Intake</time>
           </div>
-          <div class="notice-card-title">CBSE PGT & TGT Faculty Recruitment Openings</div>
-          <div class="notice-card-desc">Immediate requirements for PGT Mathematics, Physics, Chemistry, Biology & English Language across leading CBSE institutions in Sherghati, Gaya, Patna, and Ranchi. Qualified B.Ed & CTET candidates given priority.</div>
-          <a href="#about-resume-form" class="btn btn-primary close-modal-action" style="padding: 7px 14px; font-size: 13px; display: inline-flex;">Submit Resume Directly →</a>
+          <div class="notice-card-title">CBSE PGT &amp; TGT Faculty Recruitment Openings</div>
+          <div class="notice-card-desc">Immediate requirements for PGT Mathematics, Physics, Chemistry, Biology &amp; English Language across leading CBSE institutions in Sherghati, Gaya, Patna, and Ranchi. Qualified B.Ed &amp; CTET candidates given priority.</div>
+          <div class="notice-card-actions">
+            <a href="#about-resume-form" class="btn btn-primary close-modal-action" style="padding: 7px 14px; font-size: 12.5px; display: inline-flex;">Submit Resume Directly →</a>
+          </div>
         </div>
 
-        <div class="notice-card-item">
+        <div class="notice-card-item" data-category="saras">
           <div class="notice-card-meta">
             <span class="notice-item-tag tag-compliance">COMPLIANCE</span>
+            <span class="notice-ref-badge">CBSE/OASIS/STATUTORY</span>
             <time>Statutory Directive</time>
           </div>
-          <div class="notice-card-title">CBSE OASIS Staffing Ratio & Affiliation Pre-Audit Desk</div>
+          <div class="notice-card-title">CBSE OASIS Staffing Ratio &amp; Affiliation Pre-Audit Desk</div>
           <div class="notice-card-desc">Schools undergoing fresh affiliation, extension, or upgradation must maintain strict 1:1.5 teacher-to-section ratios and validated staff salary records. Bhagwati Talent Advisory's mock inspection desk is active.</div>
-          <a href="#audit-tool" class="btn btn-accent close-modal-action" style="padding: 7px 14px; font-size: 13px; display: inline-flex;">Launch Compliance Self-Audit →</a>
+          <div class="notice-card-actions">
+            <a href="#audit-tool" class="btn btn-accent close-modal-action" style="padding: 7px 14px; font-size: 12.5px; display: inline-flex;">Launch Compliance Self-Audit →</a>
+          </div>
         </div>
 
-        <div class="notice-card-item">
+        <div class="notice-card-item" data-category="advisory">
           <div class="notice-card-meta">
             <span class="notice-item-tag tag-advisory">ADVISORY</span>
+            <span class="notice-ref-badge">POCSO/POSH/2026</span>
             <time>Institutional Governance</time>
           </div>
-          <div class="notice-card-title">Mandatory POCSO & POSH Committee Constitution</div>
+          <div class="notice-card-title">Mandatory POCSO &amp; POSH Committee Constitution</div>
           <div class="notice-card-desc">Advisory support available for drafting child protection charters, appointing external NGO board members, and maintaining teacher police verification dossiers for CBSE compliance.</div>
-          <a href="#cbse-work" class="btn btn-primary close-modal-action" style="padding: 7px 14px; font-size: 13px; display: inline-flex;">Review CBSE Compliance Services →</a>
+          <div class="notice-card-actions">
+            <a href="#cbse-work" class="btn btn-primary close-modal-action" style="padding: 7px 14px; font-size: 12.5px; display: inline-flex;">Review CBSE Compliance Services →</a>
+          </div>
         </div>
 
-        <div class="notice-card-item">
+        <div class="notice-card-item" data-category="advisory">
           <div class="notice-card-meta">
             <span class="notice-item-tag tag-award">LEADERSHIP</span>
+            <span class="notice-ref-badge">HONOR/2025-26</span>
             <time>Recognition</time>
           </div>
           <div class="notice-card-title">Rahul Kunal Honored at National Achievers Forum</div>
-          <div class="notice-card-desc">Recognized with Top Zonal HR distinction and certified by Naukri.com leadership as Naukri Maestro Recruiter with 12+ years of educational & corporate HR leadership.</div>
-          <a href="#awards" class="btn btn-secondary close-modal-action" style="padding: 7px 14px; font-size: 13px; display: inline-flex;">View Verified Credentials →</a>
+          <div class="notice-card-desc">Recognized with Top Zonal HR distinction and certified by Naukri.com leadership as Naukri Maestro Recruiter with 12+ years of educational &amp; corporate HR leadership.</div>
+          <div class="notice-card-actions">
+            <a href="#awards" class="btn btn-secondary close-modal-action" style="padding: 7px 14px; font-size: 12.5px; display: inline-flex;">View Verified Credentials →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="notice-modal-footer">
+        <div class="notice-footer-info">
+          <span>Official feeds: <strong>cbse.gov.in</strong> • <strong>cbseacademic.nic.in</strong> • <strong>saras.cbse.gov.in</strong></span>
+        </div>
+        <div class="notice-footer-actions">
+          <a href="https://wa.me/917979770162?text=Hello%20Rahul%20Sir,%20we%20want%20to%20consult%20regarding%20a%20CBSE%20notice%20for%20our%20school." target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 7px 14px; font-size: 12.5px;">
+            💬 Consult Founder Desk
+          </a>
+          <button type="button" class="btn btn-primary close-modal-action" id="btnCloseNoticeModalFooter" style="padding: 7px 18px; font-size: 12.5px;">
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -1468,6 +1619,473 @@
       <span style="font-size: 16px;">⚡</span> Quick Advisory Desk
     </button>
   </div>
+
+  <!-- Admin Login Modal with Password Protection & Two-Step Verification -->
+  <div class="admin-quick-modal-backdrop" id="adminLoginModal" style="display: none;">
+    <div class="admin-quick-modal-content" style="max-width: 500px;">
+      <div class="admin-quick-modal-header" style="background: linear-gradient(135deg, #0b2545 0%, #1e3a8a 100%); color: #ffffff;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 22px;">👑</span>
+          <div>
+            <h3 style="margin: 0; font-size: 16px; color: #ffffff;">Administrator Portal</h3>
+            <div style="font-size: 11.5px; color: #cbd5e1;">Password &amp; Two-Step Verification Enforced</div>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" id="closeAdminLoginModal" style="color: #ffffff;">&times;</button>
+      </div>
+
+      <!-- Step Indicator Tracker -->
+      <div style="display: flex; background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 12px 20px; gap: 10px; align-items: center;">
+        <div id="stepIndicator1" style="flex: 1; display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color: #0b2545;">
+          <span style="width: 24px; height: 24px; border-radius: 50%; background: #0b2545; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">1</span>
+          <span>Credentials</span>
+        </div>
+        <div style="color: #94a3b8; font-size: 14px;">➔</div>
+        <div id="stepIndicator2" style="flex: 1; display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: #94a3b8;">
+          <span style="width: 24px; height: 24px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">2</span>
+          <span>Verification Code</span>
+        </div>
+      </div>
+
+      <div class="admin-quick-modal-body" style="padding: 24px;">
+        <div id="adminLoginFeedback" style="display: none; padding: 12px 14px; border-radius: 8px; font-size: 13px; margin-bottom: 16px;"></div>
+
+        <!-- STEP 1: CREDENTIALS AUTHENTICATION -->
+        <div id="adminLoginStep1">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 38px; margin-bottom: 6px;">🔐</div>
+            <h4 style="margin: 0; color: #0b2545; font-size: 18px; font-weight: 800;">Administrator Sign In</h4>
+            <p style="margin: 6px 0 0; color: #64748b; font-size: 13px;">
+              Enter registered administrator email and password
+            </p>
+          </div>
+
+          <form id="adminStep1PasswordForm">
+            <div style="margin-bottom: 14px;">
+              <label for="adminEmailInput" style="display: block; font-size: 12.5px; font-weight: 700; color: #334155; margin-bottom: 5px;">Administrator Email</label>
+              <div style="position: relative;">
+                <input type="email" id="adminEmailInput" placeholder="Enter registered administrator email" required autocomplete="username" style="width: 100%; padding: 11px 14px; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 14px; box-sizing: border-box; color: #0b2545; outline: none;" />
+              </div>
+            </div>
+
+            <div style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                <label for="adminPasswordInput" style="font-size: 12.5px; font-weight: 700; color: #334155;">Admin Password</label>
+                <button type="button" id="btnTogglePasswordVisibility" style="background: none; border: none; font-size: 11.5px; color: #2563eb; cursor: pointer; padding: 0; font-weight: 600;">👁️ Show Password</button>
+              </div>
+              <input type="password" id="adminPasswordInput" placeholder="Enter administrator password" required autocomplete="current-password" style="width: 100%; padding: 11px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 14px; box-sizing: border-box; outline: none;" />
+            </div>
+
+            <div style="background: #f1f5f9; border-left: 3px solid #0b2545; padding: 10px 14px; border-radius: 6px; font-size: 12px; color: #475569; margin-bottom: 18px; line-height: 1.5;">
+              🛡️ <strong>Two-Step Verification Enforced:</strong> For maximum account security, a 6-digit one-time verification code will be dispatched directly to your registered email upon password verification.
+            </div>
+
+            <button type="submit" id="btnAdminStep1Submit" class="btn btn-primary" style="width: 100%; padding: 13px; font-size: 14px; font-weight: 700; justify-content: center; background: #0b2545; border-color: #0b2545; display: flex; align-items: center; gap: 8px;">
+              <span>Verify &amp; Send Verification Code</span> <span>➔</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- STEP 2: TWO-STEP VERIFICATION CODE -->
+        <div id="adminLoginStep2" style="display: none;">
+          <div style="text-align: center; margin-bottom: 16px;">
+            <div style="font-size: 38px; margin-bottom: 6px;">📬</div>
+            <h4 style="margin: 0; color: #0b2545; font-size: 18px; font-weight: 800;">Two-Step Verification</h4>
+            <p style="margin: 6px 0 0; color: #64748b; font-size: 13px;">
+              A 6-digit security verification code has been dispatched to your email address.<br>
+              <span style="color: #64748b; font-size: 12px;">Please check your inbox or spam folder.</span>
+            </p>
+          </div>
+
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 14px; margin-bottom: 16px; font-size: 12.5px; color: #166534; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 18px;">✉️</span>
+            <span>Check your email inbox for the verification code. Enter the 6 digits below to complete sign-in.</span>
+          </div>
+
+          <form id="adminStep2OtpForm">
+            <div style="margin-bottom: 16px;">
+              <label for="admin2FACodeInput" style="display: block; font-size: 12.5px; font-weight: 700; color: #334155; margin-bottom: 6px; text-align: center;">
+                Enter 6-Digit Verification Code
+              </label>
+              <input type="text" id="admin2FACodeInput" maxlength="6" pattern="[0-9]*" inputmode="numeric" placeholder="------" required autocomplete="one-time-code" style="width: 100%; text-align: center; font-size: 28px; font-weight: 800; letter-spacing: 12px; padding: 12px; border: 2px solid #0b2545; border-radius: 10px; background: #f8fafc; color: #0b2545; box-sizing: border-box; font-family: monospace;" />
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 12px; color: #64748b;">
+                <span id="twoFactorCountdownText">⏱️ Expires in: <b id="twoFactorCountdownTimer" style="color: #0b2545;">10:00</b></span>
+                <button type="button" id="btnResendOtp" style="background: none; border: none; color: #2563eb; font-weight: 600; cursor: pointer; padding: 0; font-size: 12px;">🔄 Resend Code</button>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+              <button type="button" id="btnBackToStep1" class="btn btn-secondary" style="flex: 1; padding: 12px; font-size: 13px; font-weight: 600; justify-content: center;">
+                ← Back
+              </button>
+              <button type="submit" id="btnAdminStep2Submit" class="btn btn-primary" style="flex: 2; padding: 12px; font-size: 14px; font-weight: 700; justify-content: center; background: #10b981; border-color: #059669;">
+                Verify Code &amp; Log In 🚀
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- In-Place Quick Edit Modal -->
+  <div class="admin-quick-modal-backdrop" id="adminQuickEditModal" style="display: none;">
+    <div class="admin-quick-modal-content">
+      <div class="admin-quick-modal-header">
+        <h3>✏️ <span id="quickEditFieldTitle">Edit Field</span></h3>
+        <button type="button" class="btn-close-modal" id="closeQuickEditModal">&times;</button>
+      </div>
+      <div class="admin-quick-modal-body">
+        <label id="quickEditLabel">Field Content:</label>
+        <textarea id="quickEditTextarea" rows="4"></textarea>
+        <div class="admin-quick-modal-actions">
+          <button type="button" class="btn btn-secondary" id="cancelQuickEditBtn" style="padding: 8px 16px; font-size: 13px;">Cancel</button>
+          <button type="button" class="btn btn-primary" id="saveQuickEditBtn" style="padding: 8px 18px; font-size: 13px; background: #10b981; border-color: #059669;">
+            💾 Save &amp; Apply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Admin Dashboard Modal -->
+  <div class="admin-dashboard-modal" id="adminDashboardModal" style="display: none;">
+    <div class="admin-dashboard-box">
+      <div class="admin-dash-header">
+        <h2>🛠️ Bhagwati Talent Advisory — Admin Control Center</h2>
+        <button type="button" class="btn-close-modal" id="closeAdminDashboardBtn">&times;</button>
+      </div>
+
+      <div class="admin-dash-tabs">
+        <button type="button" class="admin-dash-tab active" data-tab="tab-content">
+          🌐 Site Content &amp; Hours
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-inquiries">
+          📬 Inquiries <span class="admin-tab-count" id="dashInquiriesCount">0</span>
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-resumes">
+          📄 Resumes <span class="admin-tab-count" id="dashResumesCount">0</span>
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-audits">
+          📋 Self-Audits <span class="admin-tab-count" id="dashAuditsCount">0</span>
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-educators">
+          👨‍🏫 Educators <span class="admin-tab-count" id="dashEducatorsCount">0</span>
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-media">
+          🖼️ Media &amp; Gallery
+        </button>
+        <button type="button" class="admin-dash-tab" data-tab="tab-security">
+          🔒 Security &amp; 2FA
+        </button>
+      </div>
+
+      <div class="admin-dash-content">
+        <!-- Panel 1: Site Content -->
+        <div class="admin-panel active" id="tab-content">
+          <form id="adminSiteContentForm">
+            <div class="admin-form-grid">
+              <div class="admin-form-group full">
+                <label>📢 Scrolling Notice Board Ticker</label>
+                <textarea id="cfgNoticeTicker" rows="3" placeholder="Enter scrolling announcements and alerts separated by '|'"></textarea>
+                <div class="admin-help-text">Visible on the high-visibility yellow & red ticker below header.</div>
+              </div>
+
+              <div class="admin-form-group">
+                <label>⏰ Consultation Hours</label>
+                <input type="text" id="cfgConsultationHours" value="10:00 AM - 5:00 PM (Mon - Sat)" />
+                <div class="admin-help-text">Displayed in footer, contact desk, and schema.</div>
+              </div>
+
+              <div class="admin-form-group">
+                <label>📱 Mobile / WhatsApp Number</label>
+                <input type="text" id="cfgPhone" value="+91 79797 70162" />
+              </div>
+
+              <div class="admin-form-group">
+                <label>✉️ Contact &amp; Alert Email</label>
+                <input type="email" id="cfgEmail" value="rahulkunal14@gmail.com" />
+              </div>
+
+              <div class="admin-form-group">
+                <label>📍 Principal Office Address</label>
+                <input type="text" id="cfgAddress" value="Bhagwati Complex, Near Block More, Sherghati, Gaya, Bihar - 824211" />
+              </div>
+
+              <div class="admin-form-group full">
+                <label>★ Hero Badge / Pill Text</label>
+                <input type="text" id="cfgHeroPill" value="★ Recognized Top Zonal HR Leader • 12+ Years Advisory" />
+              </div>
+
+              <div class="admin-form-group full">
+                <label>🏷️ Hero Headline (Main Title)</label>
+                <input type="text" id="cfgHeroTitle" value="Specialized Institutional HR Solutions &amp; Regulatory Compliance for CBSE Schools" />
+              </div>
+
+              <div class="admin-form-group full">
+                <label>📝 Hero Subtitle &amp; Description</label>
+                <textarea id="cfgHeroSubtitle" rows="3"></textarea>
+              </div>
+
+              <div class="admin-form-group">
+                <label>📊 Years of Experience Stat</label>
+                <input type="text" id="cfgStatYears" value="12+" />
+              </div>
+            </div>
+
+            <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+              <button type="submit" class="btn btn-primary" style="padding: 12px 24px; font-size: 14px; background: #10b981; border-color: #059669;">
+                💾 Save &amp; Publish Changes Live
+              </button>
+            </div>
+          </form>
+
+          <!-- Automatic CBSE News Sync Control Card -->
+          <div class="admin-cbse-sync-card" style="margin-top: 28px; background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 14px;">
+              <div>
+                <h4 style="margin: 0 0 4px 0; color: #1e3a8a; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                  <span>🏛️</span> Automatic CBSE Official News &amp; Circulars Sync
+                </h4>
+                <p style="margin: 0; font-size: 13px; color: #475569;">
+                  Live scraper &amp; aggregator connected to <code>cbse.gov.in</code> &amp; <code>cbseacademic.nic.in</code>. Auto-updates circulars, exam forms &amp; SARAS notices.
+                </p>
+              </div>
+              <button type="button" id="adminForceSyncCbseBtn" class="btn btn-primary" style="padding: 8px 18px; font-size: 13px; background: #2563eb; display: inline-flex; align-items: center; gap: 6px;">
+                <span id="adminSyncIcon">🔄</span> Re-Sync CBSE Portals Now
+              </button>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px;">
+              <div>
+                <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Sync Status</div>
+                <div id="adminCbseSyncStatus" style="font-size: 14px; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+                  <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #10b981;"></span> Connected &amp; Auto-Updating
+                </div>
+              </div>
+              <div>
+                <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Active Circulars</div>
+                <div id="adminCbseTotalCount" style="font-size: 14px; font-weight: 700; color: #1e293b; margin-top: 2px;">35+ Synced</div>
+              </div>
+              <div>
+                <div style="font-size: 11px; text-transform: uppercase; color: #64748b; font-weight: 700;">Last Synchronized</div>
+                <div id="adminCbseLastSync" style="font-size: 13px; font-weight: 600; color: #334155; margin-top: 2px;">Just now</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: Inquiries -->
+        <div class="admin-panel" id="tab-inquiries">
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>School / Trust</th>
+                  <th>Contact Person</th>
+                  <th>Mobile</th>
+                  <th>Email</th>
+                  <th>Service Needed</th>
+                  <th>Message</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminInquiriesTableBody">
+                <tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px;">Loading inquiries...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel 3: Resumes -->
+        <div class="admin-panel" id="tab-resumes">
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Candidate Name</th>
+                  <th>Post Applied</th>
+                  <th>Subject</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Experience</th>
+                  <th>Resume Document</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminResumesTableBody">
+                <tr><td colspan="9" style="text-align: center; color: #64748b; padding: 24px;">Loading resumes...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel 4: Self-Audits -->
+        <div class="admin-panel" id="tab-audits">
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>School / Trust Name</th>
+                  <th>Contact Person</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Score</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminAuditsTableBody">
+                <tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px;">Loading audits...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel 5: Educators -->
+        <div class="admin-panel" id="tab-educators">
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Educator Name</th>
+                  <th>Role Applied</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Experience</th>
+                  <th>Location</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="adminEducatorsTableBody">
+                <tr><td colspan="8" style="text-align: center; color: #64748b; padding: 24px;">Loading educator registrations...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panel 6: Media -->
+        <div class="admin-panel" id="tab-media">
+          <p style="color: #64748b; font-size: 13.5px; margin-top: 0;">
+            Manage gallery photos and videos. You can remove any obsolete items or upload new ones directly.
+          </p>
+          <div class="uploaded-gallery-grid" id="adminMediaGrid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Panel 7: Security & 2FA Management -->
+        <div class="admin-panel" id="tab-security">
+          <div style="max-width: 640px; margin: 0 auto;">
+            <!-- Current Status Card -->
+            <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                <h3 style="margin: 0; font-size: 16px; color: #0b2545; display: flex; align-items: center; gap: 8px;">
+                  <span>🛡️</span> Two-Step Verification (2FA) Status
+                </h3>
+                <span style="background: #dcfce7; color: #15803d; font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 9999px;">
+                  ACTIVE &amp; ENFORCED
+                </span>
+              </div>
+              <p style="margin: 0 0 12px; font-size: 13.5px; color: #475569; line-height: 1.5;">
+                Every administrative login requires both your master password and a time-sensitive 6-digit numeric verification code dispatched to:
+              </p>
+              <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px; font-size: 13px; color: #0f172a; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                <span>✉️</span> <span>rahulkunal14@gmail.com</span>
+              </div>
+            </div>
+
+            <!-- Change Password Card -->
+            <div style="background: #ffffff; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+              <h3 style="margin: 0 0 8px; font-size: 16px; color: #0b2545; display: flex; align-items: center; gap: 8px;">
+                <span>🔑</span> Update Administrator Password
+              </h3>
+              <p style="margin: 0 0 18px; font-size: 13px; color: #64748b;">
+                Change your secret password used in Step 1 of the login process.
+              </p>
+
+              <div id="changePasswordFeedback" style="display: none; padding: 10px 14px; border-radius: 6px; font-size: 13px; margin-bottom: 16px;"></div>
+
+              <form id="adminChangePasswordForm">
+                <div style="margin-bottom: 14px;">
+                  <label style="display: block; font-size: 12.5px; font-weight: 700; color: #334155; margin-bottom: 5px;">Current Password</label>
+                  <input type="password" id="currentAdminPassword" placeholder="Enter current password" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13.5px; box-sizing: border-box;" />
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px;">
+                  <div>
+                    <label style="display: block; font-size: 12.5px; font-weight: 700; color: #334155; margin-bottom: 5px;">New Password</label>
+                    <input type="password" id="newAdminPassword" placeholder="Min. 6 characters" required minlength="6" style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13.5px; box-sizing: border-box;" />
+                  </div>
+                  <div>
+                    <label style="display: block; font-size: 12.5px; font-weight: 700; color: #334155; margin-bottom: 5px;">Confirm New Password</label>
+                    <input type="password" id="confirmAdminPassword" placeholder="Re-type new password" required minlength="6" style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13.5px; box-sizing: border-box;" />
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="padding: 11px 22px; font-size: 13.5px; font-weight: 700; background: #0b2545; border-color: #0b2545;">
+                  🔐 Update Administrator Password
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="admin-toast-container" id="adminToastContainer"></div>
+
+  <!-- Firebase Modular SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, getDocFromServer } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      projectId: "peak-lightning-4c9s2",
+      appId: "1:762612362529:web:ea737f4d437036b763a260",
+      apiKey: "AIzaSyDlf5TKeFZr3B0liour2WmM-kJMpCthFyY",
+      authDomain: "peak-lightning-4c9s2.firebaseapp.com",
+      firestoreDatabaseId: "ai-studio-bhagwatitalentad-da93ed5c-b139-4435-957b-6f0d798f570a",
+      storageBucket: "peak-lightning-4c9s2.firebasestorage.app",
+      messagingSenderId: "762612362529"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    window.firebaseApp = app;
+    window.firebaseAuth = auth;
+    window.firebaseDb = db;
+    window.GoogleAuthProvider = GoogleAuthProvider;
+    window.signInWithPopup = signInWithPopup;
+    window.onAuthStateChanged = onAuthStateChanged;
+    window.signOut = signOut;
+    window.firestoreDoc = doc;
+    window.firestoreGetDoc = getDoc;
+    window.firestoreSetDoc = setDoc;
+
+    // Validate connection to Firestore as mandated by SKILL.md
+    async function testConnection() {
+      try {
+        await getDocFromServer(doc(db, 'test', 'connection'));
+      } catch (error) {
+        if (error && error.message && error.message.includes('the client is offline')) {
+          console.warn("Please check your Firebase configuration.");
+        }
+      }
+    }
+    testConnection();
+
+    window.dispatchEvent(new CustomEvent('firebase-initialized', { detail: { app, auth, db } }));
+  </script>
 
   <!-- Application Scripts -->
   <script src="script.js"></script>

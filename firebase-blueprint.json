@@ -1,0 +1,94 @@
+{
+  "entities": {
+    "SiteConfig": {
+      "title": "Site Configuration",
+      "description": "Customizable content for the institutional advisory portal",
+      "type": "object",
+      "properties": {
+        "noticeTicker": { "type": "string" },
+        "consultationHours": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "heroTitle": { "type": "string" },
+        "heroSubtitle": { "type": "string" },
+        "address": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "updatedBy": { "type": "string" }
+      }
+    },
+    "AdminUser": {
+      "title": "Admin User",
+      "description": "Administrator profile with elevated rights",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "superadmin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role"]
+    },
+    "Inquiry": {
+      "title": "Inquiry",
+      "description": "Inquiry submitted by school leader or visitor",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "message"]
+    },
+    "AuditSubmission": {
+      "title": "Audit Submission",
+      "description": "School self audit submissions and scores",
+      "type": "object",
+      "properties": {
+        "schoolName": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "score": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["schoolName", "email"]
+    },
+    "ResumeSubmission": {
+      "title": "Resume Submission",
+      "description": "Educator and staff resume submissions",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "postApplied": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "email", "postApplied"]
+    }
+  },
+  "firestore": {
+    "/site_config/{configId}": {
+      "schema": "SiteConfig",
+      "description": "Customizable content for portal sections"
+    },
+    "/admins/{adminId}": {
+      "schema": "AdminUser",
+      "description": "Authorized administrators"
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": "Inquiry",
+      "description": "Submitted inquiries from the public portal"
+    },
+    "/audits/{auditId}": {
+      "schema": "AuditSubmission",
+      "description": "Submitted school self audits"
+    },
+    "/resumes/{resumeId}": {
+      "schema": "ResumeSubmission",
+      "description": "Submitted educator resumes"
+    }
+  }
+}

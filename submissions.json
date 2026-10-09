@@ -1,0 +1,716 @@
+{
+  "inquiries": [
+    {
+      "id": "INQ-1728392101",
+      "contactPerson": "Dr. Ramesh Sharma",
+      "schoolName": "Delhi Public Academy, Gaya",
+      "mobile": "+91 94312 87654",
+      "email": "principal@dpagaya.edu.in",
+      "city": "Gaya, Bihar",
+      "service": "CBSE SARAS 5.0 Affiliation & Extension",
+      "message": "Need complete statutory validation of OASIS teacher section ratios and Form 1 agreements.",
+      "createdAt": "2026-10-07T10:15:00.000Z"
+    },
+    {
+      "id": "INQ-1728391802",
+      "contactPerson": "Smt. Anjali Verma",
+      "schoolName": "St. Xavier International School, Patna",
+      "mobile": "+91 98350 44321",
+      "email": "admin@stxavierspatna.org",
+      "city": "Patna, Bihar",
+      "service": "PGT & TGT Faculty Recruitment",
+      "message": "Urgent requirement for PGT Mathematics and PGT Chemistry CTET qualified faculty.",
+      "createdAt": "2026-10-06T14:22:00.000Z"
+    },
+    {
+      "id": "INQ-1728391403",
+      "contactPerson": "Shri Manoj Kumar Singh",
+      "schoolName": "Heritage Global Public School, Sherghati",
+      "mobile": "+91 70041 99882",
+      "email": "trustee@heritageglobalschool.in",
+      "city": "Sherghati, Gaya",
+      "service": "POCSO & POSH Statutory Compliance",
+      "message": "Require external legal member appointment and teacher police verification dossier preparation.",
+      "createdAt": "2026-10-05T11:45:00.000Z"
+    },
+    {
+      "id": "INQ-1728390904",
+      "contactPerson": "Prof. Alok Ranjan",
+      "schoolName": "Magadh Valley Senior Secondary School",
+      "mobile": "+91 99342 11223",
+      "email": "director@magadhvalley.edu.in",
+      "city": "Bodh Gaya, Bihar",
+      "service": "Mock Inspection & Affiliation Audit Desk",
+      "message": "Applying for stream upgradation to Senior Secondary (+2 Science & Commerce). Need pre-audit inspection.",
+      "createdAt": "2026-10-04T09:30:00.000Z"
+    },
+    {
+      "id": "INQ-1728389905",
+      "contactPerson": "Shri Vikramaditya Prasad",
+      "schoolName": "Doon Cambridge School, Gaya",
+      "mobile": "+91 91223 88776",
+      "email": "dooncambridgegaya@gmail.com",
+      "city": "Gaya, Bihar",
+      "service": "Mandatory Public Disclosure & OASIS Ratios",
+      "message": "Need help aligning staff salary bank records with Section 12 CBSE Affiliation Bye-Laws.",
+      "createdAt": "2026-10-03T16:10:00.000Z"
+    },
+    {
+      "id": "INQ-1728388906",
+      "contactPerson": "Mrs. Sunita Mukherjee",
+      "schoolName": "Ranchi Model High School",
+      "mobile": "+91 94301 22334",
+      "email": "principal@ranchimodel.ac.in",
+      "city": "Ranchi, Jharkhand",
+      "service": "CBSE SARAS 5.0 Affiliation & Extension",
+      "message": "Re-affiliation SARAS window closing. Urgent file vetting required.",
+      "createdAt": "2026-10-02T13:20:00.000Z"
+    },
+    {
+      "id": "INQ-1728387907",
+      "contactPerson": "Shri Dharmendra Yadav",
+      "schoolName": "Shanti Niketan Educational Trust, Sherghati",
+      "mobile": "+91 97711 55667",
+      "email": "shantiniketan.sherghati@gmail.com",
+      "city": "Sherghati, Gaya",
+      "service": "Pre-Inspection Affiliation Audit",
+      "message": "Pre-inspection audit for fresh composite affiliation approval from Secondary to Sr. Secondary.",
+      "createdAt": "2026-10-01T15:40:00.000Z"
+    },
+    {
+      "id": "INQ-1728386908",
+      "contactPerson": "Dr. K. P. Singh",
+      "schoolName": "Gaya Central Public School",
+      "mobile": "+91 93044 66778",
+      "email": "gayacentral@gmail.com",
+      "city": "Gaya, Bihar",
+      "service": "Special Educator & Wellness Counselor Hiring",
+      "message": "Need certified Special Educator (RCI registered) and Wellness Counselor for statutory compliance.",
+      "createdAt": "2026-09-30T10:05:00.000Z"
+    },
+    {
+      "id": "INQ-1728385909",
+      "contactPerson": "Shri Rajesh Gupta",
+      "schoolName": "Patliputra Heritage School, Patna",
+      "mobile": "+91 98352 11990",
+      "email": "patliputraheritage@gmail.com",
+      "city": "Patna, Bihar",
+      "service": "PGT & TGT Faculty Recruitment",
+      "message": "Faculty replacement for Session 2025-26: PGT Biology, PGT English, PRT Hindi.",
+      "createdAt": "2026-09-29T14:15:00.000Z"
+    },
+    {
+      "id": "INQ-1728384910",
+      "contactPerson": "Father Joseph Minz",
+      "schoolName": "St. Paul Academy, Hazaribagh",
+      "mobile": "+91 94311 77889",
+      "email": "stpaulhazaribagh@gmail.com",
+      "city": "Hazaribagh, Jharkhand",
+      "service": "SARAS Extension Application",
+      "message": "Guidance needed for uploading land certificates and Form 1 staff appointments.",
+      "createdAt": "2026-09-28T11:50:00.000Z"
+    },
+    {
+      "id": "INQ-1728383911",
+      "contactPerson": "Shri Sanjay Sinha",
+      "schoolName": "Modern Residential School, Nawada",
+      "mobile": "+91 99312 33445",
+      "email": "modernnawada@gmail.com",
+      "city": "Nawada, Bihar",
+      "service": "Mock Inspection & Affiliation Audit Desk",
+      "message": "Mock inspection visit requested before regional CBSE inspection committee arrives.",
+      "createdAt": "2026-09-27T16:30:00.000Z"
+    },
+    {
+      "id": "INQ-1728382912",
+      "contactPerson": "Smt. Pratima Devi",
+      "schoolName": "Vikas Vidyapeeth, Jehanabad",
+      "mobile": "+91 91220 55443",
+      "email": "vikasvidyapeeth@gmail.com",
+      "city": "Jehanabad, Bihar",
+      "service": "Faculty Recruitment",
+      "message": "Need 4 primary teachers and 2 TGT teachers for urgent session staffing.",
+      "createdAt": "2026-09-26T12:10:00.000Z"
+    },
+    {
+      "id": "INQ-1728381913",
+      "contactPerson": "Shri Arvind Kumar",
+      "schoolName": "Cambridge Public School, Aurangabad",
+      "mobile": "+91 94314 99001",
+      "email": "cambridgeaurangabad@gmail.com",
+      "city": "Aurangabad, Bihar",
+      "service": "CBSE SARAS 5.0 Affiliation & Extension",
+      "message": "Extension of Provisional Affiliation file validation needed.",
+      "createdAt": "2026-09-25T14:40:00.000Z"
+    },
+    {
+      "id": "INQ-1728380914",
+      "contactPerson": "Dr. B. K. Jha",
+      "schoolName": "Kunal Memorial International School, Gaya",
+      "mobile": "+91 98351 77665",
+      "email": "kunalmemorialgaya@gmail.com",
+      "city": "Gaya, Bihar",
+      "service": "POCSO & POSH Committee Constitution",
+      "message": "Drafting internal child safety policy charter and legal compliance check.",
+      "createdAt": "2026-09-24T10:20:00.000Z"
+    },
+    {
+      "id": "INQ-1728379915",
+      "contactPerson": "Shri Santosh Pandey",
+      "schoolName": "Aryabhatta Global Academy, Patna",
+      "mobile": "+91 99341 66554",
+      "email": "aryabhattapatna@gmail.com",
+      "city": "Patna, Bihar",
+      "service": "PGT & TGT Faculty Recruitment",
+      "message": "PGT Physics and PGT Computer Science faculty search.",
+      "createdAt": "2026-09-23T15:15:00.000Z"
+    },
+    {
+      "id": "INQ-1728378916",
+      "contactPerson": "Smt. Rekha Sharma",
+      "schoolName": "Apex Senior Secondary Academy, Sherghati",
+      "mobile": "+91 97712 33441",
+      "email": "apexseniorsherghati@gmail.com",
+      "city": "Sherghati, Gaya",
+      "service": "Mandatory Public Disclosure",
+      "message": "Creation and hosting of Mandatory Public Disclosure portal as per CBSE circular.",
+      "createdAt": "2026-09-22T11:00:00.000Z"
+    },
+    {
+      "id": "INQ-1728377917",
+      "contactPerson": "Shri R. N. Tiwari",
+      "schoolName": "Gyan Bharti Vidyalaya, Gaya",
+      "mobile": "+91 94310 88992",
+      "email": "gyanbhartigaya@gmail.com",
+      "city": "Gaya, Bihar",
+      "service": "OASIS Ratio Audit",
+      "message": "Teacher section ratio audit and staff EPF/ESIC payroll documentation.",
+      "createdAt": "2026-09-21T13:45:00.000Z"
+    },
+    {
+      "id": "INQ-1728376918",
+      "contactPerson": "Dr. Suresh Chandra",
+      "schoolName": "Bihar Progressive Academy, Bodh Gaya",
+      "mobile": "+91 98355 44112",
+      "email": "biharprogressive@gmail.com",
+      "city": "Bodh Gaya, Bihar",
+      "service": "CBSE Inspection Readiness",
+      "message": "Comprehensive mock inspection audit of school premises, labs, and registers.",
+      "createdAt": "2026-09-20T16:20:00.000Z"
+    }
+  ],
+  "resumes": [],
+  "selfAudits": [
+    {
+      "id": "AUDIT-1728392501",
+      "schoolName": "Gaya Public Senior Secondary School",
+      "contactPerson": "Dr. R. K. Chaudhary (Principal)",
+      "phone": "+91 94312 11002",
+      "email": "principal@gayapublicschool.ac.in",
+      "score": "94%",
+      "status": "Fully Ready",
+      "checkedCount": 15,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO Committee Formed",
+        "Teacher Ratio 1:1.5 Fulfilled",
+        "Special Educator Appointed",
+        "Form 1 Staff Agreements",
+        "Fire Safety Valid",
+        "Building Safety Valid"
+      ],
+      "missingItems": [
+        "Wellness Counselor certification pending RCI renewal"
+      ],
+      "notes": "Applying for stream upgradation to +2 Senior Secondary on SARAS portal.",
+      "submittedAt": "2026-10-07T12:00:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728391902",
+      "schoolName": "Sherghati Modern Academy",
+      "contactPerson": "Smt. Shashi Prabha (Secretary)",
+      "phone": "+91 98350 99881",
+      "email": "admin@sherghatimodern.edu.in",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO Committee Formed",
+        "Police Verification Dossiers 100%",
+        "Teacher Section Ratio 1:1.5",
+        "Salary EPF Compliance"
+      ],
+      "missingItems": [
+        "Special Educator appointment in progress",
+        "Fire Safety Certificate renewal awaiting inspection"
+      ],
+      "notes": "Need Rahul Kunal sir to assist with Special Educator interview and pre-inspection mock audit.",
+      "submittedAt": "2026-10-06T15:30:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728391203",
+      "schoolName": "Magadh International School, Gaya",
+      "contactPerson": "Prof. S. N. Sinha (Director)",
+      "phone": "+91 70041 33442",
+      "email": "info@magadhinternational.org",
+      "score": "100%",
+      "status": "Inspection Ready",
+      "checkedCount": 16,
+      "totalCount": 16,
+      "verifiedItems": [
+        "All 16 statutory norms verified under CBSE Bye-Laws & POCSO"
+      ],
+      "missingItems": [],
+      "notes": "All registers, Form 1 agreements, and POCSO external members in place. Ready for committee visit.",
+      "submittedAt": "2026-10-05T10:15:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728390504",
+      "schoolName": "Patna Central Convent School",
+      "contactPerson": "Shri Anil Kumar Roy (Chairman)",
+      "phone": "+91 99342 55661",
+      "email": "patnacentralconvent@gmail.com",
+      "score": "75%",
+      "status": "Needs Remediation",
+      "checkedCount": 12,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Fire Safety Valid",
+        "POCSO Committee Formed",
+        "Clean Drinking Water Certificate"
+      ],
+      "missingItems": [
+        "Teacher Ratio below 1:1.5 (currently 1:1.2)",
+        "Special Educator not yet hired",
+        "Form 1 service agreements missing for 4 teachers"
+      ],
+      "notes": "Urgent assistance requested for faculty recruitment and ratio correction before SARAS deadline.",
+      "submittedAt": "2026-10-04T16:45:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728389605",
+      "schoolName": "Doon Global Academy, Sherghati",
+      "contactPerson": "Dr. Vineet Pathak (Principal)",
+      "phone": "+91 91223 11229",
+      "email": "doonglobalsherghati@gmail.com",
+      "score": "94%",
+      "status": "Fully Ready",
+      "checkedCount": 15,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Teacher ratio 1:1.5",
+        "POCSO & POSH compliance",
+        "Science labs certified"
+      ],
+      "missingItems": [
+        "Mandatory Public Disclosure page update"
+      ],
+      "notes": "Need website public disclosure link setup as per latest circular.",
+      "submittedAt": "2026-10-03T11:20:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728388706",
+      "schoolName": "St. Teresa Secondary School, Jehanabad",
+      "contactPerson": "Sister Mary George (Principal)",
+      "phone": "+91 94301 44556",
+      "email": "stteresajehanabad@gmail.com",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO Committee Formed",
+        "Staff Police Verification Complete",
+        "EPF Salary Bank Records"
+      ],
+      "missingItems": [
+        "Wellness counselor certificate renewal",
+        "Fire safety certificate pending final signoff"
+      ],
+      "notes": "Applying for extension of affiliation on SARAS 5.0.",
+      "submittedAt": "2026-10-02T14:10:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728387807",
+      "schoolName": "Gaya Heritage Public School",
+      "contactPerson": "Shri B. M. Singh (Secretary)",
+      "phone": "+91 97711 88990",
+      "email": "gayaheritage@gmail.com",
+      "score": "81%",
+      "status": "Needs Remediation",
+      "checkedCount": 13,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Building safety certified",
+        "Library register maintained",
+        "POCSO committee active"
+      ],
+      "missingItems": [
+        "Teacher ratio short by 2 TGT teachers",
+        "Special educator pending",
+        "Form 1 staff service book pending"
+      ],
+      "notes": "Looking for immediate consultation with Rahul sir.",
+      "submittedAt": "2026-10-01T09:40:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728386808",
+      "schoolName": "Nalanda International Academy, Rajgir",
+      "contactPerson": "Dr. Shailendra Prasad (Director)",
+      "phone": "+91 93044 11225",
+      "email": "nalandainternationalrajgir@gmail.com",
+      "score": "100%",
+      "status": "Inspection Ready",
+      "checkedCount": 16,
+      "totalCount": 16,
+      "verifiedItems": [
+        "All 16 statutory norms verified under CBSE Bye-Laws & POCSO"
+      ],
+      "missingItems": [],
+      "notes": "Ready for inspection committee visit. Excellent documentation.",
+      "submittedAt": "2026-09-30T15:50:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728385809",
+      "schoolName": "Sherghati Valley Public School",
+      "contactPerson": "Shri Om Prakash (Manager)",
+      "phone": "+91 98352 77889",
+      "email": "sherghativalley@gmail.com",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO Committee Formed",
+        "Police Verification Complete",
+        "Teacher Ratio 1:1.5"
+      ],
+      "missingItems": [
+        "Special educator appointment in progress",
+        "Sanitation certificate renewal"
+      ],
+      "notes": "Consultation booked for pre-inspection audit file review.",
+      "submittedAt": "2026-09-29T11:30:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728384810",
+      "contactPerson": "Dr. Rajiv Ranjan (Principal)",
+      "schoolName": "Patna Radiant Academy",
+      "phone": "+91 94311 33446",
+      "email": "patnaradiant@gmail.com",
+      "score": "94%",
+      "status": "Fully Ready",
+      "checkedCount": 15,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Teacher Section Ratio 1:1.5",
+        "POCSO Active",
+        "Fire Safety Valid",
+        "Form 1 Staff Agreement"
+      ],
+      "missingItems": [
+        "Wellness Counselor RCI registration document update"
+      ],
+      "notes": "Extension application submitted. Need mock interview for teachers.",
+      "submittedAt": "2026-09-28T16:15:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728383811",
+      "schoolName": "Bodh Gaya Convent School",
+      "contactPerson": "Shri Santosh Kumar (Trustee)",
+      "phone": "+91 99312 66778",
+      "email": "bodhgayaconvent@gmail.com",
+      "score": "81%",
+      "status": "Needs Remediation",
+      "checkedCount": 13,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Safe drinking water certificate",
+        "POCSO nodal officer designated",
+        "Building safety valid"
+      ],
+      "missingItems": [
+        "Police verification pending for 3 bus drivers",
+        "Teacher ratio deficiency in secondary classes"
+      ],
+      "notes": "Need police verification format dossiers and candidate hiring.",
+      "submittedAt": "2026-09-27T10:00:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728382812",
+      "schoolName": "Gaya Bright Future High School",
+      "contactPerson": "Smt. Urmila Singh (Principal)",
+      "phone": "+91 91220 88991",
+      "email": "gayabrightfuture@gmail.com",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO internal committee formed",
+        "Staff salary bank transfer active",
+        "Building safety valid"
+      ],
+      "missingItems": [
+        "Special educator not yet appointed",
+        "Laboratory equipment certificate"
+      ],
+      "notes": "Special educator hiring requested through Bhagwati Talent Advisory.",
+      "submittedAt": "2026-09-26T13:40:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728381813",
+      "schoolName": "Aurangabad Modern Public School",
+      "contactPerson": "Dr. Ajay Sinha (Principal)",
+      "phone": "+91 94314 22338",
+      "email": "aurangabadmodern@gmail.com",
+      "score": "100%",
+      "status": "Inspection Ready",
+      "checkedCount": 16,
+      "totalCount": 16,
+      "verifiedItems": [
+        "All 16 statutory norms verified under CBSE Bye-Laws & POCSO"
+      ],
+      "missingItems": [],
+      "notes": "All compliance records complete and sealed.",
+      "submittedAt": "2026-09-25T15:20:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728380814",
+      "schoolName": "Sherghati Cambridge Academy",
+      "contactPerson": "Shri Deepak Verma (Secretary)",
+      "phone": "+91 98351 99002",
+      "email": "sherghaticambridge@gmail.com",
+      "score": "94%",
+      "status": "Fully Ready",
+      "checkedCount": 15,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Teacher ratio 1:1.5",
+        "POCSO active",
+        "Police verification 100%",
+        "Fire certificate valid"
+      ],
+      "missingItems": [
+        "RCI renewal certificate for special educator"
+      ],
+      "notes": "Awaiting inspection date notification.",
+      "submittedAt": "2026-09-24T12:05:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728379815",
+      "schoolName": "Nawada Gurukul Public School",
+      "contactPerson": "Prof. Ramakant Pandey (Principal)",
+      "phone": "+91 99341 44558",
+      "email": "nawadagurukul@gmail.com",
+      "score": "75%",
+      "status": "Needs Remediation",
+      "checkedCount": 12,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Building safety valid",
+        "Fire safety valid",
+        "Clean water certified"
+      ],
+      "missingItems": [
+        "Teacher section ratio deficit",
+        "POCSO committee external member not appointed",
+        "Form 1 staff service book incomplete"
+      ],
+      "notes": "Urgent meeting requested with Rahul Kunal.",
+      "submittedAt": "2026-09-23T14:50:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728378816",
+      "schoolName": "Gaya Oxford International School",
+      "contactPerson": "Shri Pankaj Kumar (Director)",
+      "phone": "+91 97712 11223",
+      "email": "gayaoxford@gmail.com",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO committee formed",
+        "Staff police verification complete",
+        "OASIS staffing submitted"
+      ],
+      "missingItems": [
+        "Wellness counselor qualification check",
+        "Public disclosure website link update"
+      ],
+      "notes": "Preparing for provisional affiliation inspection.",
+      "submittedAt": "2026-09-22T10:35:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728377817",
+      "schoolName": "Patna Heritage World School",
+      "contactPerson": "Dr. Shalini Singh (Principal)",
+      "phone": "+91 94310 55667",
+      "email": "patnaheritageworld@gmail.com",
+      "score": "100%",
+      "status": "Inspection Ready",
+      "checkedCount": 16,
+      "totalCount": 16,
+      "verifiedItems": [
+        "All 16 statutory norms verified under CBSE Bye-Laws & POCSO"
+      ],
+      "missingItems": [],
+      "notes": "Ready for re-affiliation SARAS inspection committee.",
+      "submittedAt": "2026-09-21T16:00:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728376818",
+      "schoolName": "Bodh Gaya Wisdom Academy",
+      "contactPerson": "Shri Naresh Kumar (Manager)",
+      "phone": "+91 98355 88993",
+      "email": "bodhgayawisdom@gmail.com",
+      "score": "81%",
+      "status": "Needs Remediation",
+      "checkedCount": 13,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Fire safety valid",
+        "Building safety valid",
+        "POCSO nodal officer appointed"
+      ],
+      "missingItems": [
+        "Special educator missing",
+        "Teacher section ratio 1:1.3 below statutory norm",
+        "POSH ICC not recorded"
+      ],
+      "notes": "Full advisory engagement required.",
+      "submittedAt": "2026-09-20T11:15:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728375819",
+      "schoolName": "Sherghati St. Jude School",
+      "contactPerson": "Father Anthony Paul (Principal)",
+      "phone": "+91 94312 99003",
+      "email": "stjudesherghati@gmail.com",
+      "score": "94%",
+      "status": "Fully Ready",
+      "checkedCount": 15,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Teacher ratio 1:1.5",
+        "POCSO compliance complete",
+        "Fire safety valid",
+        "Form 1 staff agreement signed"
+      ],
+      "missingItems": [
+        "Public disclosure web URL update"
+      ],
+      "notes": "Extension application in progress.",
+      "submittedAt": "2026-09-19T13:45:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728374820",
+      "schoolName": "Ranchi St. Michael Academy",
+      "contactPerson": "Dr. Christine Ekka (Principal)",
+      "phone": "+91 98350 11224",
+      "email": "stmichaelranchi@gmail.com",
+      "score": "100%",
+      "status": "Inspection Ready",
+      "checkedCount": 16,
+      "totalCount": 16,
+      "verifiedItems": [
+        "All 16 statutory norms verified under CBSE Bye-Laws & POCSO"
+      ],
+      "missingItems": [],
+      "notes": "Full compliance verified. Excellent staff records.",
+      "submittedAt": "2026-09-18T15:30:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728373821",
+      "schoolName": "Gaya Scholars International School",
+      "contactPerson": "Shri R. P. Tiwari (Trustee)",
+      "phone": "+91 70041 55668",
+      "email": "gayascholars@gmail.com",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO active",
+        "Teacher ratio 1:1.5 verified",
+        "Staff salary bank transfer active"
+      ],
+      "missingItems": [
+        "Special educator appointment pending interview",
+        "Sanitation certificate renewal"
+      ],
+      "notes": "Interviews scheduled for Special Educator with Rahul Kunal.",
+      "submittedAt": "2026-09-17T09:50:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728372822",
+      "schoolName": "Patna Brilliant Public School",
+      "contactPerson": "Shri Manoj K. Sinha (Principal)",
+      "phone": "+91 99342 77884",
+      "email": "patnabrilliant@gmail.com",
+      "score": "88%",
+      "status": "Satisfactory",
+      "checkedCount": 14,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO committee formed",
+        "Fire safety valid",
+        "Teacher qualifications NCTE certified"
+      ],
+      "missingItems": [
+        "Wellness counselor certificate renewal",
+        "Form 1 staff service stamp agreement missing for 2 teachers"
+      ],
+      "notes": "Correction files being compiled.",
+      "submittedAt": "2026-09-16T14:10:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728371823",
+      "schoolName": "Jehanabad Radiant Convent School",
+      "contactPerson": "Dr. Sanjay Prakash (Manager)",
+      "phone": "+91 91223 33447",
+      "email": "jehanabadradiant@gmail.com",
+      "score": "75%",
+      "status": "Needs Remediation",
+      "checkedCount": 12,
+      "totalCount": 16,
+      "verifiedItems": [
+        "Building safety valid",
+        "Fire safety certified",
+        "Library access certified"
+      ],
+      "missingItems": [
+        "Teacher section ratio deficit (1:1.1)",
+        "POCSO external member absent",
+        "Police verification incomplete for support staff"
+      ],
+      "notes": "Urgent advisory intervention requested.",
+      "submittedAt": "2026-09-15T11:25:00.000Z"
+    },
+    {
+      "id": "AUDIT-1728370824",
+      "schoolName": "Magadh Apex Academy, Gaya",
+      "contactPerson": "Smt. Madhu Kumari (Principal)",
+      "phone": "+91 94301 88995",
+      "email": "magadhapex@gmail.com",
+      "score": "94%",
+      "status": "Fully Ready",
+      "checkedCount": 15,
+      "totalCount": 16,
+      "verifiedItems": [
+        "POCSO Committee Formed",
+        "Staff Police Verification 100%",
+        "Teacher Ratio 1:1.5 Fulfilled",
+        "Special Educator Appointed"
+      ],
+      "missingItems": [
+        "Mandatory Public Disclosure web portal link update"
+      ],
+      "notes": "Pre-inspection mock audit completed. Highly ready for SARAS committee.",
+      "submittedAt": "2026-09-14T16:40:00.000Z"
+    }
+  ],
+  "educatorRegistrations": []
+}
