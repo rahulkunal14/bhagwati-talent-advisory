@@ -53,6 +53,7 @@ const inquiries = [];
 const educatorRegistrations = [];
 const resumes = [];
 const selfAudits = [];
+const clientFeedbacks = [];
 const emailLogs = [];
 let mediaList = [];
 
@@ -367,6 +368,7 @@ function loadSubmissions() {
       if (Array.isArray(data.resumes)) { resumes.length = 0; resumes.push(...data.resumes); }
       if (Array.isArray(data.selfAudits)) { selfAudits.length = 0; selfAudits.push(...data.selfAudits); }
       if (Array.isArray(data.educatorRegistrations)) { educatorRegistrations.length = 0; educatorRegistrations.push(...data.educatorRegistrations); }
+      if (Array.isArray(data.clientFeedbacks)) { clientFeedbacks.length = 0; clientFeedbacks.push(...data.clientFeedbacks); }
     }
   } catch (e) {
     console.warn('Could not load submissions.json:', e.message);
@@ -379,7 +381,8 @@ function saveSubmissions() {
       inquiries,
       resumes,
       selfAudits,
-      educatorRegistrations
+      educatorRegistrations,
+      clientFeedbacks
     }, null, 2), 'utf8');
   } catch (e) {
     console.error('Failed to save submissions.json:', e.message);
@@ -885,7 +888,6 @@ app.get('/api/inquiries', (req, res) => {
 
     return {
       id: item.id,
-      schoolName: item.schoolName || 'Affiliated Institution',
       contactPerson: maskedContact,
       mobile: maskedMobile,
       city: item.city || 'Bihar / Eastern India',
@@ -1208,6 +1210,160 @@ app.post('/api/submit-resume', async (req, res) => {
   }
 });
 
+// 5b. API Endpoint: Client Service Feedback (Direct delivery to rahulkunal14@gmail.com)
+app.post('/api/client-feedback', async (req, res) => {
+  try {
+    const payload = req.body;
+    const schoolName = payload.schoolName || payload.School_Name || payload.clientName || 'Partner Institution';
+    const contactPerson = payload.contactPerson || payload.Contact_Person || payload.clientPerson || 'Representative';
+    const designation = payload.designation || payload.Designation || 'Principal / Administrator';
+    const mobile = payload.mobile || payload.Mobile_Number || '';
+    const email = payload.email || payload.Email_Address || '';
+    const service = payload.service || payload.Service_Availed || 'CBSE Advisory Services';
+    const rating = Math.min(5, Math.max(1, Number(payload.rating || payload.Rating) || 5));
+    const turnaround = payload.turnaround || payload.Turnaround_Speed || 'Excellent';
+    const review = payload.review || payload.Feedback_Review || payload.message || '';
+    const strengths = payload.strengths || payload.Key_Strengths || '';
+    const suggestions = payload.suggestions || payload.Suggestions || '';
+    const consent = payload.consent !== false;
+
+    const record = {
+      id: 'FDB-' + Date.now(),
+      schoolName,
+      contactPerson,
+      designation,
+      mobile,
+      email,
+      service,
+      rating,
+      turnaround,
+      review,
+      strengths,
+      suggestions,
+      consent,
+      createdAt: new Date().toISOString()
+    };
+
+    clientFeedbacks.unshift(record);
+    saveSubmissions();
+
+    const starsEmoji = '⭐'.repeat(rating);
+
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; max-width: 650px; margin: 0 auto; color: #1e293b; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+        <div style="background: #0b2545; color: #ffffff; padding: 24px; text-align: center;">
+          <h1 style="margin: 0; font-size: 22px;">Bhagwati Talent Advisory</h1>
+          <p style="margin: 6px 0 0; font-size: 15px; color: #fbbf24; font-weight: bold;">⭐ New Client Service Feedback Received</p>
+        </div>
+
+        <div style="padding: 24px;">
+          <div style="background: #fef3c7; border: 1px solid #fde68a; border-radius: 8px; padding: 18px; text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 28px; line-height: 1.2;">${starsEmoji}</div>
+            <div style="font-size: 17px; font-weight: bold; color: #92400e; margin-top: 6px;">Overall Rating: ${rating} / 5 Stars</div>
+            <div style="font-size: 13.5px; color: #78350f; margin-top: 4px;">Service: <strong>${service}</strong> • Turnaround: <strong>${turnaround}</strong></div>
+          </div>
+
+          <h3 style="color: #0b2545; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 0;">Client & School Profile</h3>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 20px;">
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; width: 180px; color: #475569;">School / Trust Name:</td>
+              <td style="padding: 8px 0; color: #0f172a; font-weight: 700;">${schoolName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Contact Person:</td>
+              <td style="padding: 8px 0; color: #0f172a;">${contactPerson} (${designation})</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Mobile / WhatsApp:</td>
+              <td style="padding: 8px 0; color: #0f172a;"><a href="tel:${mobile}" style="color: #0284c7; text-decoration: none; font-weight: 600;">${mobile}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Email Address:</td>
+              <td style="padding: 8px 0; color: #0f172a;"><a href="mailto:${email}" style="color: #0284c7; text-decoration: none;">${email || 'Not provided'}</a></td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Service Availed:</td>
+              <td style="padding: 8px 0; color: #b45309; font-weight: bold;">${service}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Turnaround Speed:</td>
+              <td style="padding: 8px 0; color: #0f172a;">${turnaround}</td>
+            </tr>
+            ${strengths ? `
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Key Highlights:</td>
+              <td style="padding: 8px 0; color: #059669; font-weight: 600;">${strengths}</td>
+            </tr>` : ''}
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Submission Date:</td>
+              <td style="padding: 8px 0; color: #64748b;">${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} IST</td>
+            </tr>
+          </table>
+
+          <div style="background: #f8fafc; border-left: 4px solid #f59e0b; padding: 14px 18px; margin-bottom: 16px; border-radius: 4px;">
+            <p style="margin: 0 0 6px; font-weight: bold; color: #0f172a;">Client Review & Experience:</p>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #334155; white-space: pre-wrap;">${review || 'No written review text.'}</p>
+          </div>
+
+          ${suggestions ? `
+          <div style="background: #f1f5f9; padding: 12px 16px; margin-bottom: 16px; border-radius: 4px;">
+            <p style="margin: 0 0 4px; font-weight: bold; font-size: 13px; color: #475569;">Suggestions for Improvement:</p>
+            <p style="margin: 0; font-size: 13.5px; color: #334155;">${suggestions}</p>
+          </div>` : ''}
+
+          <div style="text-align: center; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+            <a href="https://wa.me/${mobile.replace(/[^0-9]/g, '')}" style="display: inline-block; background: #25d366; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; margin-right: 10px;">Reply to Client on WhatsApp</a>
+            <a href="tel:${mobile}" style="display: inline-block; background: #0b2545; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">Call Client</a>
+          </div>
+        </div>
+
+        <div style="background: #f1f5f9; padding: 14px; text-align: center; font-size: 12px; color: #64748b;">
+          Bhagwati Talent Advisory • Client Feedback Service • Direct Delivery to ${ADMIN_EMAIL}
+        </div>
+      </div>
+    `;
+
+    await sendNotificationEmail({
+      to: ADMIN_EMAIL,
+      replyTo: email || undefined,
+      subject: `[Client Service Feedback] ${schoolName} - ${rating}★ Rating (${service})`,
+      html: emailHtml,
+      data: {
+        'Client School': schoolName,
+        'Contact Person': `${contactPerson} (${designation})`,
+        'Rating': `${rating} / 5 Stars`,
+        'Service Availed': service,
+        'Turnaround': turnaround,
+        'Review': review,
+        'Suggestions': suggestions || 'None',
+        'Mobile': mobile,
+        'Email': email,
+        'Recipient Email': ADMIN_EMAIL,
+        'Timestamp': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + ' IST'
+      }
+    });
+
+    console.log(`[Client Feedback] Received feedback from ${schoolName} (${rating} stars) -> Delivered to ${ADMIN_EMAIL}`);
+
+    res.json({
+      success: true,
+      message: `Thank you! Your feedback has been successfully submitted and delivered directly to Rahul Sir (${ADMIN_EMAIL}).`,
+      feedback: record
+    });
+  } catch (err) {
+    console.error('Client feedback submission error:', err);
+    res.status(500).json({ error: 'Failed to process client feedback: ' + err.message });
+  }
+});
+
+app.get('/api/client-feedback', (req, res) => {
+  res.json({
+    success: true,
+    total: clientFeedbacks.length,
+    feedbacks: clientFeedbacks
+  });
+});
+
 // 6. API Endpoint: Email Status & Delivery Diagnostics
 app.get('/api/email-status', (req, res) => {
   const isSmtpConfigured = !!(process.env.SMTP_USER || process.env.EMAIL_USER);
@@ -1307,13 +1463,14 @@ app.post('/api/admin/config', (req, res) => {
   }
 });
 
-// 3. Get all submissions (Inquiries, Resumes, Audits, Educators)
+// 3. Get all submissions (Inquiries, Resumes, Audits, Educators, Client Feedback)
 app.get('/api/admin/submissions', (req, res) => {
   res.json({
     inquiries,
     resumes,
     selfAudits,
     educatorRegistrations,
+    feedbacks: clientFeedbacks,
     emailLogs: emailLogs.slice(0, 30)
   });
 });
@@ -1335,6 +1492,9 @@ app.delete('/api/admin/submissions/:type/:id', (req, res) => {
   } else if (type === 'educators') {
     const idx = educatorRegistrations.findIndex(item => item.id === id);
     if (idx !== -1) { educatorRegistrations.splice(idx, 1); removed = true; }
+  } else if (type === 'feedbacks') {
+    const idx = clientFeedbacks.findIndex(item => item.id === id);
+    if (idx !== -1) { clientFeedbacks.splice(idx, 1); removed = true; }
   }
 
   if (removed) {

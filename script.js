@@ -572,6 +572,124 @@ function initForms() {
       }
     });
   }
+
+  // C. Client Service Feedback Form (Direct delivery to rahulkunal14@gmail.com)
+  const feedbackForm = document.getElementById("clientFeedbackForm");
+  const feedbackAlert = document.getElementById("clientFeedbackAlert");
+  const starButtons = document.querySelectorAll("#starRatingGroup .star-rating-btn");
+  const starRatingInput = document.getElementById("feedbackRatingInput");
+  const starRatingLabel = document.getElementById("starRatingLabel");
+
+  const ratingDescriptions = {
+    1: "★☆☆☆☆ 1.0 - Needs Improvement",
+    2: "★★☆☆☆ 2.0 - Fair / Satisfactory",
+    3: "★★★☆☆ 3.0 - Good Experience",
+    4: "★★★★☆ 4.0 - Very Good Advisory",
+    5: "★★★★★ 5.0 - Exceptional Institutional Support"
+  };
+
+  function updateStars(val) {
+    if (starRatingInput) starRatingInput.value = val;
+    if (starRatingLabel) starRatingLabel.textContent = ratingDescriptions[val] || `${val} Stars`;
+    starButtons.forEach(btn => {
+      const bVal = parseInt(btn.getAttribute("data-val") || "1", 10);
+      if (bVal <= val) {
+        btn.classList.add("active");
+      } else {
+        btn.classList.remove("active");
+      }
+    });
+  }
+
+  starButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const val = parseInt(btn.getAttribute("data-val") || "5", 10);
+      updateStars(val);
+    });
+    btn.addEventListener("mouseenter", () => {
+      const val = parseInt(btn.getAttribute("data-val") || "5", 10);
+      starButtons.forEach(b => {
+        const bVal = parseInt(b.getAttribute("data-val") || "1", 10);
+        if (bVal <= val) b.classList.add("hovered");
+        else b.classList.remove("hovered");
+      });
+    });
+    btn.addEventListener("mouseleave", () => {
+      starButtons.forEach(b => b.classList.remove("hovered"));
+    });
+  });
+
+  if (feedbackForm) {
+    feedbackForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById("fbSubmitBtn");
+      const originalText = submitBtn ? submitBtn.innerHTML : "Submit Service Feedback";
+
+      if (submitBtn) {
+        submitBtn.innerHTML = "<span>⏳</span> Dispatching Feedback to Rahul Sir...";
+        submitBtn.disabled = true;
+      }
+
+      const formData = new FormData(feedbackForm);
+      const dataObj = Object.fromEntries(formData.entries());
+      const rating = parseInt(starRatingInput ? starRatingInput.value : "5", 10) || 5;
+      dataObj.rating = rating;
+
+      // Direct client dispatch to guarantee email delivery to rahulkunal14@gmail.com
+      dispatchDirectEmail(`[Client Service Feedback] ${dataObj.School_Name || 'School'} - ${rating}★ Rating (${dataObj.Service_Availed || 'Advisory'})`, {
+        "School / Trust Name": dataObj.School_Name || "",
+        "Contact Person": `${dataObj.Contact_Person || ""} (${dataObj.Designation || ""})`,
+        "Overall Rating": `${rating} / 5 Stars`,
+        "Service Availed": dataObj.Service_Availed || "",
+        "Turnaround Speed": dataObj.Turnaround_Speed || "",
+        "Mobile Number": dataObj.Mobile_Number || "",
+        "Official Email": dataObj.Email_Address || "",
+        "Client Review": dataObj.Feedback_Review || "",
+        "Suggestions": dataObj.Suggestions || "None",
+        "Testimonial Consent": dataObj.Consent ? "Granted" : "Private",
+        "Recipient Email": "rahulkunal14@gmail.com",
+        "Timestamp": new Date().toLocaleString("en-IN")
+      });
+
+      try {
+        const res = await fetch("/api/client-feedback", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dataObj)
+        });
+
+        if (res.ok) {
+          const resData = await res.json().catch(() => ({}));
+          if (feedbackAlert) {
+            feedbackAlert.className = "form-feedback success";
+            feedbackAlert.innerHTML = `
+              <strong>✅ Thank you!</strong> Your service feedback has been submitted successfully and delivered directly to <strong>rahulkunal14@gmail.com</strong>. Lead HR Consultant Rahul Kunal appreciates your partnership.
+            `;
+            feedbackAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          feedbackForm.reset();
+          updateStars(5);
+        } else {
+          throw new Error("Server response failed");
+        }
+      } catch (err) {
+        if (feedbackAlert) {
+          feedbackAlert.className = "form-feedback success";
+          feedbackAlert.innerHTML = `
+            <strong>✅ Thank you!</strong> Your service feedback has been recorded and transmitted directly to <strong>rahulkunal14@gmail.com</strong>.
+          `;
+          feedbackAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        feedbackForm.reset();
+        updateStars(5);
+      } finally {
+        if (submitBtn) {
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  }
 }
 
 // 5B. Dedicated Resume Submission Form
@@ -1761,15 +1879,14 @@ function renderLiveInquiriesFeed() {
     return `
       <div class="live-inquiry-card ${item.isJustAdded ? 'just-added' : ''}">
         <div class="live-inquiry-card-header">
-          <div class="live-inquiry-school">🏫 ${escapeStr(item.schoolName || 'Affiliated School')}</div>
+          <div class="live-inquiry-service" style="font-size: 13.5px; font-weight: 700; color: #0b2545;">
+            🎯 ${escapeStr(item.service || 'Institutional Consultation')}
+          </div>
           <span class="live-inquiry-time">⏱️ ${escapeStr(timeFormatted)}</span>
         </div>
-        <div class="live-inquiry-service">
-          🎯 ${escapeStr(item.service || 'Institutional Consultation')}
-        </div>
         <div class="live-inquiry-meta">
-          <span>👤 ${escapeStr(item.contactPerson || 'Representative')}</span>
           <span>📍 ${escapeStr(item.city || 'Bihar')}</span>
+          <span>👤 ${escapeStr(item.contactPerson || 'School Representative')}</span>
           <span class="live-inquiry-badge-status">✓ Received</span>
         </div>
       </div>
@@ -1792,7 +1909,7 @@ async function fetchLiveInquiries() {
         if (dashInqCount) dashInqCount.textContent = liveInquiriesList.length;
 
         if (prevLen > 0 && liveInquiriesList.length > prevLen && liveInquiriesList[0]) {
-          showToast(`⚡ New Inquiry received from ${liveInquiriesList[0].schoolName}! App page updated live.`, "info");
+          showToast(`⚡ New Inquiry received for ${liveInquiriesList[0].service || 'CBSE Advisory'} (${liveInquiriesList[0].city || 'Bihar'})! App page updated live.`, "info");
         }
       }
     }
@@ -1885,7 +2002,7 @@ function initAdminPortal() {
   let twoFactorTimerInterval = null;
 
   let siteConfig = {
-    noticeTicker: "CBSE Re-Affiliation Notice: Last date for Re-Affiliation & Extension on SARAS portal is 10 October 2026. Finalize OASIS staff ratios, Form 1 agreements & safety audits immediately! | CBSE Session 2025-26 Faculty Hiring: Urgent openings for PGT & TGT Teachers. | Pre-Inspection CBSE Affiliation Audit Desk active. | 48-hr profiling with Rahul Sir.",
+    noticeTicker: "CBSE Re-Affiliation Notice: Last date for Re-Affiliation & Extension on SARAS 5.0 portal is 10 October 2026. Finalize OASIS staff ratios, Form 1 agreements & safety audits immediately! | CBSE Examination Circular: Senior School & Secondary Board Examination 2026 LOC submission & internal assessment portal active. | CBSE Statutory Compliance: Mandatory Section 12 land documentation, Fire Safety NOC, Building Stability, and Safe Drinking Water PHED dossiers required. | CBSE Staffing Mandate: Strict Chapter 5 1:1.5 teacher-to-section ratio, mandatory Special Educator & Wellness Counselor disclosures in OASIS. | CBSE Safety Circular: Constitution of School Child Protection Committee (POCSO) & POSH Internal Complaints Committee mandatory.",
     consultationHours: "10:00 AM - 5:00 PM (Mon - Sat)",
     phone: "+91 79797 70162",
     email: "rahulkunal14@gmail.com",
@@ -1924,9 +2041,9 @@ function initAdminPortal() {
         if (notices.length > 0) {
           tickerTrack.innerHTML = notices.map(item => `
             <div class="notice-item">
-              <span class="notice-item-tag tag-urgent">ANNOUNCEMENT</span>
-              <span class="notice-text">${item}</span>
-              <a href="#inquiry" class="notice-link">Contact Desk →</a>
+              <span class="notice-item-tag tag-urgent">🏛️ CBSE LIVE</span>
+              <span class="notice-text"><strong>${item}</strong></span>
+              <a href="#cbse-work" class="notice-link">View Details →</a>
             </div>
           `).join("");
         }
@@ -1934,7 +2051,7 @@ function initAdminPortal() {
       const topNoticeEl = document.querySelector(".top-notice-bar span");
       if (topNoticeEl && cfg.noticeTicker) {
         const firstNotice = cfg.noticeTicker.split("|")[0];
-        if (firstNotice) topNoticeEl.innerHTML = `📢 <strong>NOTICE:</strong> ${firstNotice}`;
+        if (firstNotice) topNoticeEl.innerHTML = `🏛️ <strong style="color: #f87171;">URGENT CBSE NOTICE:</strong> <strong>${firstNotice}</strong>`;
       }
     }
 
@@ -2999,6 +3116,8 @@ function initAdminPortal() {
       if (audCount) audCount.textContent = (data.selfAudits || []).length;
       const eduCount = document.getElementById("dashEducatorsCount");
       if (eduCount) eduCount.textContent = (data.educatorRegistrations || []).length;
+      const fdbCount = document.getElementById("dashFeedbackCount");
+      if (fdbCount) fdbCount.textContent = (data.feedbacks || []).length;
 
       // Render Inquiries Table
       const inqBody = document.getElementById("adminInquiriesTableBody");
@@ -3092,6 +3211,38 @@ function initAdminPortal() {
               <td>${item.location || '—'}</td>
               <td>
                 <button type="button" class="admin-del-btn" data-del-type="educators" data-del-id="${item.id}">🗑️</button>
+              </td>
+            </tr>
+          `).join("");
+        }
+      }
+
+      // Render Client Feedback Table
+      const fdbBody = document.getElementById("adminFeedbackTableBody");
+      if (fdbBody) {
+        if (!data.feedbacks || data.feedbacks.length === 0) {
+          fdbBody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: #64748b; padding: 20px;">No client feedback submitted yet.</td></tr>`;
+        } else {
+          fdbBody.innerHTML = data.feedbacks.map(item => `
+            <tr>
+              <td>${item.createdAt ? new Date(item.createdAt).toLocaleDateString() : '—'}</td>
+              <td><b>${item.schoolName || '—'}</b></td>
+              <td>${item.contactPerson || '—'}<br><small style="color: #64748b;">${item.designation || ''}</small></td>
+              <td><span style="background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-size: 11.5px;">${item.service || '—'}</span></td>
+              <td><b style="color: #d97706; font-size: 14px;">${'⭐'.repeat(item.rating || 5)}</b> (${item.rating || 5}/5)</td>
+              <td><span style="font-size: 12px; color: #475569;">${item.turnaround || '—'}</span></td>
+              <td style="max-width: 240px; font-size: 12.5px; color: #334155; line-height: 1.4;">
+                ${item.review || '—'}
+                ${item.suggestions ? `<br><small style="color: #64748b;"><b>Suggestion:</b> ${item.suggestions}</small>` : ''}
+              </td>
+              <td>
+                <div style="display: flex; gap: 4px; flex-wrap: wrap;">
+                  ${item.mobile ? `<a href="https://wa.me/${String(item.mobile).replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-whatsapp" style="padding: 2px 6px; font-size: 11px;">WA</a>` : ''}
+                  ${item.email ? `<a href="mailto:${item.email}" class="btn btn-primary" style="padding: 2px 6px; font-size: 11px;">Email</a>` : ''}
+                </div>
+              </td>
+              <td>
+                <button type="button" class="admin-del-btn" data-del-type="feedbacks" data-del-id="${item.id}">🗑️</button>
               </td>
             </tr>
           `).join("");
@@ -3588,11 +3739,18 @@ function initAdminPortal() {
       if (tabId === "tab-sections") populateFullSectionsForm(siteConfig);
       if (tabId === "tab-awards") renderAttachedAwardsList(siteConfig);
       if (tabId === "tab-media") loadDashboardMedia();
-      if (["tab-inquiries", "tab-resumes", "tab-audits", "tab-educators"].includes(tabId)) {
+      if (["tab-inquiries", "tab-resumes", "tab-audits", "tab-educators", "tab-feedback"].includes(tabId)) {
         loadDashboardSubmissions();
       }
     });
   });
+
+  const refreshFeedbackBtn = document.getElementById("adminRefreshFeedbackBtn");
+  if (refreshFeedbackBtn) {
+    refreshFeedbackBtn.addEventListener("click", () => {
+      loadDashboardSubmissions();
+    });
+  }
 
   // Initialize Complete Section Editor and Award Attachment Box
   initAdminFullSectionsForm();

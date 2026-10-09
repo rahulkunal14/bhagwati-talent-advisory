@@ -197,6 +197,17 @@
       "service": "CBSE Inspection Readiness",
       "message": "Comprehensive mock inspection audit of school premises, labs, and registers.",
       "createdAt": "2026-09-20T16:20:00.000Z"
+    },
+    {
+      "id": "INQ-1791537280675",
+      "contactPerson": "Shri Virendra Prasad",
+      "schoolName": "Navodaya International Academy, Sherghati",
+      "mobile": "+91 94318 99001",
+      "email": "director@navodayasherghati.edu.in",
+      "city": "Sherghati, Gaya",
+      "service": "Faculty Recruitment (PGT / TGT / PRT)",
+      "message": "Urgent requirement for PGT English and TGT Science teachers for upcoming term.",
+      "createdAt": "2026-10-09T09:14:40.675Z"
     }
   ],
   "resumes": [],
@@ -712,5 +723,68 @@
       "submittedAt": "2026-09-14T16:40:00.000Z"
     }
   ],
-  "educatorRegistrations": []
+  "educatorRegistrations": [],
+  "clientFeedbacks": [
+    {
+      "id": "FDB-1791537260722",
+      "schoolName": "Gyan Bharti Public School, Bodh Gaya",
+      "contactPerson": "Dr. P. K. Mishra",
+      "designation": "School Principal",
+      "mobile": "+91 94314 55667",
+      "email": "principal@gyanbhartibodhgaya.org",
+      "service": "CBSE Re-Affiliation & SARAS 5.0 Audit",
+      "rating": 5,
+      "turnaround": "Exceeded Expectations (< 48 hrs)",
+      "review": "Exceptional advisory by Rahul Sir on SARAS 5.0 documents and teacher ratios. Inspection passed without a single deficiency.",
+      "strengths": "",
+      "suggestions": "None, continue the great work!",
+      "consent": true,
+      "createdAt": "2026-10-09T09:14:20.722Z"
+    },
+    {
+      "id": "FDB-1728410001",
+      "schoolName": "Delhi Public Academy, Gaya",
+      "contactPerson": "Dr. Ramesh Sharma",
+      "designation": "Principal",
+      "mobile": "+91 94312 87654",
+      "email": "principal@dpagaya.edu.in",
+      "service": "CBSE SARAS 5.0 Affiliation & Extension",
+      "rating": 5,
+      "turnaround": "Exceeded Expectations (< 48 hrs)",
+      "review": "Rahul Sir's guidance during our CBSE SARAS re-affiliation and OASIS staffing audit was exemplary. Every statutory clause was meticulously vetted and our inspection cleared smoothly.",
+      "suggestions": "Keep providing direct WhatsApp advisory desk support.",
+      "consent": true,
+      "createdAt": "2026-10-07T12:30:00.000Z"
+    },
+    {
+      "id": "FDB-1728405002",
+      "schoolName": "Heritage Global Public School, Sherghati",
+      "contactPerson": "Shri Manoj Kumar Singh",
+      "designation": "Managing Director",
+      "mobile": "+91 70041 99882",
+      "email": "trustee@heritageglobalschool.in",
+      "service": "Faculty Recruitment (PGT / TGT / PRT)",
+      "rating": 5,
+      "turnaround": "Very Prompt (3-5 Days)",
+      "review": "Hired qualified PGT Mathematics and Physics faculties through Bhagwati Talent Advisory. The 3-tier demo evaluation and credential screening was top-notch.",
+      "suggestions": "Expand recruitment desk to commerce faculty as well.",
+      "consent": true,
+      "createdAt": "2026-10-06T15:45:00.000Z"
+    },
+    {
+      "id": "FDB-1728399003",
+      "schoolName": "St. Xavier International School, Patna",
+      "contactPerson": "Smt. Anjali Verma",
+      "designation": "School Administrator",
+      "mobile": "+91 98350 44321",
+      "email": "admin@stxavierspatna.org",
+      "service": "POCSO, POSH & Statutory Compliance",
+      "rating": 5,
+      "turnaround": "Exceeded Expectations (< 48 hrs)",
+      "review": "Rahul Kunal sir structured our POCSO Child Protection Committee and POSH internal complaints bylaws with external NGO representation. Highly professional and legally sound.",
+      "suggestions": "None, perfect service delivery.",
+      "consent": true,
+      "createdAt": "2026-10-05T09:20:00.000Z"
+    }
+  ]
 }

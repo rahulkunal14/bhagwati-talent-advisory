@@ -1825,20 +1825,27 @@ footer.site-footer {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
+  background: linear-gradient(135deg, #b91c1c 0%, #dc2626 100%);
   color: #ffffff;
-  padding: 6px 13px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
+  padding: 7px 15px;
+  border-radius: 22px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.4);
+  box-shadow: 0 3px 12px rgba(220, 38, 38, 0.55);
+  border: 1px solid rgba(254, 202, 202, 0.45);
+}
+
+.notice-badge-text {
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: #ffffff;
 }
 
 .notice-live-dot {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
   background-color: #ef4444;
   border: 2px solid #ffffff;
   border-radius: 50%;
@@ -1886,19 +1893,22 @@ footer.site-footer {
 .notice-item {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13.5px;
-  color: #e2e8f0;
+  gap: 12px;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.2px;
 }
 
 .notice-item-tag {
   display: inline-block;
-  font-size: 10.5px;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 4px;
-  letter-spacing: 0.4px;
+  font-size: 11.5px;
+  font-weight: 900;
+  padding: 3px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .tag-urgent {
@@ -1922,8 +1932,14 @@ footer.site-footer {
 }
 
 .notice-text {
-  font-weight: 500;
-  color: #f1f5f9;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.notice-text strong {
+  font-weight: 900;
+  color: #fef08a;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .notice-link {
@@ -3593,9 +3609,10 @@ body.in-place-edit-active [data-editable]:hover::after {
 }
 
 .live-inquiry-service {
-  font-size: 12px;
-  color: #b45309;
-  font-weight: 600;
+  font-size: 13px;
+  color: #0b2545;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .live-inquiry-meta {
@@ -3620,6 +3637,137 @@ body.in-place-edit-active [data-editable]:hover::after {
   background: #ecfdf5;
   color: #065f46;
   border: 1px solid #a7f3d0;
+}
+
+/* ==========================================================================
+   CLIENT SERVICE FEEDBACK & REVIEWS DESK
+   ========================================================================== */
+.client-feedback-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .client-feedback-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+.feedback-form-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.star-rating-selector-box {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.star-rating-stars {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.star-rating-btn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: #cbd5e1;
+  transition: transform 0.15s ease, color 0.15s ease;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+.star-rating-btn:hover,
+.star-rating-btn.active,
+.star-rating-btn.hovered {
+  color: #f59e0b;
+  transform: scale(1.15);
+}
+
+.star-rating-label {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.feedback-verified-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.feedback-sidebar-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.feedback-stats-badge {
+  text-align: center;
+  padding: 18px;
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.feedback-stats-rating {
+  font-size: 40px;
+  font-weight: 900;
+  color: #0b2545;
+  line-height: 1;
+}
+
+.feedback-stats-stars {
+  font-size: 18px;
+  color: #f59e0b;
+  margin: 6px 0 4px;
+}
+
+.feedback-testimonial-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.feedback-testimonial-author {
+  font-weight: 700;
+  color: #0b2545;
+  margin-top: 8px;
+  font-size: 12.5px;
+}
+
+.feedback-testimonial-school {
+  color: #64748b;
+  font-size: 11.5px;
 }
 
 
